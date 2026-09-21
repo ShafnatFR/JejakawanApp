@@ -7,10 +7,18 @@ import { AuthProvider } from "@/components/layout/auth-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
+// Register service worker
+if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {})
+  })
+}
+
 export const metadata: Metadata = {
   title: "Jejakawan - Temukan Petualanganmu",
   description: "Platform perjalanan Indonesia untuk menemukan destinasi, teman perjalanan, dan petualangan tak terlupakan.",
   manifest: "/manifest.json",
+  icons: { icon: "/icons/icon-192.svg", apple: "/icons/icon-512.svg" },
 }
 
 export const viewport: Viewport = {

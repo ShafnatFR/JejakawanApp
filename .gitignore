@@ -4,3 +4,4 @@ node_modules/
 *.log
 _supabase-keys.txt
 _push_*.py
+_*.py

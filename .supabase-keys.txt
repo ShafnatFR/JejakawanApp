@@ -1,4 +1,0 @@
-anon: eyJhbG...M8U4
-service_role: eyJhbG...Mq0U
-default: sb_publishable_sD7HgkgjuYpNeIiBy-D2sg_iOr3erqB
-default: sb_secret_gQrWv··························

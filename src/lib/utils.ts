@@ -34,3 +34,28 @@ export function getXPForNextLevel(level: number): number {
 export function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 }
+
+export function formatXP(xp: number): string {
+  if (xp >= 10000) return `${(xp / 1000).toFixed(0)}K`
+  if (xp >= 1000) return `${(xp / 1000).toFixed(1)}K`
+  return xp.toString()
+}
+
+export function getLevelThreshold(level: number): number {
+  const thresholds = [0, 200, 500, 1000, 2000, 3500, 5500, 8000, 12000, 18000]
+  return thresholds[level - 1] ?? 0
+}
+
+export function getTrustScoreColor(score: number): string {
+  if (score >= 70) return 'text-green-500'
+  if (score >= 50) return 'text-blue-500'
+  if (score >= 30) return 'text-yellow-500'
+  return 'text-red-500'
+}
+
+export function getCompatibilityColor(score: number): string {
+  if (score >= 80) return 'text-green-600 bg-green-50'
+  if (score >= 60) return 'text-blue-600 bg-blue-50'
+  if (score >= 40) return 'text-yellow-600 bg-yellow-50'
+  return 'text-red-600 bg-red-50'
+}

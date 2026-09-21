@@ -4,12 +4,15 @@ import { useEffect, useState } from "react"
 import { useAuthStore } from "@/stores/auth"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Trophy, MapPin, Star, Shield, Calendar, Award, TrendingUp } from "lucide-react"
+import { TrustBadge } from "@/components/safety/trust-badge"
+import { VerificationBadges } from "@/components/safety/verification-badges"
+import { Trophy, MapPin, Star, Shield, Calendar, Award, TrendingUp, ArrowRight } from "lucide-react"
 
 export default function ProfilePage() {
   const { user, profile } = useAuthStore()
@@ -38,6 +41,17 @@ export default function ProfilePage() {
 
   const levelProgress = (profile.xp_total % 500) / 5
 
+  // Trust score calculation
+  function getTrustScore(): number {
+    let score = 20
+    if (profile.phone_verified) score += 20
+    if (profile.ktp_verified) score += 30
+    score += Math.min(profile.rating_avg * 6, 30)
+    return Math.min(Math.round(score), 100)
+  }
+
+  const trustScore = getTrustScore()
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
       {/* Profile header */}
@@ -51,12 +65,34 @@ export default function ProfilePage() {
             <div className="flex-1">
               <h1 className="text-2xl font-bold">{profile.display_name}</h1>
               <p className="text-muted-foreground">{profile.bio || "Belum ada bio"}</p>
-              <div className="flex items-center gap-3 mt-2">
+              <div className="flex items-center gap-3 mt-2 flex-wrap">
                 <Badge variant="outline" className="capitalize"><MapPin className="h-3 w-3 mr-1" />{profile.current_mode}</Badge>
                 {profile.ktp_verified && <Badge variant="outline" className="text-green-600"><Shield className="h-3 w-3 mr-1" />Terverifikasi</Badge>}
                 <Badge variant="outline"><Star className="h-3 w-3 mr-1" />{profile.rating_avg.toFixed(1)}</Badge>
               </div>
             </div>
+          </div>
+
+          {/* Trust Score */}
+          <div className="flex items-center justify-between p-3 bg-muted rounded-lg mb-4">
+            <div>
+              <p className="text-sm font-medium">Skor Kepercayaan</p>
+              <p className="text-xs text-muted-foreground">Berdasarkan verifikasi & aktivitas</p>
+            </div>
+            <TrustBadge score={trustScore} size="lg" />
+          </div>
+
+          {/* Verification Badges */}
+          <div className="mb-4">
+            <p className="text-sm font-medium mb-2">Verifikasi Identitas</p>
+            <VerificationBadges phoneVerified={profile.phone_verified} ktpVerified={profile.ktp_verified} />
+            {!profile.ktp_verified && (
+              <Link href="/verify">
+                <Button variant="link" size="sm" className="mt-1 h-auto p-0 text-xs text-primary">
+                  Verifikasi KTP sekarang <ArrowRight className="h-3 w-3 ml-1" />
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* XP & Level */}

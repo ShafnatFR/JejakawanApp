@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -17,6 +18,14 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+
+  const handleGoogleRegister = async () => {
+    const supabase = createClient()
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${location.origin}/auth/callback` },
+    })
+  }
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -67,6 +76,13 @@ export default function RegisterPage() {
               {loading ? "Mendaftar..." : "Daftar"}
             </Button>
           </form>
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center"><span className="w-full border-t" /></div>
+            <div className="relative flex justify-center text-xs uppercase"><span className="bg-card px-2 text-muted-foreground">atau</span></div>
+          </div>
+          <Button variant="outline" className="w-full" onClick={handleGoogleRegister}>
+            Daftar dengan Google
+          </Button>
           <p className="text-center text-sm text-muted-foreground mt-6">
             Sudah punya akun?{" "}
             <Link href="/login" className="text-primary hover:underline">Masuk</Link>

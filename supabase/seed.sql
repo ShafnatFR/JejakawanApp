@@ -1,0 +1,88 @@
+-- Seed: Badges
+INSERT INTO public.badges (name, description, category, xp_required, condition_type, condition_value) VALUES
+('Pioneer Explorer', 'Bergabung sebagai early adopter Jejakawan', 'special', 0, NULL, NULL),
+('First Trip', 'Selesaikan trip pertamamu', 'trip', 0, 'trips_completed', 1),
+('Social Butterfly', 'Match dengan 5 traveler berbeda', 'social', 0, 'matches_accepted', 5),
+('Review Master', 'Tulis 10 review destinasi', 'content', 0, 'reviews_written', 10),
+('Underrated Hunter', 'Kunjungi 5 destinasi underrated', 'explorer', 0, 'underrated_visits', 5),
+('Photo Pro', 'Upload 20 foto destinasi', 'content', 0, 'photos_uploaded', 20),
+('Mission Complete', 'Selesaikan 10 misi', 'mission', 0, 'missions_completed', 10),
+('Level 5 Explorer', 'Capai level 5', 'level', 2000, 'level', 5),
+('Level 10 Legend', 'Capai level 10', 'level', 10000, 'level', 10),
+('XP Hunter', 'Kumpulkan 5000 XP', 'xp', 5000, 'xp_total', 5000),
+('Solo Traveler', 'Lakukan 3 trip solo', 'trip', 0, 'solo_trips', 3),
+('Group Leader', 'Buat trip group dan ajak 3 orang', 'social', 0, 'group_trips_led', 1),
+('Java Explorer', 'Kunjungi destinasi di 3 provinsi Jawa', 'explorer', 0, 'provinces_visited', 3),
+('Bali Beyond', 'Kunjungi Bali selain Kuta/Seminyak', 'explorer', 0, 'bali_underrated', 1),
+('Sunrise Chaser', 'Kunjungi 3 destinasi sunrise terbaik', 'explorer', 0, 'sunrise_spots', 3),
+('Culture Enthusiast', 'Kunjungi 5 destinasi budaya', 'explorer', 0, 'culture_visits', 5),
+('Nature Lover', 'Kunjungi 5 destinasi alam', 'explorer', 0, 'nature_visits', 5),
+('Foodie Traveler', 'Review 5 destinasi kuliner', 'content', 0, 'kuliner_reviews', 5),
+('Verified Traveler', 'Verifikasi KTP', 'trust', 0, 'ktp_verified', 1),
+('Trusted Companion', 'Dapatkan rating 4.5+ dari 5 match', 'trust', 0, 'high_rating_matches', 5);
+
+-- Seed: 50+ Indonesian Destinations
+INSERT INTO public.destinations (name, slug, description, category, latitude, longitude, address, province, regency, is_underrated, entry_fee_min, entry_fee_max, signal_strength, best_season, rating_avg, visit_count, is_verified, is_active) VALUES
+-- JAWA BARAT (15)
+('Ciletuh Geopark', 'ciletuh-geopark', 'UNESCO Global Geopark dengan tebing curam, air terjun, dan pantai tersembunyi di Sukabumi.', '{"alam","pantai","geopark"}', -7.2167, 106.4500, 'Sukabumi, Jawa Barat', 'Jawa Barat', 'Sukabumi', true, 10000, 25000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.70, 342, true, true),
+('Tebing Keraton', 'tebing-keraton', 'Tebing dengan pemandangan hutan pinus dan kabut pagi yang memukau di Bandung Utara.', '{"alam","foto"}', -6.8333, 107.6167, 'Dago, Bandung', 'Jawa Barat', 'Bandung', true, 15000, 20000, 'strong', '{"may","jun","jul","aug","sep"}', 4.50, 1250, true, true),
+('Situ Cileunca', 'situ-cileunca', 'Danau buatan dengan pemandangan pegunungan dan kebun teh di Pangalengan.', '{"alam","danau"}', -7.2000, 107.6333, 'Pangalengan, Bandung', 'Jawa Barat', 'Bandung', true, 5000, 15000, 'moderate', '{"apr","may","jun","jul","aug","sep"}', 4.40, 567, true, true),
+('Curug Cikaso', 'curug-cikaso', 'Tiga air terjun spektakuler setinggi 80 meter di tengah hutan tropis Sukabumi.', '{"alam","air_terjun"}', -7.3833, 106.5000, 'Sukabumi, Jawa Barat', 'Jawa Barat', 'Sukabumi', true, 10000, 20000, 'weak', '{"may","jun","jul","aug","sep","oct"}', 4.60, 423, true, true),
+('Kawah Rengganis', 'kawah-rengganis', 'Kawah vulkanik alami dengan kolam air panas di tengah hutan pinus Ciwidey.', '{"alam","pemandian"}', -7.1167, 107.4500, 'Ciwidey, Bandung', 'Jawa Barat', 'Bandung', true, 15000, 25000, 'moderate', '{"apr","may","jun","jul","aug","sep"}', 4.35, 789, true, true),
+('Bukit Moko', 'bukit-moko', 'Spot camping dan sunrise dengan view Kota Bandung dari ketinggian 1500m.', '{"alam","camping","foto"}', -6.8500, 107.6500, 'Cimenyan, Bandung', 'Jawa Barat', 'Bandung', true, 10000, 15000, 'moderate', '{"may","jun","jul","aug","sep"}', 4.55, 934, true, true),
+('Taman Nasional Gunung Halimun', 'tngh', 'Hutan hujan tropis terluas di Jawa dengan keanekaragaman hayati tinggi.', '{"alam","hutan","pendakian"}', -6.7500, 106.5000, 'Bogor-Sukabumi', 'Jawa Barat', 'Bogor', true, 20000, 35000, 'none', '{"apr","may","jun","jul","aug","sep","oct"}', 4.65, 198, true, true),
+('Pantai Santolo', 'pantai-santolo', 'Pantai berpasir putih dengan pulau kecil yang bisa dicapai jalan kaki saat surut.', '{"alam","pantai"}', -7.7167, 107.6833, 'Garut, Jawa Barat', 'Jawa Barat', 'Garut', true, 10000, 15000, 'moderate', '{"apr","may","jun","jul","aug","sep","oct"}', 4.50, 612, true, true),
+('Darajat Pass', 'darajat-pass', 'Pemandian air panas alami dengan pemandangan perbukitan hijau Garut.', '{"alam","pemandian"}', -7.3500, 107.8167, 'Garut, Jawa Barat', 'Jawa Barat', 'Garut', true, 20000, 40000, 'strong', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.30, 2150, true, true),
+('Kebun Raya Cibodas', 'kebun-raya-cibodas', 'Kebun botani dengan koleksi tanaman langka dan pemandangan Gunung Gede.', '{"alam","edukasi"}', -6.7500, 107.0000, 'Cianjur, Jawa Barat', 'Jawa Barat', 'Cianjur', false, 15000, 25000, 'strong', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.55, 3420, true, true),
+('Pantai Ujung Genteng', 'ujung-genteng', 'Pantai terpencil dengan penyu hijau dan ombak besar di selatan Sukabumi.', '{"alam","pantai","satwa"}', -7.4500, 106.4167, 'Sukabumi, Jawa Barat', 'Jawa Barat', 'Sukabumi', true, 10000, 20000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.60, 278, true, true),
+('Gunung Papandayan', 'gunung-papandayan', 'Gunung aktif dengan kawah belerang, hutan mati, dan edelweiss.', '{"alam","pendakian"}', -7.3167, 107.7333, 'Garut, Jawa Barat', 'Jawa Barat', 'Garut', false, 20000, 35000, 'moderate', '{"apr","may","jun","jul","aug","sep"}', 4.65, 1890, true, true),
+('Situ Patenggang', 'situ-patenggang', 'Danau di ketinggian 1600m dikelilingi kebun teh dengan pulau cinta.', '{"alam","danau"}', -7.1667, 107.4833, 'Ciwidey, Bandung', 'Jawa Barat', 'Bandung', false, 18000, 25000, 'moderate', '{"apr","may","jun","jul","aug","sep"}', 4.40, 4560, true, true),
+('Kampung Naga', 'kampung-naga', 'Kampung adat Sunda yang masih mempertahankan tradisi leluhur.', '{"budaya","adat"}', -7.2833, 108.0167, 'Tasikmalaya, Jawa Barat', 'Jawa Barat', 'Tasikmalaya', true, 5000, 10000, 'moderate', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.45, 567, true, true),
+('Bukit Panembongan', 'bukit-panembongan', 'Spot foto dengan jembatan gantung di atas lembah hijau Kuningan.', '{"alam","foto"}', -7.0000, 108.5500, 'Kuningan, Jawa Barat', 'Jawa Barat', 'Kuningan', true, 10000, 15000, 'moderate', '{"may","jun","jul","aug","sep"}', 4.35, 456, true, true),
+
+-- JAWA TENGAH (10)
+('Dieng Plateau', 'dieng-plateau', 'Dataran tinggi dengan kawah, telaga warna, dan candi Hindu tertua di Jawa.', '{"alam","budaya","geopark"}', -7.2000, 109.9167, 'Wonosobo-Banjarnegara', 'Jawa Tengah', 'Wonosobo', false, 20000, 35000, 'moderate', '{"may","jun","jul","aug","sep","oct"}', 4.70, 5670, true, true),
+('Karimun Jawa', 'karimun-jawa', 'Taman nasional laut dengan terumbu karang, hiu jinak, dan pantai putih.', '{"alam","pantai","snorkeling"}', -5.8167, 110.4333, 'Jepara, Jawa Tengah', 'Jawa Tengah', 'Jepara', false, 150000, 300000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.80, 8900, true, true),
+('Telaga Warna Dieng', 'telaga-warna-dieng', 'Danau dengan warna air berubah-ubah karena kandungan belerang.', '{"alam","danau"}', -7.2167, 109.9000, 'Dieng, Wonosobo', 'Jawa Tengah', 'Wonosobo', false, 10000, 20000, 'moderate', '{"may","jun","jul","aug","sep"}', 4.55, 3450, true, true),
+('Pantai Menganti', 'pantai-menganti', 'Pantai tersembunyi dengan tebing karang dan pemandangan laut selatan.', '{"alam","pantai"}', -7.8833, 109.7833, 'Kebumen, Jawa Tengah', 'Jawa Tengah', 'Kebumen', true, 10000, 15000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.60, 234, true, true),
+('Goa Jatijajar', 'goa-jatijajar', 'Gua alam dengan stalaktit-stalagmit dan diorama legenda Ramayana.', '{"alam","gua","budaya"}', -7.8000, 109.4167, 'Kebumen, Jawa Tengah', 'Jawa Tengah', 'Kebumen', true, 15000, 25000, 'moderate', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.30, 890, true, true),
+('Bukit Sikunir', 'bukit-sikunir', 'Golden sunrise terbaik di Jawa dari ketinggian 2300m.', '{"alam","foto","pendakian"}', -7.2167, 109.9333, 'Dieng, Wonosobo', 'Jawa Tengah', 'Wonosobo', true, 10000, 15000, 'weak', '{"may","jun","jul","aug","sep"}', 4.75, 1234, true, true),
+('Lawang Sewu', 'lawang-sewu', 'Gedung bersejarah peninggalan Belanda dengan arsitektur megah dan cerita mistis.', '{"budaya","sejarah"}', -6.9833, 110.4167, 'Semarang, Jawa Tengah', 'Jawa Tengah', 'Semarang', false, 10000, 20000, 'strong', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.45, 6780, true, true),
+('Pantai Nampu', 'pantai-nampu', 'Pantai tersembunyi dengan batu karang unik dan sunset spektakuler.', '{"alam","pantai"}', -7.9167, 110.9167, 'Wonogiri, Jawa Tengah', 'Jawa Tengah', 'Wonogiri', true, 5000, 10000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.50, 189, true, true),
+('Gunung Prau', 'gunung-prau', 'Padang savana di atas awal dengan golden sunrise dan view 7 gunung.', '{"alam","pendakian","foto"}', -7.2000, 109.9500, 'Dieng, Wonosobo', 'Jawa Tengah', 'Wonosobo', true, 15000, 25000, 'weak', '{"may","jun","jul","aug","sep"}', 4.80, 2340, true, true),
+('Waduk Jatiluhur', 'waduk-jatiluhur', 'Waduk terbesar di Indonesia dengan wisata air dan pemandangan perbukitan.', '{"alam","danau","rekreasi"}', -6.5333, 107.3833, 'Purwakarta, Jawa Barat', 'Jawa Tengah', 'Purwakarta', true, 10000, 20000, 'moderate', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.20, 1560, true, true),
+
+-- JAWA TIMUR (10)
+('Kawah Ijen', 'kawah-ijen', 'Kawah dengan api biru langka dan danau asam terbesar di dunia.', '{"alam","pendakian","fenomena"}', -8.0583, 114.2417, 'Banyuwangi, Jawa Timur', 'Jawa Timur', 'Banyuwangi', false, 100000, 150000, 'weak', '{"apr","may","jun","jul","aug","sep"}', 4.85, 12340, true, true),
+('Pulau Merah', 'pulau-merah', 'Pantai dengan bukit kecil berwarna merah dan ombak sempurna untuk surfing.', '{"alam","pantai","surfing"}', -8.5833, 114.0500, 'Banyuwangi, Jawa Timur', 'Jawa Timur', 'Banyuwangi', true, 10000, 20000, 'moderate', '{"apr","may","jun","jul","aug","sep","oct"}', 4.60, 3450, true, true),
+('Tumpak Sewu', 'tumpak-sewu', 'Air terjun Niagara-nya Indonesia dengan 100+ aliran air dari tebing.', '{"alam","air_terjun","foto"}', -8.2167, 112.9167, 'Lumajang, Jawa Timur', 'Jawa Timur', 'Lumajang', true, 10000, 20000, 'weak', '{"may","jun","jul","aug","sep","oct"}', 4.80, 1567, true, true),
+('Baluran National Park', 'baluran', 'Savana Afrika-nya Indonesia dengan banteng, rusa, dan merak liar.', '{"alam","satwa","safari"}', -7.8333, 114.3833, 'Situbondo, Jawa Timur', 'Jawa Timur', 'Situbondo', true, 20000, 30000, 'weak', '{"apr","may","jun","jul","aug","sep"}', 4.65, 890, true, true),
+('Bromo', 'bromo', 'Gunung berapi aktif dengan lautan pasir dan sunrise ikonik.', '{"alam","pendakian","foto"}', -7.9425, 112.9531, 'Probolinggo, Jawa Timur', 'Jawa Timur', 'Probolinggo', false, 220000, 350000, 'moderate', '{"apr","may","jun","jul","aug","sep"}', 4.90, 25600, true, true),
+('Pantai Plengkung', 'pantai-plengkung', 'Pantai dengan ombak terbaik ke-2 di dunia untuk surfing profesional.', '{"alam","pantai","surfing"}', -8.7167, 114.4333, 'Banyuwangi, Jawa Timur', 'Jawa Timur', 'Banyuwangi', true, 50000, 100000, 'none', '{"apr","may","jun","jul","aug","sep","oct"}', 4.70, 567, true, true),
+('Air Terjun Madakaripura', 'madakaripura', 'Air terjun melingkar tempat Patih Gajah Mada bersemedi.', '{"alam","air_terjun","sejarah"}', -7.8667, 113.0167, 'Probolinggo, Jawa Timur', 'Jawa Timur', 'Probolinggo', true, 20000, 30000, 'weak', '{"may","jun","jul","aug","sep","oct"}', 4.60, 1234, true, true),
+('Gunung Semeru', 'gunung-semeru', 'Gunung tertinggi di Jawa dengan Ranu Kumbolo dan puncak Mahameru.', '{"alam","pendakian"}', -8.1081, 112.9225, 'Lumajang-Malang, Jawa Timur', 'Jawa Timur', 'Malang', false, 150000, 250000, 'weak', '{"apr","may","jun","jul","aug","sep"}', 4.85, 8900, true, true),
+('Taman Safari Prigen', 'taman-safari-prigen', 'Safari park dengan 2000+ satwa dan wahana edukasi anak.', '{"alam","satwa","edukasi"}', -7.6833, 112.6167, 'Pasuruan, Jawa Timur', 'Jawa Timur', 'Pasuruan', false, 100000, 150000, 'strong', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.50, 12340, true, true),
+('Pantai Klayar', 'pantai-klayar', 'Pantai dengan seruling laut alami dan formasi batu karang unik.', '{"alam","pantai","foto"}', -8.1833, 110.9833, 'Pacitan, Jawa Timur', 'Jawa Timur', 'Pacitan', true, 10000, 15000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.55, 456, true, true),
+
+-- YOGYAKARTA (8)
+('Pantai Timang', 'pantai-timang', 'Pantai dengan gondola tradisional menyeberang ke pulau karang.', '{"alam","pantai","adventure"}', -8.0167, 110.3833, 'Gunung Kidul, Yogyakarta', 'DIY', 'Gunung Kidul', true, 15000, 25000, 'weak', '{"apr","may","jun","jul","aug","sep"}', 4.60, 2340, true, true),
+('Goa Pindul', 'goa-pindul', 'Cave tubing menyusuri gua dengan sungai bawah tanah dan cahaya alami.', '{"alam","gua","adventure"}', -7.9333, 110.6167, 'Gunung Kidul, Yogyakarta', 'DIY', 'Gunung Kidul', true, 30000, 50000, 'moderate', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.55, 5670, true, true),
+('Gumuk Pasir Parangkusumo', 'gumuk-pasir', 'Gurun pasir unik dengan fenomena sandboarding di tepi pantai.', '{"alam","foto","adventure"}', -7.9667, 110.2833, 'Bantul, Yogyakarta', 'DIY', 'Bantul', true, 5000, 15000, 'strong', '{"may","jun","jul","aug","sep"}', 4.45, 3450, true, true),
+('Pantai Wediombo', 'pantai-wediombo', 'Pantai tersembunyi dengan kolam alami di celah batu karang.', '{"alam","pantai"}', -8.1333, 110.6167, 'Gunung Kidul, Yogyakarta', 'DIY', 'Gunung Kidul', true, 10000, 15000, 'weak', '{"apr","may","jun","jul","aug","sep","oct"}', 4.50, 567, true, true),
+('Kalibiru', 'kalibiru', 'Spot foto di atas pohon dengan background Waduk Sermo dan perbukitan.', '{"alam","foto"}', -7.8167, 110.1167, 'Kulon Progo, Yogyakarta', 'DIY', 'Kulon Progo', true, 10000, 20000, 'moderate', '{"may","jun","jul","aug","sep"}', 4.40, 2340, true, true),
+('Puncak Becici', 'puncak-becici', 'Hutan pinus dengan gardu pandang dan sunset view. Pernah dikunjungi Obama.', '{"alam","foto"}', -7.9500, 110.4833, 'Bantul, Yogyakarta', 'DIY', 'Bantul', true, 10000, 15000, 'strong', '{"may","jun","jul","aug","sep"}', 4.35, 4560, true, true),
+('Candi Ratu Boko', 'ratu-boko', 'Situs kerajaan abad ke-8 dengan sunset view dan pemandangan Candi Prambanan.', '{"budaya","sejarah","foto"}', -7.7667, 110.4833, 'Sleman, Yogyakarta', 'DIY', 'Sleman', false, 25000, 50000, 'strong', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.55, 5670, true, true),
+('Hutan Pinus Mangunan', 'hutan-pinus-mangunan', 'Hutan pinus dengan gardu pandang dan kabut pagi yang dramatis.', '{"alam","foto"}', -7.9333, 110.4167, 'Bantul, Yogyakarta', 'DIY', 'Bantul', true, 10000, 15000, 'strong', '{"may","jun","jul","aug","sep"}', 4.40, 5670, true, true),
+
+-- BALI UNDERRATED (7)
+('Amed', 'amed', 'Desa nelayan dengan snorkeling ke kapal karam Jepang dan view Gunung Agung.', '{"alam","pantai","snorkeling"}', -8.3500, 115.6833, 'Karangasem, Bali', 'Bali', 'Karangasem', true, 10000, 25000, 'moderate', '{"apr","may","jun","jul","aug","sep","oct"}', 4.65, 2340, true, true),
+('Tirta Gangga', 'tirta-gangga', 'Taman air kerajaan dengan kolam teratai dan patung-patung batu.', '{"budaya","sejarah","foto"}', -8.4167, 115.5833, 'Karangasem, Bali', 'Bali', 'Karangasem', true, 20000, 30000, 'strong', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.50, 4560, true, true),
+('Nusa Penida', 'nusa-penida', 'Pulau dengan tebing dramatis, manta ray, dan pantai Kelingking ikonik.', '{"alam","pantai","snorkeling"}', -8.7264, 115.5442, 'Klungkung, Bali', 'Bali', 'Klungkung', false, 100000, 200000, 'moderate', '{"apr","may","jun","jul","aug","sep","oct"}', 4.75, 12340, true, true),
+('Jatiluwih', 'jatiluwih', 'Sawah terasering UNESCO dengan sistem irigasi subak tradisional.', '{"alam","budaya","foto"}', -8.3500, 115.1333, 'Tabanan, Bali', 'Bali', 'Tabanan', true, 40000, 50000, 'moderate', '{"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}', 4.60, 5670, true, true),
+('Air Terjun Sekumpul', 'air-terjun-sekumpul', '7 air terjun spektakuler di tengah hutan tropis Bali Utara.', '{"alam","air_terjun","foto"}', -8.1667, 115.3833, 'Buleleng, Bali', 'Bali', 'Buleleng', true, 20000, 35000, 'weak', '{"may","jun","jul","aug","sep","oct"}', 4.70, 1234, true, true),
+('Munduk', 'munduk', 'Desa di pegunungan dengan air terjun, perkebunan kopi, dan danau Buyan.', '{"alam","trekking"}', -8.2500, 115.0833, 'Buleleng, Bali', 'Bali', 'Buleleng', true, 10000, 25000, 'moderate', '{"apr","may","jun","jul","aug","sep","oct"}', 4.55, 1890, true, true),
+('Pantai Bias Tugel', 'bias-tugel', 'Pantai tersembunyi dekat Padangbai dengan air jernih dan pasir putih.', '{"alam","pantai"}', -8.5333, 115.5167, 'Karangasem, Bali', 'Bali', 'Karangasem', true, 10000, 20000, 'moderate', '{"apr","may","jun","jul","aug","sep","oct"}', 4.50, 678, true, true);
+
+-- Seed: Dummy users for testing
+-- Note: These will be created via auth signup, so we only insert profiles for existing auth users
+-- The trigger handle_new_user() will auto-create profiles on signup

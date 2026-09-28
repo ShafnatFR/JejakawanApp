@@ -22,10 +22,11 @@ export function Navbar() {
   const [unreadNotif, setUnreadNotif] = useState(0)
 
   useEffect(() => {
-    if (user) {
-      fetchUnreadCounts()
-    }
-  }, [user])
+    if (!user) return
+    // Debounce to prevent spam on TOKEN_REFRESHED
+    const timer = setTimeout(() => fetchUnreadCounts(), 1000)
+    return () => clearTimeout(timer)
+  }, [user?.id])
 
   async function fetchUnreadCounts() {
     if (!user) return

@@ -19,12 +19,19 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   profile: null,
   loading: true,
-  setUser: (user) => set({ user }),
+  setUser: (user) => {
+    const current = get().user
+    // Skip if same user (prevent re-render spam on TOKEN_REFRESHED)
+    if (current?.id === user?.id) return
+    set({ user })
+  },
   setProfile: (profile) => set({ profile }),
   setLoading: (loading) => set({ loading }),
+  _fetching: false,
   fetchProfile: async () => {
-    const { user } = get()
-    if (!user) return
+    const { user, _fetching } = get() as any
+    if (!user || _fetching) return
+    set({ _fetching: true } as any)
     const supabase = createClient()
     const { data, error } = await supabase
       .from('user_profiles')
@@ -32,7 +39,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       .eq('id', user.id)
       .single()
     if (data && !error) {
-      set({ profile: data as UserProfile })
+      set({ profile: data as UserProfile, _fetching: false } as any)
+    } else {
+      set({ _fetching: false } as any)
     }
   },
   signOut: async () => {

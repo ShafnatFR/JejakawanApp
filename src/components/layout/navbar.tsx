@@ -22,19 +22,7 @@ export function Navbar() {
   const [unreadNotif, setUnreadNotif] = useState(0)
 
   useEffect(() => {
-    const supabase = createClient()
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-    })
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-    return () => subscription.unsubscribe()
-  }, [setUser])
-
-  useEffect(() => {
     if (user) {
-      useAuthStore.getState().fetchProfile()
       fetchUnreadCounts()
     }
   }, [user])

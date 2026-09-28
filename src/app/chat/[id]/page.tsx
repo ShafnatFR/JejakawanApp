@@ -19,15 +19,40 @@ export default function ChatRoomPage() {
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const pollingRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    if (user && roomId) {
-      fetchMessages()
-      setupRealtimeOrPolling()
+    if (!user || !roomId) return
+    let channel: ReturnType<typeof supabase.channel> | null = null
+    let polling: NodeJS.Timeout | null = null
+    const supabase = createClient()
+
+    fetchMessages()
+
+    // Try realtime first
+    try {
+      channel = supabase
+        .channel(`chat:${roomId}`)
+        .on(
+          "postgres_changes",
+          { event: "INSERT", schema: "public", table: "chat_messages", filter: `room_id=eq.${roomId}` },
+          async (payload) => {
+            const newMsg = payload.new as ChatMessage
+            const { data: sender } = await supabase
+              .from("user_profiles")
+              .select("display_name, avatar_url")
+              .eq("id", newMsg.sender_id)
+              .single()
+            setMessages((prev) => [...prev, { ...newMsg, sender: sender || undefined }])
+          }
+        )
+        .subscribe()
+    } catch {
+      polling = setInterval(fetchMessages, 5000)
     }
+
     return () => {
-      if (pollingRef.current) clearInterval(pollingRef.current)
+      if (channel) supabase.removeChannel(channel)
+      if (polling) clearInterval(polling)
     }
   }, [user, roomId])
 
@@ -46,45 +71,6 @@ export default function ChatRoomPage() {
 
     setMessages(data || [])
     setLoading(false)
-  }
-
-  function setupRealtimeOrPolling() {
-    const supabase = createClient()
-    try {
-      const channel = supabase
-        .channel(`chat:${roomId}`)
-        .on(
-          "postgres_changes",
-          {
-            event: "INSERT",
-            schema: "public",
-            table: "chat_messages",
-            filter: `room_id=eq.${roomId}`,
-          },
-          async (payload) => {
-            const newMsg = payload.new as ChatMessage
-            // Fetch sender info
-            const { data: sender } = await supabase
-              .from("user_profiles")
-              .select("display_name, avatar_url")
-              .eq("id", newMsg.sender_id)
-              .single()
-
-            setMessages((prev) => [
-              ...prev,
-              { ...newMsg, sender: sender || undefined },
-            ])
-          }
-        )
-        .subscribe()
-
-      return () => {
-        supabase.removeChannel(channel)
-      }
-    } catch {
-      // Fallback to polling
-      pollingRef.current = setInterval(fetchMessages, 3000)
-    }
   }
 
   function scrollToBottom() {

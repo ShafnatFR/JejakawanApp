@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
@@ -29,6 +30,10 @@ export default function RegisterPage() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (password !== confirmPassword) {
+      setError("Password dan konfirmasi tidak cocok.")
+      return
+    }
     setLoading(true)
     setError("")
     const supabase = createClient()
@@ -69,6 +74,10 @@ export default function RegisterPage() {
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" placeholder="Minimal 6 karakter" value={password} onChange={e => setPassword(e.target.value)} required minLength={6} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="confirm">Konfirmasi Password</Label>
+              <Input id="confirm" type="password" placeholder="Ulangi password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required minLength={6} />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             {success && <p className="text-sm text-green-600">{success}</p>}

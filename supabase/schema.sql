@@ -379,6 +379,15 @@ CREATE TABLE IF NOT EXISTS public.admin_audit_logs (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 28. User Favorites
+CREATE TABLE IF NOT EXISTS public.user_favorites (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES public.user_profiles(id),
+  destination_id UUID NOT NULL REFERENCES public.destinations(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, destination_id)
+);
+
 -- RLS Policies
 ALTER TABLE public.user_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.destinations ENABLE ROW LEVEL SECURITY;
@@ -486,3 +495,83 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_user_profiles_updated_at BEFORE UPDATE ON public.user_profiles FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
 CREATE TRIGGER update_destinations_updated_at BEFORE UPDATE ON public.destinations FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
 CREATE TRIGGER update_trip_requests_updated_at BEFORE UPDATE ON public.trip_requests FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+-- 28. Guide Profiles
+CREATE TABLE IF NOT EXISTS public.guide_profiles (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL UNIQUE REFERENCES public.user_profiles(id),
+  guide_name VARCHAR(200) NOT NULL,
+  bio TEXT,
+  photo_url TEXT,
+  operating_locations TEXT[] DEFAULT '{}',
+  price_per_day INT DEFAULT 0,
+  languages TEXT[] DEFAULT '{}',
+  bank_account VARCHAR(50),
+  bank_name VARCHAR(50),
+  rating_avg DECIMAL(3,2) DEFAULT 0.00,
+  rating_count INT DEFAULT 0,
+  is_verified BOOLEAN DEFAULT FALSE,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 29. User Roles
+CREATE TABLE IF NOT EXISTS public.user_roles (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES public.user_profiles(id),
+  role VARCHAR(20) NOT NULL CHECK (role IN ('tourist','explorer','guide','agency','admin')),
+  status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active','suspended','pending')),
+  granted_at TIMESTAMPTZ DEFAULT NOW(),
+  granted_by UUID REFERENCES public.user_profiles(id),
+  UNIQUE(user_id, role)
+);
+
+-- 30. Donations
+CREATE TABLE IF NOT EXISTS public.donations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES public.user_profiles(id),
+  amount INT NOT NULL,
+  tier VARCHAR(20) CHECK (tier IN ('bronze','silver','gold','platinum')),
+  payment_status VARCHAR(20) DEFAULT 'pending' CHECK (payment_status IN ('pending','paid','failed')),
+  payment_ref VARCHAR(200),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 31. Guide Bookings
+CREATE TABLE IF NOT EXISTS public.guide_bookings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  guide_id UUID NOT NULL REFERENCES public.guide_profiles(id),
+  user_id UUID NOT NULL REFERENCES public.user_profiles(id),
+  destination_id UUID REFERENCES public.destinations(id),
+  booking_date DATE NOT NULL,
+  duration_days INT DEFAULT 1,
+  total_price INT NOT NULL,
+  status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending','confirmed','completed','cancelled')),
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- RLS for new tables
+ALTER TABLE public.guide_profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.donations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.guide_bookings ENABLE ROW LEVEL SECURITY;
+
+-- Guide profiles: public read, own write
+CREATE POLICY "Guide profiles viewable by everyone" ON public.guide_profiles FOR SELECT USING (true);
+CREATE POLICY "Users can create own guide profile" ON public.guide_profiles FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own guide profile" ON public.guide_profiles FOR UPDATE USING (auth.uid() = user_id);
+
+-- User roles: public read
+CREATE POLICY "User roles viewable by everyone" ON public.user_roles FOR SELECT USING (true);
+
+-- Donations: own read
+CREATE POLICY "Users can view own donations" ON public.donations FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can create donations" ON public.donations FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Guide bookings: involved users
+CREATE POLICY "Users can view own guide bookings" ON public.guide_bookings FOR SELECT USING (auth.uid() = user_id OR auth.uid() IN (SELECT user_id FROM public.guide_profiles WHERE id = guide_id));
+CREATE POLICY "Users can create guide bookings" ON public.guide_bookings FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE TRIGGER update_guide_profiles_updated_at BEFORE UPDATE ON public.guide_profiles FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();

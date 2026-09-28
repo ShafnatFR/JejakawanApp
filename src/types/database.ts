@@ -208,6 +208,65 @@ export interface Notification {
   created_at: string
 }
 
+
+export type GuideRole = 'tourist' | 'explorer' | 'guide' | 'agency' | 'admin'
+export type DonationTier = 'bronze' | 'silver' | 'gold' | 'platinum'
+
+export interface GuideProfile {
+  id: string
+  user_id: string
+  guide_name: string
+  bio: string | null
+  photo_url: string | null
+  operating_locations: string[]
+  price_per_day: number
+  languages: string[]
+  bank_account: string | null
+  bank_name: string | null
+  rating_avg: number
+  rating_count: number
+  is_verified: boolean
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  user?: UserProfile
+}
+
+export interface GuideBooking {
+  id: string
+  guide_id: string
+  user_id: string
+  destination_id: string | null
+  booking_date: string
+  duration_days: number
+  total_price: number
+  status: BookingStatus
+  notes: string | null
+  created_at: string
+  guide?: GuideProfile
+  user?: UserProfile
+  destination?: Destination
+}
+
+export interface UserRole {
+  id: string
+  user_id: string
+  role: GuideRole
+  status: 'active' | 'suspended' | 'pending'
+  granted_at: string
+  granted_by: string | null
+}
+
+export interface Donation {
+  id: string
+  user_id: string
+  amount: number
+  tier: DonationTier | null
+  payment_status: PaymentStatus
+  payment_ref: string | null
+  created_at: string
+}
+
 export interface UserReport {
   id: string
   reporter_id: string

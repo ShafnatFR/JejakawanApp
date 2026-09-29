@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ekspedisi Puncak Rinjani &amp; Camping Segara Anak 4H3M - Jejakawan</title>
+<!-- Tailwind CSS v3 CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scroll">
+    /* Subtle custom styles for smooth scrolling and micro-details */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans min-h-screen flex flex-col">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo -->
+<div class="flex items-center space-x-8">
+<a class="flex items-center space-x-2.5 text-brand-600 font-bold text-xl tracking-tight" href="#">
+<!-- Compass Icon -->
+<svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span class="text-brand-600 text-2xl font-extrabold tracking-tight">Jejakawan</span>
+</a>
+<!-- Main Navigation Links -->
+<nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
+<a class="hover:text-brand-600 transition-colors" href="#">Discover</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Explore</a>
+<a class="text-brand-600 font-semibold border-b-2 border-brand-600 pb-0.5" href="#">Trip Match</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Open Trip</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Gamifikasi</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Panduan Lokal</a>
+</nav>
+</div>
+<!-- Right Utility Actions -->
+<div class="flex items-center space-x-4">
+<!-- Search Button/Trigger -->
+<button aria-label="Cari Petualangan" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Message Icon with Unread Badge -->
+<button aria-label="Pesan" class="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
+</button>
+<!-- Notification Bell -->
+<button aria-label="Notifikasi" class="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-brand-600 rounded-full"></span>
+</button>
+<!-- User Profile Avatar -->
+<div class="flex items-center pl-2">
+<button class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 font-semibold flex items-center justify-center border border-brand-200 hover:ring-2 hover:ring-brand-500 transition" title="Shafnat F.">
+            S
+          </button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: BreadcrumbAndNav -->
+<section class="bg-white border-b border-slate-200 py-3" data-purpose="breadcrumbs">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+<nav class="flex items-center space-x-2 text-slate-500">
+<a class="hover:text-slate-800 transition" href="#">Beranda</a>
+<span>/</span>
+<a class="hover:text-slate-800 transition" href="#">Trip Match</a>
+<span>/</span>
+<span class="text-slate-800 font-medium truncate max-w-xs sm:max-w-md">Ekspedisi Rinjani &amp; Segara Anak 4H3M</span>
+</nav>
+<a class="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium transition" href="#">
+<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+        Kembali ke Trip Match
+      </a>
+</div>
+</section>
+<!-- END: BreadcrumbAndNav -->
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+<!-- BEGIN: TitleAndMetaBadges -->
+<div class="mb-6">
+<div class="flex flex-wrap items-center gap-2 mb-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<svg class="w-3.5 h-3.5 mr-1 text-emerald-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+          Ekspedisi Terverifikasi ASITA &amp; APGI
+        </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
+          Trekking &amp; Gunung
+        </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+          Tingkat: Menengah (Moderate)
+        </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200">
+          Sisa 3 Kursi
+        </span>
+</div>
+<h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
+        Ekspedisi Puncak Rinjani &amp; Camping Segara Anak 4H3M
+      </h1>
+<p class="text-sm sm:text-base text-slate-600 mt-2 flex items-center">
+<svg class="w-4 h-4 mr-1.5 text-rose-500 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" fill-rule="evenodd"></path>
+</svg>
+        Sembalun, Lombok Timur, NTB • Titik Kumpul: Bandara Internasional Lombok (LOP)
+      </p>
+</div>
+<!-- END: TitleAndMetaBadges -->
+<!-- BEGIN: PhotoGalleryGrid -->
+<section class="mb-10" data-purpose="photo-gallery">
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 h-[380px] sm:h-[460px] rounded-2xl overflow-hidden shadow-sm">
+<!-- Large Main Showcase Image -->
+<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden bg-slate-200">
+<img alt="Pemandangan Danau Segara Anak dan Puncak Rinjani dari Pelawangan" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEfVqIK6vUGK9KAbuoMKYI77cAK3PnfHN-__-2pMDIaBxqrVRPuLneUeml7AU01b21j3R6P2PMZovE42uJO4v354LmYORzroCHIbnwImZ69J7r3ntRUacGt6b2qbZnPaHg-zNV1hzf5qWNLDIrjqQG9DuA3du1V7Q6Tmy4LfSLo1kskZ8ZkErOY6Xlps3l0DzLC0egqVHAYLvOfQ3GUGxfB5S11Fg4gGACMvI2lp_iDZS0k5QbZ1yo"/>
+<div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5">
+<svg class="w-4 h-4 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+            Spot Camping Favorit • Pelawangan Sembalun
+          </div>
+</div>
+<!-- Thumbnail 1 -->
+<div class="relative hidden md:block overflow-hidden group bg-slate-200">
+<img alt="Pemandangan Kawah Vulkanik Eksotis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" src="https://lh3.googleusercontent.com/aida/AEtjO1WqxakPvDgeKDpA_sqUttXB7RZ98HFD8Cc_kDcD68fa6897xdByKNvZfIHLJHgaastcxjgkb6qial8DiWyQsshI-8vEE5GdCFRZKn5_ikpDCzKxtmUd-o0LFhCEgS022ZFJWsHaGRpHrF5pFcfC10tHoR28SJGvR-fpZOaG6AZO-kgF4zyW4LmRMEIFkoytXbwP8gAflidbD0XPZh1k2hgB_efY5iRLAX5JdLMrE1GXpH3Yjo9aqSCPhw"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<!-- Thumbnail 2 -->
+<div class="relative hidden md:block overflow-hidden group bg-slate-200">
+<img alt="Sunrise Camp Pegunungan Terbuka" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" src="https://lh3.googleusercontent.com/aida/AEtjO1V-66IvL1GZFaDh-8nOnGF8njTVbGdCtpJjHba9O4zni5gZm585KZ52szwRIuTAlSsbM6YOW_wXy2j6LEKgd1HMMIt-aX7n6gxvg5YgMYZ9uhFLa1JikAyF-qzAc5XW1DFwFMjrriIRBT6-BmH1rGPZXFYan7ohBZlBF0_WveSRkwT6woaegZVsC_dTOpkRGYBHLI6h3zawNFAfGrB5MXdzPoURH23MQjatQ3O22fPMRn8eEhpusxJqAhE"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<!-- Thumbnail 3 -->
+<div class="relative hidden md:block overflow-hidden group bg-slate-200">
+<img alt="Pemandangan Savana dan Rute Pendakian" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" src="https://lh3.googleusercontent.com/aida/AEtjO1VCH-wy0hjgdcfLdha805SkFdIMtXI1R2tn7LrVe36ibbYchdDgDpE5xpNOwoLIiqV1ST8SvnUf1ITPRYN0n7Zu42umiyqXPlXguracoDId5zQXt1ybDHHrzSc1PORNPIEBkslyQaNnkOAfsSkSUh0V47DuIMpPrrHBTOxtuLyAuTsnDrSW722pL9-GAZgvFO4QYHx4OifuR6lhvS7ZTCSwXS-tZtci-r3k0_mbJs1_I4LRlC5ejYGFMck"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<!-- Thumbnail 4 with Modal Trigger Overlay -->
+<div class="relative hidden md:block overflow-hidden group bg-slate-900 cursor-pointer">
+<img alt="Lihat dokumentasi foto trip lainnya" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEfVqIK6vUGK9KAbuoMKYI77cAK3PnfHN-__-2pMDIaBxqrVRPuLneUeml7AU01b21j3R6P2PMZovE42uJO4v354LmYORzroCHIbnwImZ69J7r3ntRUacGt6b2qbZnPaHg-zNV1hzf5qWNLDIrjqQG9DuA3du1V7Q6Tmy4LfSLo1kskZ8ZkErOY6Xlps3l0DzLC0egqVHAYLvOfQ3GUGxfB5S11Fg4gGACMvI2lp_iDZS0k5QbZ1yo"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-white bg-slate-900/50 hover:bg-slate-900/40 transition">
+<svg class="w-6 h-6 mb-1 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="font-semibold text-sm">+6 Foto Lainnya</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: PhotoGalleryGrid -->
+<!-- Main Content & Sticky Sidebar Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+<!-- BEGIN: LeftColumnDetails (8 of 12 cols) -->
+<div class="lg:col-span-8 space-y-8" data-purpose="trip-main-details">
+<!-- Key Quick Stats Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 rounded-xl border border-slate-200">
+<div class="flex items-center space-x-3 p-2">
+<div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Durasi</p>
+<p class="text-sm font-bold text-slate-900">4H 3M</p>
+</div>
+</div>
+<div class="flex items-center space-x-3 p-2">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Keberangkatan</p>
+<p class="text-sm font-bold text-slate-900">18 - 21 Mei 2026</p>
+</div>
+</div>
+<div class="flex items-center space-x-3 p-2">
+<div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Kapasitas</p>
+<p class="text-sm font-bold text-slate-900">Maks. 10 Orang</p>
+</div>
+</div>
+<div class="flex items-center space-x-3 p-2">
+<div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Tingkat Kesulitan</p>
+<p class="text-sm font-bold text-slate-900">Level 3 / 5</p>
+</div>
+</div>
+</div>
+<!-- Host / Organizer Profile Card -->
+<div class="bg-white rounded-xl border border-slate-200 p-5" data-purpose="host-profile">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center space-x-4">
+<!-- Avatar -->
+<div class="relative">
+<div class="w-14 h-14 rounded-full bg-slate-800 text-white font-bold text-lg flex items-center justify-center ring-2 ring-brand-500">
+                  AB
+                </div>
+<span class="absolute bottom-0 right-0 bg-emerald-500 text-white p-0.5 rounded-full ring-2 ring-white" title="Verified Guide">
+<svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+</span>
+</div>
+<div>
+<div class="flex items-center space-x-2">
+<h3 class="text-base font-bold text-slate-900">Arya Bramantya</h3>
+<span class="bg-brand-50 text-brand-700 text-xs font-semibold px-2 py-0.5 rounded">Super Host</span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5">Verified Mountain Leader APGI • Asli Sembalun, Lombok</p>
+<div class="flex items-center space-x-3 mt-1 text-xs text-slate-600">
+<span class="flex items-center text-amber-600 font-semibold">
+                    ★ 4.98 (34 Ekspedisi Rinjani Sukses)
+                  </span>
+<span>•</span>
+<span class="text-slate-500">Skor Kepercayaan: <strong class="text-emerald-600 font-semibold">98/100</strong></span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-2.5 w-full sm:w-auto">
+<button class="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition">
+                Kirim Pesan
+              </button>
+<button class="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 rounded-lg transition">
+                Lihat Profil Guide
+              </button>
+</div>
+</div>
+</div>
+<!-- Travelers Who Joined Section (Trip Match Feature) -->
+<div class="bg-white rounded-xl border border-slate-200 p-5" data-purpose="matched-travelers">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-2">
+<div>
+<h3 class="text-base font-bold text-slate-900 flex items-center">
+                Peserta yang Sudah Bergabung
+                <span class="ml-2 px-2 py-0.5 bg-slate-100 text-slate-700 rounded-full text-xs font-semibold">7 Orang</span>
+</h3>
+<p class="text-xs text-slate-500 mt-0.5">Komposisi grup: 4 Pria, 3 Wanita • Kompatibilitas minat: <span class="text-brand-600 font-bold">94% Pecinta Alam &amp; Fotografi</span></p>
+</div>
+<span class="text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md font-medium border border-emerald-200 self-start sm:self-auto">
+              Trip Terkonfirmasi Berangkat
+            </span>
+</div>
+<!-- Traveler Avatars List -->
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 mt-4 text-center">
+<div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+<div class="w-10 h-10 rounded-full bg-brand-600 text-white font-semibold mx-auto flex items-center justify-center text-xs">SF</div>
+<p class="text-xs font-semibold text-slate-800 mt-1.5 truncate">Shafnat F.</p>
+<p class="text-[10px] text-slate-400">Jakarta</p>
+</div>
+<div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+<div class="w-10 h-10 rounded-full bg-slate-700 text-white font-semibold mx-auto flex items-center justify-center text-xs">RH</div>
+<p class="text-xs font-semibold text-slate-800 mt-1.5 truncate">Rian H.</p>
+<p class="text-[10px] text-slate-400">Bandung</p>
+</div>
+<div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+<div class="w-10 h-10 rounded-full bg-rose-600 text-white font-semibold mx-auto flex items-center justify-center text-xs">MS</div>
+<p class="text-xs font-semibold text-slate-800 mt-1.5 truncate">Maya S.</p>
+<p class="text-[10px] text-slate-400">Surabaya</p>
+</div>
+<div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+<div class="w-10 h-10 rounded-full bg-amber-600 text-white font-semibold mx-auto flex items-center justify-center text-xs">BK</div>
+<p class="text-xs font-semibold text-slate-800 mt-1.5 truncate">Budi K.</p>
+<p class="text-[10px] text-slate-400">Yogyakarta</p>
+</div>
+<div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+<div class="w-10 h-10 rounded-full bg-teal-600 text-white font-semibold mx-auto flex items-center justify-center text-xs">DA</div>
+<p class="text-xs font-semibold text-slate-800 mt-1.5 truncate">Dewi A.</p>
+<p class="text-[10px] text-slate-400">Bali</p>
+</div>
+<div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+<div class="w-10 h-10 rounded-full bg-indigo-700 text-white font-semibold mx-auto flex items-center justify-center text-xs">AW</div>
+<p class="text-xs font-semibold text-slate-800 mt-1.5 truncate">Alif W.</p>
+<p class="text-[10px] text-slate-400">Semarang</p>
+</div>
+<div class="p-2 rounded-lg bg-dashed border-2 border-dashed border-brand-300 bg-brand-50/50 flex flex-col justify-center items-center">
+<div class="w-10 h-10 rounded-full bg-brand-100 text-brand-600 font-bold mx-auto flex items-center justify-center text-xs">+3</div>
+<p class="text-xs font-bold text-brand-600 mt-1.5">Slot Kosong</p>
+<p class="text-[10px] text-brand-500 font-medium">Bisa Kamu</p>
+</div>
+</div>
+</div>
+<!-- Description & Highlight -->
+<div class="bg-white rounded-xl border border-slate-200 p-6 space-y-4" data-purpose="trip-overview">
+<h2 class="text-lg font-bold text-slate-900">Tentang Petualangan Ini</h2>
+<p class="text-slate-600 text-sm leading-relaxed">
+            Menapaki salah satu gunung berapi terindah di dunia. Melalui jalur legendaris Sembalun dengan sabana yang membentang luas, kita akan bermalam di bibir kaldera Pelawangan Sembalun dengan pemandangan magis ke arah Danau Segara Anak dan Gunung Baru Jari. Perjalanan dilanjutkan dengan summit attack ke Puncak Dewi Anjani 3.726 mdpl untuk menyaksikan sunrise spektakuler di atas samudera awan.
+          </p>
+<p class="text-slate-600 text-sm leading-relaxed">
+            Setelah menaklukkan puncak, kita akan turun untuk bermalam di tepi Danau Segara Anak, menikmati hangatnya pemandian air panas alami (Aiq Kalak), dan kembali turun melalui rute hutan tropis Senaru yang asri dan sejuk.
+          </p>
+<div class="pt-3 border-t border-slate-100">
+<h3 class="text-sm font-semibold text-slate-800 mb-2">Sorotan Utama (Highlights):</h3>
+<ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
+<li class="flex items-center">
+<svg class="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+                Sunrise 3.726 mdpl Puncak Anjani
+              </li>
+<li class="flex items-center">
+<svg class="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+                Camping tepi Danau Segara Anak
+              </li>
+<li class="flex items-center">
+<svg class="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+                Relaksasi di Pemandian Air Panas Aiq Kalak
+              </li>
+<li class="flex items-center">
+<svg class="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+                Fotografi Bintang &amp; Galaksi Bima Sakti
+              </li>
+</ul>
+</div>
+</div>
+<!-- Detailed Itinerary Section -->
+<div class="bg-white rounded-xl border border-slate-200 p-6" data-purpose="itinerary-timeline">
+<div class="flex items-center justify-between mb-5">
+<h2 class="text-lg font-bold text-slate-900">Rencana Perjalanan (Itinerary)</h2>
+<span class="text-xs text-brand-600 bg-brand-50 px-2.5 py-1 rounded font-medium">Jalur Sembalun - Turun Senaru</span>
+</div>
+<div class="relative border-l-2 border-slate-200 ml-3 space-y-6">
+<!-- Day 1 -->
+<div class="relative pl-6">
+<span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-white"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Hari 1 • 18 Mei 2026</span>
+<h4 class="text-sm font-bold text-slate-900 mt-0.5">Penjemputan Bandara Lombok - Sembalun Basecamp</h4>
+<p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Penjemputan di Bandara Internasional Lombok (LOP) maksimal pukul 12.00 WITA. Perjalanan darat menuju Desa Sembalun (3 jam), check-in homestay, medical check-up, briefing pendakian bersama guide resmi APGI, dan persiapan logistik packing porter.
+              </p>
+</div>
+<!-- Day 2 -->
+<div class="relative pl-6">
+<span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-white"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Hari 2 • 19 Mei 2026</span>
+<h4 class="text-sm font-bold text-slate-900 mt-0.5">Sembalun Basecamp (1.156 mdpl) ke Pelawangan Sembalun (2.639 mdpl)</h4>
+<p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Sarapan pagi dan registrasi tiket e-Rinjani TNGR. Memulai trekking melewati savana luas menuju Pos 1, Pos 2, dan istirahat makan siang hangat di Pos 3. Melanjutkan tantangan Bukit Penyesalan hingga tiba di Pelawangan Sembalun. Sunset memukau di atas awan dan mendirikan tenda camp bintang.
+              </p>
+</div>
+<!-- Day 3 -->
+<div class="relative pl-6">
+<span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-white"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Hari 3 • 20 Mei 2026</span>
+<h4 class="text-sm font-bold text-slate-900 mt-0.5">Summit Attack Puncak 3.726 mdpl &amp; Turun ke Danau Segara Anak</h4>
+<p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Bangun pukul 02.00 WITA, briefing dan snack hangat sebelum memulai summit attack menuju Puncak Dewi Anjani 3.726 mdpl. Menikmati matahari terbit nan megah. Kembali ke camp untuk sarapan, lalu turun menuju Danau Segara Anak (2.000 mdpl). Relaksasi berendam di pemandian air panas alami dan camping di tepi danau.
+              </p>
+</div>
+<!-- Day 4 -->
+<div class="relative pl-6">
+<span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-white"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-brand-600">Hari 4 • 21 Mei 2026</span>
+<h4 class="text-sm font-bold text-slate-900 mt-0.5">Danau Segara Anak - Senaru - Mataram / Drop Bandara LOP</h4>
+<p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Trekking santai melalui jalur hutan Senaru yang rimbun dan teduh menuju Pintu Masuk Senaru (estimasi 5-6 jam). Makan siang di Pos Senaru. Tim transport Jejakawan siap mengantar seluruh peserta kembali ke Kota Mataram atau Bandara Lombok (flight disarankan setelah pukul 19.00 WITA). Trip selesai.
+              </p>
+</div>
+</div>
+</div>
+<!-- Facilities: Include & Exclude -->
+<div class="bg-white rounded-xl border border-slate-200 p-6" data-purpose="facilities">
+<h2 class="text-lg font-bold text-slate-900 mb-4">Fasilitas &amp; Inklusi</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Termasuk -->
+<div class="bg-emerald-50/50 rounded-lg p-4 border border-emerald-100">
+<h4 class="text-sm font-bold text-emerald-800 flex items-center mb-3">
+<svg class="w-4 h-4 mr-1.5 text-emerald-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+                Termasuk Biaya (Include):
+              </h4>
+<ul class="text-xs text-slate-700 space-y-2">
+<li class="flex items-start">✓ Simaksi e-Rinjani TNGR &amp; Asuransi Jiwa Resmi</li>
+<li class="flex items-start">✓ Tenda Dome Double Layer Premium (1 tenda 2 orang)</li>
+<li class="flex items-start">✓ Tim Porter Kelompok (membawa tenda, matras &amp; logistik)</li>
+<li class="flex items-start">✓ Makan &amp; Minum 3x sehari selama ekspedisi + Buah segar</li>
+<li class="flex items-start">✓ Homestay 1 malam di Sembalun (H-1)</li>
+<li class="flex items-start">✓ Guide Gunung Berlisensi APGI &amp; Tim Medis P3K + Emergency O2</li>
+<li class="flex items-start">✓ Transportasi PP AC Bandara Lombok - Basecamp</li>
+</ul>
+</div>
+<!-- Tidak Termasuk -->
+<div class="bg-rose-50/50 rounded-lg p-4 border border-rose-100">
+<h4 class="text-sm font-bold text-rose-800 flex items-center mb-3">
+<svg class="w-4 h-4 mr-1.5 text-rose-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" fill-rule="evenodd"></path>
+</svg>
+                Tidak Termasuk (Exclude):
+              </h4>
+<ul class="text-xs text-slate-700 space-y-2">
+<li class="flex items-start">✕ Tiket Pesawat pulang-pergi dari kota asal ke Lombok (LOP)</li>
+<li class="flex items-start">✕ Porter pribadi (opsional jika butuh bantuan tas ransel pribadi)</li>
+<li class="flex items-start">✕ Pengeluaran pribadi &amp; cemilan ekstra</li>
+<li class="flex items-start">✕ Perlengkapan pribadi (sepatu, pakaian hangat &amp; jaket)</li>
+<li class="flex items-start">✕ Tip sukarela untuk Guide dan Porter</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Gear Checklist -->
+<div class="bg-white rounded-xl border border-slate-200 p-6" data-purpose="gear-checklist">
+<h2 class="text-lg font-bold text-slate-900 mb-2">Perlengkapan Wajib yang Perlu Disiapkan</h2>
+<p class="text-xs text-slate-500 mb-4">Suhu di Pelawangan &amp; Puncak dapat mencapai 4° - 8° C pada malam hari.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-slate-700">
+<div class="flex items-center p-2.5 rounded-lg border border-slate-100 bg-slate-50">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+              Jaket Windproof / Goose Down
+            </div>
+<div class="flex items-center p-2.5 rounded-lg border border-slate-100 bg-slate-50">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+              Sepatu Trekking High Cut
+            </div>
+<div class="flex items-center p-2.5 rounded-lg border border-slate-100 bg-slate-50">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+              Sleeping Bag Pribadi
+            </div>
+<div class="flex items-center p-2.5 rounded-lg border border-slate-100 bg-slate-50">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+              Headlamp + Baterai Cadangan
+            </div>
+<div class="flex items-center p-2.5 rounded-lg border border-slate-100 bg-slate-50">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+              Trekking Pole
+            </div>
+<div class="flex items-center p-2.5 rounded-lg border border-slate-100 bg-slate-50">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+              Obat &amp; Suplemen Pribadi
+            </div>
+</div>
+</div>
+<!-- Reviews Section -->
+<div class="bg-white rounded-xl border border-slate-200 p-6" data-purpose="reviews">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="text-lg font-bold text-slate-900">Ulasan Pendaki Sebelumnya</h2>
+<p class="text-xs text-slate-500">Nilai kepuasan 4.98 dari total 34 ekspedisi</p>
+</div>
+<div class="text-right">
+<span class="text-xl font-bold text-amber-500">★ 5.0</span>
+<span class="text-xs text-slate-400 block">Terverifikasi</span>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Review 1 -->
+<div class="border-b border-slate-100 pb-4">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center text-xs">
+                    DN
+                  </div>
+<div>
+<h5 class="text-xs font-bold text-slate-800">Dimas Nugroho</h5>
+<p class="text-[10px] text-slate-400">Trekking Rinjani • April 2026</p>
+</div>
+</div>
+<div class="text-amber-400 text-xs">★★★★★</div>
+</div>
+<p class="text-xs text-slate-600 leading-relaxed">
+                "Pengalaman summit terbaik seumur hidup! Bang Arya dan tim porternya luar biasa ramah, masakan di camp sangat bergizi, dan briefing keselamatannya detail banget. Rute bersih dan sangat terorganisir. Bakal join lagi lewat Jejakawan!"
+              </p>
+</div>
+<!-- Review 2 -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-full bg-rose-100 text-rose-700 font-bold flex items-center justify-center text-xs">
+                    CP
+                  </div>
+<div>
+<h5 class="text-xs font-bold text-slate-800">Clarissa Putri</h5>
+<p class="text-[10px] text-slate-400">Trekking Rinjani • Maret 2026</p>
+</div>
+</div>
+<div class="text-amber-400 text-xs">★★★★★</div>
+</div>
+<p class="text-xs text-slate-600 leading-relaxed">
+                "Sebagai solo traveler cewek, awalnya ragu tapi fitur Trip Match Jejakawan beneran bikin nyaman karena ketemu teman-teman yang satu frekuensi. Pemandangan Segara Anak tidak ada tandingannya!"
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- END: LeftColumnDetails -->
+<!-- BEGIN: RightStickyBookingSidebar (4 of 12 cols) -->
+<aside class="lg:col-span-4" data-purpose="booking-card-wrapper">
+<div class="sticky top-20 bg-white rounded-2xl border border-slate-200 shadow-md p-6 space-y-5">
+<!-- Pricing Block -->
+<div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="text-xs text-slate-400 line-through">Rp 2.800.000</span>
+<div class="flex items-baseline space-x-1">
+<span class="text-2xl sm:text-3xl font-black text-slate-900">Rp 2.450.000</span>
+<span class="text-xs font-medium text-slate-500">/ orang</span>
+</div>
+</div>
+<span class="bg-rose-50 text-rose-600 text-xs font-bold px-2.5 py-1 rounded-md border border-rose-200">
+                Hemat Rp 350.000
+              </span>
+</div>
+<p class="text-[11px] text-emerald-600 font-medium mt-1">Diskon Early Bird • Khusus pendaftaran bulan ini</p>
+</div>
+<hr class="border-slate-100"/>
+<!-- Slot Capacity Indicator -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-slate-700">Ketersediaan Kursi</span>
+<span class="text-brand-600">7 / 10 Terisi (Sisa 3 Slot!)</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full rounded-full transition-all duration-300" style="width: 70%"></div>
+</div>
+<p class="text-[11px] text-slate-500">Kuota minim 6 orang terpenuhi, <strong class="text-slate-800">Pasti Berangkat</strong>.</p>
+</div>
+<!-- Date Selector (Preset) -->
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">Jadwal Keberangkatan</label>
+<div class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-800 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>18 Mei 2026 - 21 Mei 2026</span>
+</div>
+<span class="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">Terjadwal</span>
+</div>
+</div>
+<!-- Traveler Count -->
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">Jumlah Peserta</label>
+<div class="flex items-center justify-between border border-slate-200 rounded-lg p-2 bg-slate-50">
+<span class="text-xs font-medium text-slate-700">1 Traveler (Dewasa)</span>
+<div class="flex items-center space-x-2">
+<button class="w-7 h-7 bg-white rounded border border-slate-300 text-slate-600 font-bold hover:bg-slate-100 flex items-center justify-center text-sm disabled:opacity-40" disabled="">-</button>
+<span class="text-xs font-bold text-slate-900 w-4 text-center">1</span>
+<button class="w-7 h-7 bg-white rounded border border-slate-300 text-slate-600 font-bold hover:bg-slate-100 flex items-center justify-center text-sm">+</button>
+</div>
+</div>
+</div>
+<!-- Price Calculation Breakdown -->
+<div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs">
+<div class="flex justify-between text-slate-600">
+<span>Paket Trip Rinjani 4H3M (x1)</span>
+<span>Rp 2.450.000</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Biaya Izin Konservasi &amp; Asuransi</span>
+<span class="text-emerald-600 font-medium">Termasuk</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Biaya Layanan Jejakawan</span>
+<span class="text-emerald-600 font-medium">Rp 0 (Promo)</span>
+</div>
+<div class="flex justify-between text-slate-900 font-bold pt-2 border-t border-slate-200 text-sm">
+<span>Total Pembayaran</span>
+<span class="text-brand-600 font-extrabold">Rp 2.450.000</span>
+</div>
+</div>
+<!-- Gamification Points Note -->
+<div class="p-2.5 rounded-lg bg-indigo-50/70 border border-indigo-100 flex items-center space-x-2.5">
+<div class="p-1.5 bg-brand-600 text-white rounded-md flex-shrink-0">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+</div>
+<p class="text-[11px] text-brand-900 leading-tight">
+              Dapatkan <strong class="font-bold text-brand-700">+750 XP Petualang</strong> &amp; lencana digital <em>"Penakluk Rinjani 3.726 mdpl"</em> saat menyelesaikan trip.
+            </p>
+</div>
+<!-- Primary CTA Button -->
+<div class="space-y-2">
+<button class="w-full py-3.5 px-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-sm hover:shadow transition-all text-sm flex items-center justify-center space-x-2">
+<span>Gabung Trip Ini Sekarang</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Secondary Actions -->
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-lg transition flex items-center justify-center space-x-1.5">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Simpan</span>
+</button>
+<button class="py-2 px-3 border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-lg transition flex items-center justify-center space-x-1.5">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Bagikan</span>
+</button>
+</div>
+</div>
+<!-- Trust Badges & Guarantee -->
+<div class="pt-3 border-t border-slate-100 space-y-2 text-[11px] text-slate-500">
+<div class="flex items-center space-x-2">
+<svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Garansi 100% Refund jika trip dibatalkan penyelenggara</span>
+</div>
+<div class="flex items-center space-x-2">
+<svg class="w-4 h-4 text-brand-600 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Rekening Bersama Escrow Terlindungi Jejakawan</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: RightStickyBookingSidebar -->
+</div>
+</main>
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-16 pt-12 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- 4-Column Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+<!-- Col 1: About Jejakawan -->
+<div class="space-y-3">
+<div class="flex items-center space-x-2">
+<svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span class="text-xl font-extrabold text-brand-600 tracking-tight">Jejakawan</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan bersama kawan sefrekuensi.
+          </p>
+</div>
+<!-- Col 2: Jelajahi -->
+<div>
+<h4 class="text-sm font-bold text-slate-800 mb-3">Jelajahi</h4>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Rekomendasi Trip</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Peta Eksplorasi</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Open Trip Terverifikasi</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Destinasi Populer</a></li>
+</ul>
+</div>
+<!-- Col 3: Komunitas -->
+<div>
+<h4 class="text-sm font-bold text-slate-800 mb-3">Komunitas</h4>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Cari Teman Jalan (Trip Match)</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Misi &amp; Badge Petualang</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Peringkat &amp; Leaderboard</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Forum Diskusi Jejak</a></li>
+</ul>
+</div>
+<!-- Col 4: Bantuan -->
+<div>
+<h4 class="text-sm font-bold text-slate-800 mb-3">Bantuan &amp; Kontak</h4>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Kebijakan Pembatalan &amp; Refund</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Standar Keamanan Pendakian</a></li>
+<li><span class="text-slate-500">Kontak: <a class="text-brand-600 font-medium" href="mailto:halo@jejakawan.id">halo@jejakawan.id</a></span></li>
+</ul>
+</div>
+</div>
+<!-- Copyright Notice -->
+<div class="pt-6 border-t border-slate-100 text-center text-xs text-slate-500">
+        © 2026 Jejakawan. Semua hak dilindungi undang-undang. Dirancang untuk petualang Indonesia.
+      </div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

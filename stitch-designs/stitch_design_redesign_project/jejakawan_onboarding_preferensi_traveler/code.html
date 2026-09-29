@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jejakawan - Personalisasi Profil Traveler</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+            },
+            surface: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-layout">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #F8FAFC;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur border-b border-slate-200" data-purpose="site-navigation-header">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2.5 focus:outline-none" data-purpose="brand-logo" href="#">
+<div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm">
+<svg class="w-6 h-6 stroke-current" fill="none" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<polygon fill="currentColor" points="12 3 14.5 9.5 21 12 14.5 14.5 12 21 9.5 14.5 3 12 9.5 9.5"></polygon>
+</svg>
+</div>
+<span class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</a>
+<!-- Progress Badge & Secondary Actions -->
+<div class="flex items-center gap-3 sm:gap-6" data-purpose="onboarding-controls">
+<div class="hidden md:flex items-center gap-2 bg-indigo-50 text-indigo-700 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-indigo-100">
+<svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewbox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+          Bonus Onboarding: +50 XP
+        </div>
+<a class="text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors" data-purpose="skip-action" href="#">
+          Lewati Sekarang
+        </a>
+<!-- Initial Avatar Pill -->
+<div class="flex items-center gap-2 pl-3 border-l border-slate-200">
+<div class="w-9 h-9 rounded-full bg-slate-100 text-slate-700 font-bold text-sm flex items-center justify-center border border-slate-300 ring-2 ring-slate-100">
+            S
+          </div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full" data-purpose="onboarding-main-container">
+<!-- Hero Onboarding Title & Multi-step Wizard Indicator -->
+<section class="max-w-3xl mx-auto text-center mb-8 sm:mb-12" data-purpose="step-wizard-indicator">
+<h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+        Selamat Datang di Jejakawan!
+      </h1>
+<p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+        Atur preferensi kamu agar kami bisa memberikan rekomendasi petualangan, rute, dan kawan perjalanan terbaik.
+      </p>
+<!-- Step Indicators -->
+<div class="mt-8 flex flex-col gap-3">
+<div class="flex items-center justify-between text-xs font-semibold text-slate-500 px-1">
+<span class="text-indigo-600 font-bold">Langkah 1: Identitas &amp; Asal</span>
+<span class="hidden sm:inline">Langkah 2: Minat Wisata</span>
+<span class="hidden sm:inline">Langkah 3: Preferensi Perjalanan</span>
+<span class="text-slate-700 font-bold">33% Selesai</span>
+</div>
+<!-- Visual Segmented Bar -->
+<div class="grid grid-cols-3 gap-2.5 sm:gap-4">
+<div class="h-2 rounded-full bg-indigo-600 shadow-sm" title="Langkah 1: Aktif"></div>
+<div class="h-2 rounded-full bg-slate-200" title="Langkah 2: Belum Selesai"></div>
+<div class="h-2 rounded-full bg-slate-200" title="Langkah 3: Belum Selesai"></div>
+</div>
+</div>
+</section>
+<!-- Main Card & Side Context Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-5xl mx-auto" data-purpose="onboarding-form-section">
+<!-- Interactive Form Container -->
+<div class="lg:col-span-8 bg-white border border-slate-200/90 rounded-2xl shadow-sm p-6 sm:p-10" data-purpose="step1-card">
+<!-- Step Headline -->
+<div class="border-b border-slate-100 pb-5 mb-6">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-xl sm:text-2xl font-bold text-slate-900">Tentang Kamu</h2>
+<p class="text-sm text-slate-500 mt-0.5">Ceritakan sedikit tentang dirimu untuk memulai jejak petualangan.</p>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">
+              Langkah 1/3
+            </span>
+</div>
+</div>
+<form action="#" class="space-y-6" data-purpose="onboarding-form" method="POST">
+<!-- Avatar Customization Section -->
+<div data-purpose="avatar-selection-section">
+<label class="block text-sm font-semibold text-slate-800 mb-2">Foto Profil Traveler</label>
+<div class="flex flex-col sm:flex-row items-center gap-5 p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+<div class="relative group">
+<div class="w-20 h-20 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-2xl font-bold border-2 border-indigo-200 shadow-inner overflow-hidden" id="avatar-preview">
+                  S
+                </div>
+<button class="absolute bottom-0 right-0 p-1.5 bg-indigo-600 text-white rounded-full shadow hover:bg-indigo-700 transition" title="Ganti Foto" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<div class="space-y-1 text-center sm:text-left flex-1">
+<p class="text-sm font-medium text-slate-800">Pilih Avatar Komunitas atau Unggah Foto</p>
+<p class="text-xs text-slate-500">Mendukung format JPG, PNG atau WebP (Maks. 2MB)</p>
+<!-- Preset Quick Badges / Avatars -->
+<div class="flex items-center gap-2 pt-2 justify-center sm:justify-start flex-wrap">
+<button class="text-xs px-2.5 py-1 bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:text-indigo-600 transition flex items-center gap-1 font-medium" type="button">
+<span>🎒</span> Backpacker
+                  </button>
+<button class="text-xs px-2.5 py-1 bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:text-indigo-600 transition flex items-center gap-1 font-medium" type="button">
+<span>📸</span> Fotografer
+                  </button>
+<button class="text-xs px-2.5 py-1 bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:text-indigo-600 transition flex items-center gap-1 font-medium" type="button">
+<span>🤿</span> Diver
+                  </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Input: Nama Lengkap & Nama Tampilan (Username) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-purpose="name-inputs">
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="full_name">
+                Nama Lengkap
+              </label>
+<input class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition shadow-sm placeholder:text-slate-400" id="full_name" name="full_name" placeholder="cth. Surya Pratama" required="" type="text" value="Surya Pratama"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="display_name">
+                Nama Tampilan / Username <span class="text-indigo-600">*</span>
+</label>
+<div class="relative rounded-xl shadow-sm">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm font-medium">
+                  @
+                </span>
+<input class="w-full pl-8 pr-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition placeholder:text-slate-400" id="display_name" name="display_name" placeholder="nama_kamu" required="" type="text" value="suryapetualang"/>
+</div>
+</div>
+</div>
+<!-- Input: Kota / Lokasi Asal -->
+<div data-purpose="location-input">
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="origin_location">
+              Lokasi Domisili / Kota Asal <span class="text-indigo-600">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+<input class="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition shadow-sm placeholder:text-slate-400" id="origin_location" name="origin_location" placeholder="Jakarta, Bandung, Surabaya, Yogyakarta, dll." required="" type="text" value="Bandung, Jawa Barat"/>
+</div>
+<!-- Popular City Tags -->
+<div class="flex items-center gap-1.5 mt-2 flex-wrap text-xs text-slate-500">
+<span class="font-medium text-slate-400">Pilihan cepat:</span>
+<button class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 transition" onclick="document.getElementById('origin_location').value='Jakarta'" type="button">Jakarta</button>
+<button class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 transition" onclick="document.getElementById('origin_location').value='Bandung'" type="button">Bandung</button>
+<button class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 transition" onclick="document.getElementById('origin_location').value='Surabaya'" type="button">Surabaya</button>
+<button class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 transition" onclick="document.getElementById('origin_location').value='Yogyakarta'" type="button">Yogyakarta</button>
+<button class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 transition" onclick="document.getElementById('origin_location').value='Denpasar / Bali'" type="button">Bali</button>
+</div>
+</div>
+<!-- Input: Bio / Semboyan Petualang -->
+<div data-purpose="travel-bio-input">
+<div class="flex justify-between items-center mb-1.5">
+<label class="block text-sm font-semibold text-slate-700" for="traveler_bio">
+                Bio Singkat Traveler
+              </label>
+<span class="text-xs text-slate-400 font-medium" id="bio-counter">64/160</span>
+</div>
+<textarea class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition shadow-sm placeholder:text-slate-400 leading-relaxed resize-none" id="traveler_bio" maxlength="160" name="traveler_bio" placeholder="Ceritakan minatmu, misal: 'Pencinta aroma kopi lokal di puncak gunung dan sunset pantai timur.'" rows="3">Penikmat sunrise di ketinggian dan pemburu kopi lokal nusantara ☕⛰️</textarea>
+</div>
+<!-- Preference: Tipe Karakter Traveler (Single/Multi Selector) -->
+<div data-purpose="traveler-identity-chips">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+              Persona Petualangan Utama <span class="text-xs font-normal text-slate-400">(Pilih salah satu)</span>
+</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+<label class="relative flex items-center p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50/50 cursor-pointer transition select-none">
+<input checked="" class="sr-only" name="traveler_persona" type="radio" value="solo"/>
+<span class="text-xs sm:text-sm font-semibold text-indigo-900 flex items-center gap-1.5">
+<span>🧭</span> Solo Backpacker
+                </span>
+</label>
+<label class="relative flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition select-none">
+<input class="sr-only" name="traveler_persona" type="radio" value="hidden-gems"/>
+<span class="text-xs sm:text-sm font-medium text-slate-700 flex items-center gap-1.5">
+<span>💎</span> Hidden Gems
+                </span>
+</label>
+<label class="relative flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition select-none">
+<input class="sr-only" name="traveler_persona" type="radio" value="nature"/>
+<span class="text-xs sm:text-sm font-medium text-slate-700 flex items-center gap-1.5">
+<span>🌲</span> Alam &amp; Pendaki
+                </span>
+</label>
+<label class="relative flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition select-none">
+<input class="sr-only" name="traveler_persona" type="radio" value="culinary"/>
+<span class="text-xs sm:text-sm font-medium text-slate-700 flex items-center gap-1.5">
+<span>🍲</span> Kuliner Autentik
+                </span>
+</label>
+<label class="relative flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition select-none">
+<input class="sr-only" name="traveler_persona" type="radio" value="roadtrip"/>
+<span class="text-xs sm:text-sm font-medium text-slate-700 flex items-center gap-1.5">
+<span>🚗</span> Road Tripper
+                </span>
+</label>
+<label class="relative flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition select-none">
+<input class="sr-only" name="traveler_persona" type="radio" value="relaxed"/>
+<span class="text-xs sm:text-sm font-medium text-slate-700 flex items-center gap-1.5">
+<span>🏖️</span> Santai &amp; Resort
+                </span>
+</label>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row items-center justify-between gap-4" data-purpose="form-actions">
+<a class="w-full sm:w-auto text-center px-5 py-3 text-sm font-semibold text-slate-500 hover:text-slate-800 transition" href="#">
+              Atur Nanti Saja
+            </a>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white text-sm font-bold rounded-xl shadow-md shadow-indigo-200 hover:shadow-indigo-300 transition duration-150 transform hover:-translate-y-0.5" type="button">
+<span>Lanjut ke Minat Wisata</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</form>
+</div>
+<!-- Right Column: Inspiration & Community Preview Card -->
+<aside class="lg:col-span-4 space-y-6" data-purpose="onboarding-side-context">
+<!-- Live Community Travel Card -->
+<div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+<div class="relative h-44 w-full overflow-hidden">
+<img alt="Komunitas Jejakawan di Puncak Pulau Padar" class="w-full h-full object-cover object-top hover:scale-105 transition duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1Wkz1gWA7nARZqls2kZHQ4YMJBtui-0INQcrXYr12sly9VCdUl57ZDEv7IFPuI8vnNE2ExlQQROqkz-MQ_2NQvRiKnu1B3-nmEcKNJfBcU-jGCxx6rplCb8PdOeSAtDWJhbL_lrbvuL3IeVjqsgtSFsucUa8ayW94yqJiM1iE8Y0leXk2E_lEugH4aLO5BcciTiE-e7iHWoknjsmlq1f_pBRY5JBJt6Fh7Y6W2JUBVb6-BQi4rozD9xFEk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-4 right-4 text-white">
+<span class="inline-block px-2 py-0.5 bg-white/20 backdrop-blur-md rounded text-[11px] font-semibold mb-1">
+                Komunitas Terbuka
+              </span>
+<p class="text-xs font-medium text-slate-100">
+                Bergabung dengan 12.000+ kawan seperjalanan di seluruh penjuru Indonesia.
+              </p>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-sm font-bold text-slate-900 mb-2">Kenapa mengisi profil ini penting?</h3>
+<ul class="space-y-3 text-xs text-slate-600">
+<li class="flex items-start gap-2.5">
+<span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+<span>Rekomendasi destinasi yang tepat sesuai asal kota &amp; bujetmu.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+<span>Menghubungkanmu ke rekan open trip dengan minat yang seirama.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+<span>Membuka akses badge penjelajah &amp; reward komunitas.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Destination Spotlight Snippet -->
+<div class="p-4 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0">
+<img alt="Spot Populer Indonesia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WHJn_6t3qmfl_Laz4NJv6_FSciDPdBN-e3znmftHAC9N9U04y4Amrxp_w6XIeQpSChC2uR9I-9daNrOOhjhcf4eTIvfnibgDhnPTZhyBBQK4w5a79uFaWpfN7y5YAH8OJp4iVpbeeTJhucVszw9PLyE-cO6P71TVqW2EmgmRK3H3qTxZf5vYK988bHQHwiTsWGbR9EcraGsn6jzr4LybjjfRGdSwWc8YwztsW-gJ9yW9A36UREnKrGyw"/>
+</div>
+<div>
+<div class="text-[11px] font-semibold text-indigo-600 uppercase tracking-wider">Destinasi Trending</div>
+<div class="text-xs font-bold text-slate-800">Kepulauan Raja Ampat, Papua</div>
+<div class="text-[11px] text-slate-500">84 petualang merencanakan trip bulan ini</div>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="mt-auto bg-white border-t border-slate-200 py-10" data-purpose="site-footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-xs sm:text-sm">
+<!-- Col 1 -->
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
+              J
+            </div>
+<span class="font-bold text-slate-900 text-base">Jejakawan</span>
+</div>
+<p class="text-slate-500 text-xs leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Col 2 -->
+<div>
+<h4 class="font-bold text-slate-900 mb-3 text-xs tracking-wider uppercase">Jelajahi</h4>
+<ul class="space-y-2 text-slate-600">
+<li><a class="hover:text-indigo-600 transition" href="#">Rekomendasi</a></li>
+<li><a class="hover:text-indigo-600 transition" href="#">Peta Destinasi</a></li>
+<li><a class="hover:text-indigo-600 transition" href="#">Open Trip Terverifikasi</a></li>
+</ul>
+</div>
+<!-- Col 3 -->
+<div>
+<h4 class="font-bold text-slate-900 mb-3 text-xs tracking-wider uppercase">Komunitas</h4>
+<ul class="space-y-2 text-slate-600">
+<li><a class="hover:text-indigo-600 transition" href="#">Cari Teman Jalan</a></li>
+<li><a class="hover:text-indigo-600 transition" href="#">Misi &amp; Badge</a></li>
+<li><a class="hover:text-indigo-600 transition" href="#">Profil Traveler</a></li>
+</ul>
+</div>
+<!-- Col 4 -->
+<div>
+<h4 class="font-bold text-slate-900 mb-3 text-xs tracking-wider uppercase">Bantuan</h4>
+<ul class="space-y-2 text-slate-600">
+<li><a class="hover:text-indigo-600 transition" href="#">Pengaturan Akun</a></li>
+<li><a class="hover:text-indigo-600 transition" href="#">Panduan Keamanan</a></li>
+<li><a class="hover:text-indigo-600 transition" href="#">Kontak: halo@jejakawan.id</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+<div class="flex items-center gap-4">
+<a class="hover:text-slate-700 transition" href="#">Kebijakan Privasi</a>
+<span>•</span>
+<a class="hover:text-slate-700 transition" href="#">Syarat Ketentuan</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: Interactive Logic Scripts -->
+<script data-purpose="persona-selector">
+    // Interactive radio tile highlight
+    const radioInputs = document.querySelectorAll('input[name="traveler_persona"]');
+    radioInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        radioInputs.forEach(r => {
+          const parent = r.closest('label');
+          if (r.checked) {
+            parent.className = 'relative flex items-center p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50/50 cursor-pointer transition select-none';
+            parent.querySelector('span').className = 'text-xs sm:text-sm font-semibold text-indigo-900 flex items-center gap-1.5';
+          } else {
+            parent.className = 'relative flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition select-none';
+            parent.querySelector('span').className = 'text-xs sm:text-sm font-medium text-slate-700 flex items-center gap-1.5';
+          }
+        });
+      });
+    });
+
+    // Bio length counter
+    const bioTextarea = document.getElementById('traveler_bio');
+    const bioCounter = document.getElementById('bio-counter');
+    if (bioTextarea && bioCounter) {
+      bioTextarea.addEventListener('input', (e) => {
+        bioCounter.textContent = `${e.target.value.length}/160`;
+      });
+    }
+  </script>
+<!-- END: Interactive Logic Scripts -->
+</body></html>

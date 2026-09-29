@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jejakawan - Jelajah &amp; Direktori Destinasi</title>
+<!-- Tailwind CSS CDN with forms and container-queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            accent: {
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles grouped by purpose -->
+<style data-purpose="custom-scrollbars">
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style data-purpose="interaction-elevations">
+    .card-hover-effect {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover-effect:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18">
+<div class="flex items-center justify-between h-16 sm:h-20">
+<!-- Brand Logo & Mark -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 group" href="#">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5l-4.5 1.5 1.5-4.5L14.5 9 13 16.5zM12 13.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</a>
+<!-- Primary Navigation Links -->
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors" href="#">Discover</a>
+<a class="px-3.5 py-2 text-sm font-semibold text-brand-600 rounded-lg bg-brand-50 border border-brand-100" href="#">Explore</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors" href="#">Trip Match</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors" href="#">Open Trip</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors flex items-center gap-1.5" href="#">
+<span>Gamifikasi</span>
+<span class="px-1.5 py-0.5 text-[10px] uppercase font-bold tracking-wide text-amber-700 bg-amber-100 rounded-full">XP</span>
+</a>
+</nav>
+</div>
+<!-- Right User Actions & Profile Profile Info -->
+<div class="flex items-center gap-3">
+<!-- Notification Button -->
+<button aria-label="Notifikasi" class="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+<!-- User Profile Chip -->
+<div class="flex items-center gap-2.5 pl-1">
+<div class="w-9 h-9 rounded-full bg-slate-200 ring-2 ring-brand-500/20 flex items-center justify-center font-semibold text-sm text-brand-700 bg-gradient-to-tr from-brand-100 to-indigo-100">
+              SP
+            </div>
+<div class="hidden sm:block text-left leading-tight">
+<div class="text-sm font-semibold text-slate-800">Surya P.</div>
+<div class="text-xs text-slate-500">Explorer Lv. 4</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<!-- BEGIN: ExploreHeadingSection -->
+<section class="space-y-4" data-purpose="page-title-and-modes">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-2">
+<span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span> Direktori Wisata Resmi
+          </span>
+<h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+            Jelajahi Destinasi Nusantara
+          </h1>
+<p class="text-slate-500 text-sm sm:text-base mt-1.5 max-w-2xl">
+            Katalog 150+ destinasi pilihan, hidden gems otentik, dan keajaiban bentang alam Indonesia.
+          </p>
+</div>
+<!-- Layout View Switches -->
+<div class="flex items-center gap-2 self-start md:self-auto bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+<button aria-label="Tampilan Kisi" class="p-2 rounded-lg bg-brand-600 text-white shadow-sm transition" type="button">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+</svg>
+</button>
+<button aria-label="Tampilan Daftar" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition" type="button">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Search Bar and Sorting Controls -->
+<div class="bg-white rounded-2xl p-3 border border-slate-200/90 shadow-sm flex flex-col md:flex-row gap-3">
+<div class="relative flex-grow">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 text-sm placeholder:text-slate-400 text-slate-800" placeholder="Cari nama destinasi, daerah, atau aktivitas wisata..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<!-- Sort Dropdown -->
+<div class="relative min-w-[210px] flex-1 sm:flex-initial">
+<select aria-label="Urutan Tampilan" class="w-full pl-3.5 pr-8 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 cursor-pointer">
+<option>Urutkan: Popularitas Tertinggi</option>
+<option>Urutkan: Rating Tertinggi (⭐ 4.8+)</option>
+<option>Urutkan: Biaya Masuk Terendah</option>
+<option>Urutkan: Destinasi Terdekat</option>
+</select>
+</div>
+<!-- Quick Filter Button -->
+<button class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold inline-flex items-center gap-2 transition" type="button">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="hidden sm:inline">Filter</span>
+</button>
+</div>
+</div>
+<!-- Province Filter Tabs Carousel/Bar -->
+<div class="overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+<div class="flex items-center gap-2 min-w-max pb-1">
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white shadow-sm shadow-brand-500/25" type="button">Semua Wilayah</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Jawa Barat</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Jawa Tengah</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Jawa Timur</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">DI Yogyakarta</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Bali &amp; Nusa Tenggara</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Sumatera</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Sulawesi</button>
+<button class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200" type="button">Papua &amp; Maluku</button>
+</div>
+</div>
+<!-- Quick Filter Badges -->
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<span class="text-xs text-slate-400 font-semibold mr-1">Filter Cepat:</span>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200/80 hover:bg-amber-100 transition" type="button">
+          ✨ Hidden Gem Eksklusif
+        </button>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" type="button">
+          💰 Budget Backpacker
+        </button>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" type="button">
+          🌋 Wisata Gunung
+        </button>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" type="button">
+          🏖️ Wisata Pantai &amp; Bahari
+        </button>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" type="button">
+          🏛️ Situs Sejarah &amp; Budaya
+        </button>
+</div>
+</section>
+<!-- END: ExploreHeadingSection -->
+<!-- BEGIN: SpotlightCard -->
+<section aria-label="Destinasi Sorotan">
+<div class="relative overflow-hidden rounded-3xl bg-slate-900 text-white shadow-xl shadow-slate-900/10 border border-slate-200/40">
+<div class="grid grid-cols-1 lg:grid-cols-12 min-h-[360px]">
+<!-- Image Section with Gradient Overlay -->
+<div class="lg:col-span-7 relative min-h-[260px] lg:min-h-full">
+<img alt="Stunning scenic photograph of Mount Bromo volcanic crater at sunrise with sea of sand and morning mist, East Java Indonesia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxqMfwiOOAybUMwiCouM8I0DySv8l_-QHAj2xpptc0EWFdXiq9ayS9l84Xz1eqfKk_n4xBPwUSN0aGgvhaFlEcXgzdoGfQDs2sv4bLQqaQ_tHwzFDOcpFw_D4bRFjyeWdJmdCiZ9MNEIxNGvBXz_kVpui0fHTD4tJaTkW5JmCm7oAAco0hTzblWc2SkGKBoHP14fQj4oEMWQ0DSeNZnGw_r9JffItKIAu1gGLPpU4Ak229KVniZijp"/>
+<div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-slate-950 via-slate-950/40 to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow-md">
+                🔥 Paling Populer Minggu Ini
+              </span>
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md text-white border border-white/30">
+                Taman Nasional Bromo Tengger
+              </span>
+</div>
+</div>
+<!-- Spotlight Details -->
+<div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-slate-900 to-slate-950">
+<div class="space-y-4">
+<div class="flex items-center gap-1 text-amber-400 text-sm font-semibold">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+<span>4.9</span>
+<span class="text-slate-400 font-normal">(2,560 ulasan terverifikasi)</span>
+</div>
+<h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                Gunung Bromo &amp; Lautan Pasir
+              </h2>
+<p class="text-slate-300 text-sm leading-relaxed">
+                Menyaksikan matahari terbit spektakuler di atas kaldera purba Tengger, sensasi menunggang kuda di lautan pasir berbisik, serta kawah aktif yang megah.
+              </p>
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800 text-slate-200 border border-slate-700">📍 Probolinggo &amp; Pasuruan, Jatim</span>
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800 text-slate-200 border border-slate-700">🌋 Gunung &amp; Savana</span>
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800 text-slate-200 border border-slate-700">🚙 Jeep Tour</span>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-slate-800 flex items-center justify-between gap-4">
+<div>
+<span class="block text-xs text-slate-400 uppercase tracking-wider font-medium">Tiket Masuk Domestik</span>
+<div class="text-lg font-bold text-white">Rp 29.000 <span class="text-xs font-normal text-slate-400">/ orang</span></div>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Simpan ke Wishlist" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<button class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 font-semibold text-sm text-white shadow-lg shadow-brand-600/30 transition" type="button">
+                  Rencanakan Rute
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: SpotlightCard -->
+<!-- BEGIN: DestinationCardGrid -->
+<section aria-label="Katalog Destinasi Utama" class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-xl font-bold text-slate-900">Destinasi Favorit Para Petualang</h2>
+<p class="text-sm text-slate-500">Pilihan teratas yang dikurasi langsung oleh komunitas Jejakawan</p>
+</div>
+<span class="text-xs font-semibold text-brand-700 bg-brand-50 px-3 py-1.5 rounded-lg border border-brand-100">
+          Menampilkan 12 dari 150 Lokasi
+        </span>
+</div>
+<!-- 3 Columns Clean Elevated Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-purpose="destination-items-grid">
+<!-- Card 1: Bromo Tengger -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden">
+<img alt="Stunning scenic photograph of Mount Bromo volcanic crater at sunrise with sea of sand and morning mist, East Java Indonesia" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxqMfwiOOAybUMwiCouM8I0DySv8l_-QHAj2xpptc0EWFdXiq9ayS9l84Xz1eqfKk_n4xBPwUSN0aGgvhaFlEcXgzdoGfQDs2sv4bLQqaQ_tHwzFDOcpFw_D4bRFjyeWdJmdCiZ9MNEIxNGvBXz_kVpui0fHTD4tJaTkW5JmCm7oAAco0hTzblWc2SkGKBoHP14fQj4oEMWQ0DSeNZnGw_r9JffItKIAu1gGLPpU4Ak229KVniZijp"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-slate-800 shadow-sm">
+                🌋 Vulkanik
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Probolinggo, Jawa Timur
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.9 <span class="font-normal text-slate-400">(2,560)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Gunung Bromo</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Lautan pasir terhampar luas, kawah vulkanik aktif, dan spot sunrise Bukit Cinta yang memesona.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Alam</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Pendakian</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Fotografi</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 29.000 - 220.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2: Tumpak Sewu -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm border-amber-200/60 overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden">
+<img alt="Breathtaking view of Tumpak Sewu waterfall surrounded by lush green tropical jungle canyon, East Java Indonesia" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZXCp7poiRtjBK3cCupcblKtau06rMzlx6P1Q0Rpk5ErlzUFYvahWl76hnIC1613hW_4pkcTqryFOL3Ir6RE7hWqAJviWNQMG8hHeM42SQlroi1Z6txQqr75xLnRRlSv71bKCUf2FBEAMmc-aaXbBgLQX9inxcGxTyQJSIlCIG95dU1U-SdzXmKycnFbQFeaQ7tUrMHrdl0gxaydnPsgtX_gzBlePfk4U-djaIYPI9tojSzm0yqRkb"/>
+<div class="absolute top-3 left-3 flex gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow-sm">
+                ✨ Hidden Gem
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Lumajang, Jawa Timur
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.8 <span class="font-normal text-slate-400">(1,567)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Air Terjun Tumpak Sewu</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Air terjun tirai melingkar berlatar belakang Gunung Semeru di tebing lembah yang eksotis nan rimbun.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Alam</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Air Terjun</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Trekking</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 10.000 - 20.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3: Kepulauan Raja Ampat -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Kepulauan Raja Ampat Papua Barat" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1WHJn_6t3qmfl_Laz4NJv6_FSciDPdBN-e3znmftHAC9N9U04y4Amrxp_w6XIeQpSChC2uR9I-9daNrOOhjhcf4eTIvfnibgDhnPTZhyBBQK4w5a79uFaWpfN7y5YAH8OJp4iVpbeeTJhucVszw9PLyE-cO6P71TVqW2EmgmRK3H3qTxZf5vYK988bHQHwiTsWGbR9EcraGsn6jzr4LybjjfRGdSwWc8YwztsW-gJ9yW9A36UREnKrGyw"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white shadow-sm">
+                🏝️ Cagar Bahari
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Raja Ampat, Papua Barat Daya
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 5.0 <span class="font-normal text-slate-400">(980)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Kepulauan Raja Ampat</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Gugusan pulau karang menawan dan ekosistem terumbu karang terkaya di jantung Segitiga Karang Dunia.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Bahari</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Diving</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Island Hopping</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 500.000 - 1.500.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4: Wisata Kebun Teh & Pegunungan -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Hamparan kebun teh hijau pegunungan Jawa Barat" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1VrnXAc_g1BR8i_4EaHZ80_644YlIEfnQ6S8TMfyM14PSbD_mPa0T4PHQpU6wonV-uknGkTAga_wGXSHYZKrsGGv4QUgkjY4Y-OtQfL_mAfmsw_mN1qWWTqtoxTkdn0ygSos2Q9ti0VvAEwoEcnfxe-XLpXd_zE_tKel-pgktGQW2xgEaLKv2CAc42zMfvBGYZyMsxUIQr16FbdAm2Brm3OSjc71AyD-48-AOnMAhccQws-k5s0P37KHcg"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
+                🌿 Ekowisata
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Pangalengan, Jawa Barat
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.7 <span class="font-normal text-slate-400">(1,840)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Perkebunan Teh Cukul &amp; Situ Cileunca</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Hamparan bukit teh berkabut sejuk dengan sunrise point spektakuler dan ketenangan danau pegunungan.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Alam</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Camping</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Relaxing</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 15.000 - 30.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 5: Kawah Ijen -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Pemandangan danau asam toska Kawah Ijen Banyuwangi" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN6kKnK5qPar0lKQvE90TlCdbtMTrp6cGCn7fkP6SZCx5ELL2Sxfup9Lc0qcSEb2aNWb_50sBZDOEC9ApOMXly4oAEpn8zH4GEtX5TiuJ1Y5XdhtSH39Bp_1DYharY00rFPdLvmqFjcY-VtOlFYOyFVdmw1RaW1RKkRBUjKQQxsiIlP_ZYLgGw6gAfNh6LmMSu1sF6Kloz1O8jkLov4-wfLecTh4IAZV5rjJATKHcWKNnHUigqQV9D"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-700 text-white shadow-sm">
+                🔥 Fenomena Langka
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Banyuwangi, Jawa Timur
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.8 <span class="font-normal text-slate-400">(1,547)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Kawah Ijen</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Keajaiban api biru abadi (blue fire) dan kawah asam tercantik di dunia dengan para penambang belerang.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Alam</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Pendakian</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Kawah</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 100.000 - 150.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 6: Nusa Penida -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Tebing Kelingking Nusa Penida Bali" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAMflQWD7MQWcn8C0HlvUAURa8FAoewxBOJwx1T3i18tVmrjVZI336xr2RvJF3wEmSaauM7Wa8YDMNJsviboXAWyHbuyd21OyYX85jEHNq9W-qYjs3bqLXc20kGUmlyqmgVRRxffNr5HIpKOfVZKjyKqbuXEml17CAhPfGT5EeQd4ycVxWZANRhSJq09X2Zm6LC2_hFifatqsACqAqBXhfidbL2r2Of0Lk0sIm5bbHUz7VOqGgnv8l"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-600 text-white shadow-sm">
+                🌊 Pantai Eksotis
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Klungkung, Bali
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.8 <span class="font-normal text-slate-400">(2,340)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Nusa Penida</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Pantai Kelingking berbentang tebing T-Rex yang ikonik, Diamond Beach, dan perairan jernih Manta Point.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Bahari</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Pantai</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Snorkeling</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 100.000 - 200.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 7: Dieng Plateau -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Pemandangan Telaga Warna Dieng Plateau" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk7hc2sQBQuS0U4BdoqmQqLLoY76SNMtmapwEUL9t-PtpD0dNMWuZRqcOqawNXSz84m4ZpQWT_fba2wT_Y5RSufiTG_1a0ZIsQFMKD3_NtDM-W_GCVoVXBugTw9YGZZppXacCHha4Iik-uYDIafWY64KjRqUMPaq1QBuu1mCF7f7ZmR6U4sGTNOolln5A0ewcZORAmArx_toffzJ0QpLeJjTs-fc8iR5nqdQnA_OvGlqgjlC3jjFxO"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-600 text-white shadow-sm">
+                ⛰️ Dataran Tinggi
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Wonosobo, Jawa Tengah
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.7 <span class="font-normal text-slate-400">(3,470)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Dieng Plateau</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Negeri di atas awan dengan keindahan Telaga Warna, Kawah Sikidang, dan kompleks candi kuno Hindu.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Alam</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Budaya</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Telaga</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 20.000 - 35.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 8: Karimunjawa -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Kepulauan Karimunjawa Jawa Tengah" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFPkQs62hkCtsTNkePdcrwANBXQskaGMqJ0_0ym7QzD5bOwRK1JafsRO2N9a2GxyIgERLzFBJgVT7PulUGAXZy7_zWDFxO7ZGg3FkB9-mLxa--6rj_NRaMiXU7TwakndI5vkxPSclnpnBrM4qg-71Ghz9z-I0bu58ZOZXE9BHTKsfa3KQIiUPzDeSa8hyotrnAgtzFLX8VpYMnuHGykVvPUzUB7vOo2cFQEznQxL3_R3Ox2vNUs57T"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-700 text-white shadow-sm">
+                🐠 Taman Nasional
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Jepara, Jawa Tengah
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.8 <span class="font-normal text-slate-400">(2,110)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Karimun Jawa</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Gugusan pulau tropis Laut Jawa berpasir putih lembut, penangkaran hiu jinak, dan terumbu karang asri.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Alam</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Pantai</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Snorkeling</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 150.000 - 300.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 9: Candi Ratu Boko -->
+<article class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col card-hover-effect">
+<div class="relative h-52 overflow-hidden bg-slate-100">
+<img alt="Gerbang Megah Candi Ratu Boko Sleman Yogyakarta" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2wDl2gWjkMRm3blAzH8NMCKErwlH4On7DXv1GWMcjZfl-BNZKPE3ks884H-wGXIU8cym5GEAM-v1ATf6cE56NX39V_BN4b5N4oZSZ-59GmE9ttY-WBSXltN1iKQpCrna32EvolU962gx2IZJOHT48BszuR81UmkwqNlAa1JHMPYioy1SKNK9CfyEfVkKkjYZyquoFrrtdXup7rrTAEpUiBSRGpbcU1PmIM9zrZBrysR0v8D3v6_Fx"/>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-600 text-white shadow-sm">
+                🏛️ Cagar Budaya
+              </span>
+</div>
+<button aria-label="Simpan Destinasi" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm text-white transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div>
+<div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span class="inline-flex items-center gap-1 font-medium text-slate-600">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Sleman, DI Yogyakarta
+                </span>
+<span class="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  ★ 4.7 <span class="font-normal text-slate-400">(4,120)</span>
+</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 hover:text-brand-600 cursor-pointer">Situs Ratu Boko</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Situs reruntuhan istana megah abad ke-8 di atas bukit dengan panorama siluet matahari terbenam paling magis.</p>
+</div>
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Budaya</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Sejarah</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">Sunset</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-400 block uppercase font-medium">Estimasi Biaya</span>
+<span class="text-sm font-bold text-slate-800">Rp 25.000 - 50.000</span>
+</div>
+<a class="px-3 py-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-semibold rounded-lg transition" href="#">Detail →</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination / Load More Bar -->
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
+<p class="text-xs sm:text-sm text-slate-500 text-center sm:text-left">
+          Menampilkan <span class="font-semibold text-slate-900">1</span> sampai <span class="font-semibold text-slate-900">9</span> dari <span class="font-semibold text-slate-900">154</span> destinasi terverifikasi
+        </p>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-2 border border-slate-200 rounded-lg text-slate-400 text-xs font-medium cursor-not-allowed" type="button">Sebelumnya</button>
+<button class="w-8 h-8 rounded-lg bg-brand-600 text-white text-xs font-semibold" type="button">1</button>
+<button class="w-8 h-8 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold" type="button">2</button>
+<button class="w-8 h-8 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold" type="button">3</button>
+<span class="text-slate-400 px-1 text-xs">...</span>
+<button class="w-8 h-8 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold" type="button">18</button>
+<button class="px-3 py-2 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 text-xs font-medium" type="button">Selanjutnya</button>
+</div>
+</div>
+</section>
+<!-- END: DestinationCardGrid -->
+<!-- BEGIN: CommunityCalloutBanner -->
+<section aria-label="Kontribusi Komunitas" class="rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-700 to-sky-800 text-white p-6 sm:p-10 shadow-lg relative overflow-hidden">
+<!-- Decorative Backdrop circles -->
+<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute right-1/3 -top-12 w-48 h-48 bg-brand-400/20 rounded-full blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="space-y-2.5 max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
+<span>🎁 Dapatkan +250 JejakXP</span>
+</div>
+<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Tahu Spot Tersembunyi yang Belum Tercatat?</h2>
+<p class="text-blue-100 text-sm sm:text-base leading-relaxed">
+            Bantu sesama petualang menemukan keindahan alam Indonesia yang masih alami. Daftarkan destinasi hidden gem baru, ulas pengalamanmu, dan raih badge eksklusif kontributor.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow-md transition" type="button">
+            + Daftarkan Hidden Gem
+          </button>
+<button class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-sm backdrop-blur-sm transition" type="button">
+            Panduan Kurasi
+          </button>
+</div>
+</div>
+</section>
+<!-- END: CommunityCalloutBanner -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-10">
+<!-- Brand Description -->
+<div class="md:col-span-2 space-y-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white shadow-sm">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5l-4.5 1.5 1.5-4.5L14.5 9 13 16.5z"></path>
+</svg>
+</div>
+<span class="text-lg font-bold tracking-tight text-slate-900">Jejakawan</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed max-w-sm">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan bersama komunitas.
+          </p>
+<div class="flex items-center gap-3 text-slate-400">
+<span class="text-xs">🇮🇩 Bangga Berwisata di Indonesia</span>
+</div>
+</div>
+<!-- Links Column 1: Jelajahi -->
+<div class="space-y-3">
+<h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Jelajahi</h3>
+<ul class="space-y-2 text-sm">
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Rekomendasi Editor</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Peta Interaktif</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Open Trip Komunitas</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Panduan Jalur Wisata</a></li>
+</ul>
+</div>
+<!-- Links Column 2: Komunitas -->
+<div class="space-y-3">
+<h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Komunitas</h3>
+<ul class="space-y-2 text-sm">
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Cari Teman Trip</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Misi &amp; Badge XP</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Peringkat Traveler</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Klub Petualang</a></li>
+</ul>
+</div>
+<!-- Links Column 3: Bantuan -->
+<div class="space-y-3">
+<h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Bantuan &amp; Kontak</h3>
+<ul class="space-y-2 text-sm">
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Pusat Pengaturan</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Pedoman Komunitas</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">halo@jejakawan.id</a></li>
+<li><a class="text-slate-600 hover:text-brand-600 transition" href="#">Syarat &amp; Kebijakan</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright Notice -->
+<div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+<div>
+          © 2026 Jejakawan. Semua hak dilindungi undang-undang.
+        </div>
+<div class="flex items-center gap-6">
+<a class="hover:text-slate-600" href="#">Kebijakan Privasi</a>
+<a class="hover:text-slate-600" href="#">Syarat Layanan</a>
+<a class="hover:text-slate-600" href="#">Peta Situs</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Pemandu Lokal - Jejakawan</title>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            jejakawan: {
+              50: '#f5f7ff',
+              100: '#ebf0fe',
+              200: '#ced9fd',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-scrollbars">
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Brand Logo and Mode Indicator -->
+<div class="flex items-center space-x-6">
+<a aria-label="Beranda Jejakawan" class="flex items-center space-x-2.5 focus:outline-none" href="#">
+<span class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-md shadow-indigo-100">
+<!-- Compass SVG Icon -->
+<svg class="w-5 h-5 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</span>
+<span class="text-xl font-bold tracking-tight text-indigo-600">Jejakawan</span>
+</a>
+<span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Mitra Guide Aktif
+          </span>
+</div>
+<!-- Navigation Links -->
+<nav aria-label="Menu Utama" class="hidden lg:flex items-center space-x-8 text-sm font-medium text-slate-600">
+<a class="hover:text-indigo-600 transition-colors" href="#">Discover</a>
+<a class="hover:text-indigo-600 transition-colors" href="#">Explore</a>
+<a class="hover:text-indigo-600 transition-colors" href="#">Trip Match</a>
+<a class="hover:text-indigo-600 transition-colors" href="#">Open Trip</a>
+<a class="hover:text-indigo-600 transition-colors" href="#">Gamifikasi</a>
+<a class="text-indigo-600 font-semibold border-b-2 border-indigo-600 pb-0.5" href="#">Panduan Lokal</a>
+</nav>
+<!-- Header Actions: Chat, Notification, Avatar & Switcher -->
+<div class="flex items-center space-x-3.5">
+<!-- Chat Button with Counter Badge -->
+<button aria-label="Pesan Masuk" class="relative p-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1 right-1 w-4 h-4 bg-indigo-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">2</span>
+</button>
+<!-- Notification Bell with Counter Badge -->
+<button aria-label="Notifikasi" class="relative p-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1 right-1 w-4 h-4 bg-amber-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+</button>
+<div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+<!-- User Profile Widget -->
+<div class="flex items-center space-x-3 pl-1">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-indigo-100 border-2 border-indigo-600 text-indigo-700 font-bold flex items-center justify-center text-sm shadow-sm">
+                S
+              </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="hidden sm:block text-left">
+<p class="text-xs font-bold text-slate-900 leading-tight">Surya Danuarta</p>
+<div class="flex items-center text-[11px] text-amber-500 font-semibold space-x-0.5">
+<span>★ 4.95</span>
+<span class="text-slate-400 font-normal">• Pro Guide</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-6">
+<!-- BEGIN: DashboardHeader -->
+<section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm" data-purpose="dashboard-heading">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+<span>Beranda</span>
+<span>/</span>
+<span class="text-indigo-600">Portal Pemandu Lokal</span>
+</div>
+<h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Dashboard Pemandu Lokal</h1>
+<p class="text-sm text-slate-500 mt-1 max-w-2xl">
+            Kelola pesanan trip, ketersediaan jadwal, pendapatan, dan reputasimu sebagai mitra resmi Jejakawan.
+          </p>
+</div>
+<!-- Quick Actions CTA -->
+<div class="flex flex-wrap items-center gap-2.5">
+<a class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors border border-slate-200" href="#">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Lihat Profil Publik
+          </a>
+<a class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors border border-slate-200" href="#">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Atur Jadwal
+          </a>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            + Buat Paket Tur
+          </button>
+</div>
+</div>
+</section>
+<!-- END: DashboardHeader -->
+<!-- BEGIN: QuickStatsOverview -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="stat-metrics">
+<!-- Stat 1: Pendapatan -->
+<div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pendapatan Bulan Ini</span>
+<span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+<div class="mt-4">
+<h2 class="text-2xl font-black text-slate-900 tracking-tight">Rp 8.450.000</h2>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+              ↑ 18.2% <span class="font-normal text-slate-400">vs bln lalu</span>
+</span>
+<button class="text-xs font-bold text-indigo-600 hover:text-indigo-800">Tarik Dana →</button>
+</div>
+</div>
+</div>
+<!-- Stat 2: Trip Selesai -->
+<div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Trip Selesai</span>
+<span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+<div class="mt-4">
+<h2 class="text-2xl font-black text-slate-900 tracking-tight">24 Trip</h2>
+<p class="text-xs text-slate-500 mt-2 flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            100% Tamu Puas &amp; Terlindungi
+          </p>
+</div>
+</div>
+<!-- Stat 3: Permintaan Baru -->
+<div class="bg-white p-5 rounded-2xl border border-amber-200 bg-amber-50/20 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Booking Perlu Konfirmasi</span>
+<span class="p-2 bg-amber-100 text-amber-700 rounded-xl">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+<div class="mt-4">
+<h2 class="text-2xl font-black text-amber-800 tracking-tight">3 Permintaan</h2>
+<p class="text-xs text-amber-600 mt-2 font-semibold">Respon cepat dalam 2 jam</p>
+</div>
+</div>
+<!-- Stat 4: Rating & Lisensi -->
+<div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Rating &amp; Lisensi</span>
+<span class="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline space-x-2">
+<h2 class="text-2xl font-black text-slate-900 tracking-tight">4.95</h2>
+<span class="text-xs text-slate-500 font-medium">(48 Ulasan Terverifikasi)</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-xs font-bold text-indigo-700">
+<span class="inline-block w-2 h-2 rounded-full bg-indigo-600"></span>
+            Pemandu Andal Bromo &amp; Ijen
+          </div>
+</div>
+</div>
+</section>
+<!-- END: QuickStatsOverview -->
+<!-- BEGIN: TwoColumnDashboardLayout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Main Bookings & Active Tours (2 cols wide) -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Booking Orders & Management Section -->
+<section class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm" data-purpose="booking-management">
+<div class="flex items-center justify-between mb-5">
+<div>
+<h2 class="text-lg font-bold text-slate-900">Permintaan &amp; Jadwal Tur Mendatang</h2>
+<p class="text-xs text-slate-500">Kelola dan periksa jadwal trip wisatawan Anda secara langsung</p>
+</div>
+<a class="text-xs font-bold text-indigo-600 hover:text-indigo-800" href="#">Lihat Semua (8) →</a>
+</div>
+<!-- Trip Items List -->
+<div class="space-y-4">
+<!-- Item 1: Pending Action / New Request -->
+<div class="p-4 rounded-xl border-2 border-indigo-200 bg-indigo-50/20 hover:border-indigo-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 text-[11px] font-bold rounded-md bg-amber-100 text-amber-800 uppercase tracking-wide">Menunggu Konfirmasi</span>
+<span class="text-xs font-semibold text-slate-500">Booking ID: #JKW-9482</span>
+</div>
+<h3 class="font-bold text-slate-900 text-base">Sunrise Bromo Secret Spot &amp; Pasir Berbisik</h3>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-slate-600">
+<span class="flex items-center gap-1 text-slate-800 font-medium">
+<svg class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Kevin &amp; Tim (4 Pax)
+                  </span>
+<span class="flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    18 Okt 2026 (02:30 WIB)
+                  </span>
+<span class="font-extrabold text-indigo-600">Rp 1.200.000</span>
+</div>
+</div>
+<div class="flex items-center gap-2 self-start md:self-center">
+<button class="px-3.5 py-2 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 shadow-sm transition-all" type="button">
+                  Chat Tamu
+                </button>
+<button class="px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-all" type="button">
+                  Konfirmasi
+                </button>
+</div>
+</div>
+<!-- Item 2: Confirmed Upcoming Trip -->
+<div class="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 text-[11px] font-bold rounded-md bg-emerald-100 text-emerald-800">Terkonfirmasi</span>
+<span class="text-xs font-semibold text-slate-500">Booking ID: #JKW-9120</span>
+</div>
+<h3 class="font-bold text-slate-900 text-base">Trekking Kawah Ijen Blue Fire &amp; Sunrise</h3>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-slate-600">
+<span class="flex items-center gap-1 text-slate-800 font-medium">
+<svg class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Sarah Miller (2 Pax - International)
+                  </span>
+<span class="flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    22 Okt 2026 (00:30 WIB)
+                  </span>
+<span class="font-bold text-slate-900">Rp 850.000</span>
+</div>
+</div>
+<div class="flex items-center gap-2 self-start md:self-center">
+<button class="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors" type="button">
+                  Detail Rencana
+                </button>
+</div>
+</div>
+<!-- Item 3: Finished Trip -->
+<div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1.5 opacity-90">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 text-[11px] font-bold rounded-md bg-slate-200 text-slate-700">Selesai • Menunggu Ulasan</span>
+<span class="text-xs font-semibold text-slate-500">Booking ID: #JKW-8821</span>
+</div>
+<h3 class="font-bold text-slate-900 text-base">Hidden Canyon &amp; Air Terjun Madakaripura</h3>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-slate-600">
+<span class="flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Adit Pratama (Private 1 Pax)
+                  </span>
+<span class="flex items-center gap-1 font-medium">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    12 Okt 2026
+                  </span>
+<span class="font-semibold text-slate-600">Rp 450.000 (Dana Dicairkan)</span>
+</div>
+</div>
+<div class="flex items-center gap-2 self-start md:self-center">
+<span class="text-xs text-emerald-600 font-bold flex items-center gap-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Pembayaran Beres
+                </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Tour Packages Section -->
+<section class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm" data-purpose="active-packages">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="text-lg font-bold text-slate-900">Paket Tur &amp; Rute Populer Milik Anda</h2>
+<p class="text-xs text-slate-500">Atur ketersediaan dan ubah rincian paket pemanduan lokal Anda</p>
+</div>
+<button class="text-xs font-bold text-indigo-600 hover:text-indigo-800">+ Tambah Paket Baru</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Package 1 -->
+<div class="border border-slate-200 rounded-xl p-4 hover:shadow-md transition-shadow bg-white flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-xs mb-2">
+<span class="px-2 py-0.5 rounded-full font-bold bg-indigo-50 text-indigo-700">Gunung &amp; Trekking</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
+<span class="ml-2 text-[11px] font-semibold text-emerald-700">Aktif</span>
+</label>
+</div>
+<h4 class="font-bold text-slate-900 text-sm leading-snug">Eksplorasi Sunrise Spot Rahasia Bromo &amp; Kawah Aktif</h4>
+<p class="text-xs text-slate-500 mt-1.5 line-clamp-2">Eksplorasi bukit Kingkong tanpa kerumunan turis biasa, bonus hunting foto Milky Way.</p>
+</div>
+<div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+<div>
+<span class="text-slate-400">Harga / Pax:</span>
+<span class="font-bold text-slate-900 ml-1">Rp 300.000</span>
+</div>
+<button class="font-semibold text-indigo-600 hover:underline">Edit Paket</button>
+</div>
+</div>
+<!-- Package 2 -->
+<div class="border border-slate-200 rounded-xl p-4 hover:shadow-md transition-shadow bg-white flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-xs mb-2">
+<span class="px-2 py-0.5 rounded-full font-bold bg-amber-50 text-amber-700">Piknik &amp; Air Terjun</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-emerald-500"></div>
+<span class="ml-2 text-[11px] font-semibold text-emerald-700">Aktif</span>
+</label>
+</div>
+<h4 class="font-bold text-slate-900 text-sm leading-snug">Private Trail Air Terjun Madakaripura &amp; Tradisi Tengger</h4>
+<p class="text-xs text-slate-500 mt-1.5 line-clamp-2">Pemanduan eksklusif menyusuri tebing hijau abadi serta bercengkerama dengan sesepuh Desa Wonokitri.</p>
+</div>
+<div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+<div>
+<span class="text-slate-400">Harga / Pax:</span>
+<span class="font-bold text-slate-900 ml-1">Rp 450.000</span>
+</div>
+<button class="font-semibold text-indigo-600 hover:underline">Edit Paket</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Traveler Reviews Section -->
+<section class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm" data-purpose="guest-reviews">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="text-lg font-bold text-slate-900">Ulasan Wisatawan Terbaru</h2>
+<p class="text-xs text-slate-500">Umpan balik asli dari traveler yang telah menyelesaikan perjalanan</p>
+</div>
+<div class="text-xs font-bold text-amber-500 flex items-center gap-1">
+<span>★ 4.95 Rata-rata</span>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Review 1 -->
+<div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-200 text-indigo-800 font-bold text-xs flex items-center justify-center">
+                    KM
+                  </div>
+<div>
+<h5 class="text-xs font-bold text-slate-900">Kevin Mandala (Jakarta)</h5>
+<p class="text-[11px] text-slate-400">Trip Sunrise Bromo • 5 Hari yang lalu</p>
+</div>
+</div>
+<div class="text-xs text-amber-500 font-bold">★★★★★</div>
+</div>
+<p class="text-xs text-slate-600 italic">
+                "Mas Surya beneran paham banget spot yang sepi dari lautan turis! View sunrise-nya luar biasa magis, sangat sabar memandu dan foto-foto dokumentasinya kelas fotografer profesional. Recommended guide!"
+              </p>
+</div>
+<!-- Review 2 -->
+<div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 font-bold text-xs flex items-center justify-center">
+                    AN
+                  </div>
+<div>
+<h5 class="text-xs font-bold text-slate-900">Anindya Putri (Bandung)</h5>
+<p class="text-[11px] text-slate-400">Trip Blue Fire Kawah Ijen • 12 Hari yang lalu</p>
+</div>
+</div>
+<div class="text-xs text-amber-500 font-bold">★★★★★</div>
+</div>
+<p class="text-xs text-slate-600 italic">
+                "Safety first selalu dijaga sama Mas Surya waktu trekking malam di Ijen. Masker gas disiapin yang tipe respirator bagus, ga bau belerang sama sekali. Terima kasih banyak atas hospitality-nya!"
+              </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Widgets (1 col wide) -->
+<aside class="space-y-6">
+<!-- Widget 1: Official Verification & License Badge -->
+<div class="bg-gradient-to-br from-indigo-700 to-indigo-900 rounded-2xl p-5 text-white shadow-md relative overflow-hidden" data-purpose="guide-certification">
+<!-- Background decorative circle -->
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded bg-white/20 border border-white/20">Lisensi Resmi</span>
+<svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h3 class="text-base font-bold mt-3 leading-snug">Mitra Pemandu Tersertifikasi Kemenparekraf &amp; HPI</h3>
+<p class="text-xs text-indigo-100 mt-1">No. Lisensi: HPI-JATIM-2024-0982<br/>Berlaku hingga: Des 2028</p>
+<div class="mt-4 pt-3 border-t border-indigo-500/40 flex items-center justify-between text-xs">
+<span class="text-indigo-200">Skor Kepercayaan</span>
+<span class="font-extrabold text-emerald-300">98 / 100 (Sangat Terpercaya)</span>
+</div>
+</div>
+<!-- Widget 2: Availability Quick Calendar -->
+<div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm" data-purpose="quick-calendar">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-bold text-slate-900 text-sm">Kalender Ketersediaan</h3>
+<span class="text-xs font-semibold text-indigo-600">Oktober 2026</span>
+</div>
+<!-- Simple Calendar Days Layout -->
+<div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-slate-400 mb-2">
+<span>M</span><span>S</span><span>S</span><span>R</span><span>K</span><span>J</span><span>S</span>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-xs">
+<!-- Blank placeholders -->
+<span class="p-1.5 text-slate-300">28</span>
+<span class="p-1.5 text-slate-300">29</span>
+<span class="p-1.5 text-slate-300">30</span>
+<span class="p-1.5 text-slate-700">1</span>
+<span class="p-1.5 text-slate-700">2</span>
+<span class="p-1.5 text-slate-700">3</span>
+<span class="p-1.5 text-slate-700">4</span>
+<span class="p-1.5 text-slate-700">5</span>
+<span class="p-1.5 text-slate-700">6</span>
+<span class="p-1.5 text-slate-700">7</span>
+<span class="p-1.5 text-slate-700">8</span>
+<span class="p-1.5 text-slate-700">9</span>
+<span class="p-1.5 text-slate-700">10</span>
+<span class="p-1.5 text-slate-700">11</span>
+<span class="p-1.5 bg-slate-100 rounded-lg text-slate-400 line-through">12</span>
+<span class="p-1.5 text-slate-700">13</span>
+<span class="p-1.5 text-slate-700">14</span>
+<span class="p-1.5 text-slate-700">15</span>
+<span class="p-1.5 text-slate-700">16</span>
+<span class="p-1.5 text-slate-700">17</span>
+<!-- Booked Day 18 -->
+<span class="p-1.5 bg-indigo-600 text-white font-bold rounded-lg relative">
+              18
+              <span class="w-1 h-1 bg-amber-400 rounded-full absolute bottom-0.5 left-1/2 -translate-x-1/2"></span>
+</span>
+<span class="p-1.5 text-slate-700">19</span>
+<span class="p-1.5 text-slate-700">20</span>
+<span class="p-1.5 text-slate-700">21</span>
+<!-- Booked Day 22 -->
+<span class="p-1.5 bg-indigo-600 text-white font-bold rounded-lg relative">
+              22
+              <span class="w-1 h-1 bg-amber-400 rounded-full absolute bottom-0.5 left-1/2 -translate-x-1/2"></span>
+</span>
+<span class="p-1.5 text-slate-700">23</span>
+<span class="p-1.5 text-slate-700">24</span>
+<span class="p-1.5 text-slate-700">25</span>
+<span class="p-1.5 text-slate-700">26</span>
+<span class="p-1.5 text-slate-700">27</span>
+<span class="p-1.5 text-slate-700">28</span>
+<span class="p-1.5 text-slate-700">29</span>
+<span class="p-1.5 text-slate-700">30</span>
+<span class="p-1.5 text-slate-700">31</span>
+</div>
+<!-- Legend -->
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+<span class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-indigo-600 rounded"></span> Ada Jadwal
+            </span>
+<span class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-slate-200 rounded"></span> Libur / Off
+            </span>
+<button class="text-indigo-600 font-bold hover:underline">Ubah Kalender</button>
+</div>
+</div>
+<!-- Widget 3: Gamifikasi & Level Guide -->
+<div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm" data-purpose="guide-gamification">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-xl shadow-inner">
+              👑
+            </div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Peringkat Jejakawan</span>
+<h4 class="font-extrabold text-slate-900 text-sm">Master Local Ranger</h4>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="mt-4 space-y-1.5">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">1.850 XP</span>
+<span class="font-bold text-slate-700">2.000 XP untuk Legend</span>
+</div>
+<div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full" style="width: 92.5%"></div>
+</div>
+</div>
+<div class="mt-4 p-3 bg-indigo-50/60 rounded-xl border border-indigo-100 text-xs text-indigo-950 space-y-1">
+<p class="font-bold flex items-center gap-1 text-indigo-700">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              Tips Meningkatkan Pesanan:
+            </p>
+<p class="text-slate-600 leading-relaxed">
+              Selesaikan 2 trip lagi bulan ini dengan ulasan bintang 5 untuk mendapatkan badge eksklusif <strong>Top 1% Guide Indonesia</strong>.
+            </p>
+</div>
+</div>
+<!-- Widget 4: Pusat Bantuan Cepat -->
+<div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm" data-purpose="quick-support">
+<h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-slate-400">Butuh Bantuan Mendesak?</h4>
+<p class="text-xs text-slate-600 mt-2 leading-relaxed">
+            Tim Support Mitra Guide siap siaga 24/7 jika terjadi kondisi darurat saat trip di lapangan.
+          </p>
+<a class="mt-3.5 inline-flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors" href="https://wa.me/" rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"></path></svg>
+            Hotline SOS Guide Center
+          </a>
+</div>
+</aside>
+</div>
+<!-- END: TwoColumnDashboardLayout -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-12" data-purpose="jejakawan-footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- 4 Column Footer Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Col 1: Brand Info -->
+<div class="space-y-4">
+<div class="flex items-center space-x-2">
+<span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+<svg class="w-4 h-4 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</span>
+<span class="text-xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Col 2: Jelajahi -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Jelajahi</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Rekomendasi</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Peta</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Open Trip</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Panduan Lokal</a></li>
+</ul>
+</div>
+<!-- Col 3: Komunitas -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Komunitas</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Cari Teman</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Misi &amp; Badge</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Profil Guide</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Forum Mitra</a></li>
+</ul>
+</div>
+<!-- Col 4: Bantuan & Hubungi -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Bantuan</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Pusat Bantuan Guide</a></li>
+<li><a class="hover:text-indigo-600 transition-colors" href="#">Pengaturan</a></li>
+<li>
+<a class="inline-flex items-center gap-1.5 hover:text-indigo-600 transition-colors font-medium" href="mailto:halo@jejakawan.id">
+                Kontak: halo@jejakawan.id
+              </a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Sub-bar -->
+<div class="mt-12 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+<div class="flex items-center space-x-6 mt-4 sm:mt-0">
+<a class="hover:underline" href="#">Syarat &amp; Ketentuan</a>
+<a class="hover:underline" href="#">Kebijakan Privasi</a>
+<a class="hover:underline" href="#">Standar Keselamatan</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

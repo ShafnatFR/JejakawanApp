@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Plus_Jakarta_Sans } from "next/font/google"
 import "./globals.css"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { AuthProvider } from "@/components/layout/auth-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" })
 
 // Register service worker
 if (typeof window !== "undefined" && "serviceWorker" in navigator) {
@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id">
-      <body className={inter.className}>
+      <body className={jakarta.className}>
         <AuthProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />

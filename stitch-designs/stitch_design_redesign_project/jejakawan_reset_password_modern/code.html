@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Kata Sandi - Jejakawan</title>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+            },
+            surface: {
+              subtle: '#F8FAFC',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Google Font: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-elements">
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .subtle-dot-bg {
+      background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between selection:bg-indigo-100 selection:text-indigo-700">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo & Badge -->
+<a aria-label="Beranda Jejakawan" class="flex items-center gap-2.5 group transition-transform active:scale-95" href="#">
+<div class="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center text-white shadow-md shadow-primary-500/25 group-hover:bg-primary-700 transition-colors">
+<!-- Compass Icon -->
+<svg class="w-5 h-5 transition-transform group-hover:rotate-45 duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</a>
+<!-- Center Navigation Links -->
+<nav class="hidden md:flex items-center gap-1 lg:gap-2">
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">Discover</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">Explore</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">Trip Match</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">Open Trip</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">Gamifikasi</a>
+</nav>
+<!-- Right Utility Actions -->
+<div class="flex items-center gap-3">
+<!-- Messages/Chat Button -->
+<button aria-label="Pesan" class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-colors relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+</button>
+<!-- Notification Bell Icon -->
+<button aria-label="Notifikasi" class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-colors relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+<path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-indigo-600 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- User Profile Avatar Badge -->
+<div class="flex items-center ml-1 pl-2 border-l border-slate-200">
+<button aria-label="Profil Pengguna" class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-sm flex items-center justify-center hover:ring-2 hover:ring-primary-500 hover:ring-offset-1 transition" type="button">
+            S
+          </button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow flex items-center justify-center px-4 py-12 subtle-dot-bg">
+<div class="w-full max-w-lg">
+<!-- Reset Password Card Container -->
+<section class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200/80 p-8 sm:p-10 transition-all">
+<!-- Header & Security Shield Badge -->
+<div class="text-center mb-8">
+<div class="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 text-primary-600 flex items-center justify-center mx-auto mb-4 shadow-xs">
+<!-- Lock & Shield Icon -->
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
+<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+</svg>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Reset Kata Sandi</h1>
+<p class="mt-2 text-sm leading-relaxed text-slate-500 max-w-sm mx-auto">
+            Buat kata sandi baru yang kuat untuk melindungi akun petualanganmu di Jejakawan.
+          </p>
+</div>
+<!-- Form Section -->
+<form class="space-y-6" id="reset-password-form" onsubmit="event.preventDefault();">
+<!-- Field 1: Password Baru -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-sm font-semibold text-slate-700 flex items-center gap-1.5" for="new-password">
+<span>Password Baru</span>
+<span class="text-red-500" title="Wajib diisi">*</span>
+</label>
+<span class="text-xs text-slate-400 font-medium">Min. 8 karakter</span>
+</div>
+<div class="relative rounded-xl shadow-xs">
+<input class="w-full pl-4 pr-11 py-3 text-sm rounded-xl border border-slate-300 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" id="new-password" name="new-password" placeholder="Minimal 8 karakter (kombinasi angka &amp; huruf)" required="" type="password" value="Kembara2026!"/>
+<!-- Visibility Toggle Button -->
+<button aria-label="Tampilkan atau sembunyikan kata sandi" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none" id="toggle-new-pwd" type="button">
+<svg class="w-5 h-5" fill="none" id="eye-icon-new" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Password Strength Bar Meter -->
+<div class="space-y-1.5 pt-1">
+<div class="flex items-center justify-between text-xs">
+<span class="font-medium text-slate-500">Kekuatan Kata Sandi:</span>
+<span class="font-semibold text-emerald-600">Kuat</span>
+</div>
+<div class="grid grid-cols-4 gap-1.5 h-1.5">
+<div class="rounded-full bg-emerald-500"></div>
+<div class="rounded-full bg-emerald-500"></div>
+<div class="rounded-full bg-emerald-500"></div>
+<div class="rounded-full bg-emerald-500"></div>
+</div>
+</div>
+<!-- Criteria Checklist Badges -->
+<div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
+<div class="flex items-center gap-1.5 text-emerald-700">
+<svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Minimal 8 karakter</span>
+</div>
+<div class="flex items-center gap-1.5 text-emerald-700">
+<svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Huruf besar &amp; kecil</span>
+</div>
+<div class="flex items-center gap-1.5 text-emerald-700 sm:col-span-2">
+<svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Mengandung angka dan simbol unik</span>
+</div>
+</div>
+</div>
+<!-- Field 2: Konfirmasi Password Baru -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-sm font-semibold text-slate-700 flex items-center gap-1.5" for="confirm-password">
+<span>Konfirmasi Password</span>
+<span class="text-red-500" title="Wajib diisi">*</span>
+</label>
+<span class="text-xs text-emerald-600 font-medium flex items-center gap-1">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+                Sesuai
+              </span>
+</div>
+<div class="relative rounded-xl shadow-xs">
+<input class="w-full pl-4 pr-11 py-3 text-sm rounded-xl border border-slate-300 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" id="confirm-password" name="confirm-password" placeholder="Ulangi password baru kamu" required="" type="password" value="Kembara2026!"/>
+<!-- Visibility Toggle Button -->
+<button aria-label="Tampilkan atau sembunyikan konfirmasi kata sandi" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none" id="toggle-confirm-pwd" type="button">
+<svg class="w-5 h-5" fill="none" id="eye-icon-confirm" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<p class="text-xs text-slate-500">Pastikan kedua kata sandi cocok dan tidak mudah ditebak oleh orang lain.</p>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full py-3.5 px-4 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-semibold text-sm rounded-xl shadow-lg shadow-primary-500/25 transition duration-200 flex items-center justify-center gap-2 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" type="submit">
+<span>Simpan Password Baru</span>
+<svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</form>
+<!-- Security Notice Box -->
+<div class="mt-6 rounded-xl bg-slate-50 border border-slate-200/70 p-3.5 flex items-start gap-3 text-xs text-slate-600">
+<svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<p class="leading-relaxed">
+            Sesi ini dilindungi dengan enkripsi end-to-end 256-bit. Setelah kata sandi diperbarui, kamu akan diminta masuk kembali ke akunmu.
+          </p>
+</div>
+<!-- Back to Login Link -->
+<div class="mt-6 text-center">
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-primary-600 transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Kembali ke Halaman Masuk</span>
+</a>
+</div>
+</section>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200/80">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+<!-- Footer Columns -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 pb-10 border-b border-slate-200/70">
+<!-- Column 1: Brand Info -->
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary-600 flex items-center justify-center text-white">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span class="text-lg font-bold text-slate-900 tracking-tight">Jejakawan</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Column 2: Jelajahi -->
+<div class="space-y-3">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">Jelajahi</h3>
+<ul class="space-y-2.5 text-sm text-slate-500">
+<li><a class="hover:text-primary-600 transition-colors" href="#">Rekomendasi</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Peta Interaktif</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Open Trip</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Direktori Destinasi</a></li>
+</ul>
+</div>
+<!-- Column 3: Komunitas -->
+<div class="space-y-3">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">Komunitas</h3>
+<ul class="space-y-2.5 text-sm text-slate-500">
+<li><a class="hover:text-primary-600 transition-colors" href="#">Cari Teman</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Misi &amp; Badge</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Papan Peringkat</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Profil Penjelajah</a></li>
+</ul>
+</div>
+<!-- Column 4: Bantuan & Kontak -->
+<div class="space-y-3">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900">Bantuan</h3>
+<ul class="space-y-2.5 text-sm text-slate-500">
+<li><a class="hover:text-primary-600 transition-colors" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Pengaturan Privasi</a></li>
+<li><a class="hover:text-primary-600 transition-colors" href="#">Keamanan Akun</a></li>
+<li class="pt-1">
+<span class="block text-xs font-semibold text-slate-400">Kontak:</span>
+<a class="text-primary-600 hover:text-primary-700 font-medium" href="mailto:halo@jejakawan.id">halo@jejakawan.id</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Sub-footer -->
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-slate-700 transition" href="#">Syarat &amp; Ketentuan</a>
+<a class="hover:text-slate-700 transition" href="#">Kebijakan Privasi</a>
+<a class="hover:text-slate-700 transition" href="#">Panduan Komunitas</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- Password Visibility Toggle Logic -->
+<script data-purpose="password-visibility">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle for New Password
+      const toggleNew = document.getElementById('toggle-new-pwd');
+      const inputNew = document.getElementById('new-password');
+      if (toggleNew && inputNew) {
+        toggleNew.addEventListener('click', () => {
+          const type = inputNew.getAttribute('type') === 'password' ? 'text' : 'password';
+          inputNew.setAttribute('type', type);
+        });
+      }
+
+      // Toggle for Confirm Password
+      const toggleConfirm = document.getElementById('toggle-confirm-pwd');
+      const inputConfirm = document.getElementById('confirm-password');
+      if (toggleConfirm && inputConfirm) {
+        toggleConfirm.addEventListener('click', () => {
+          const type = inputConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+          inputConfirm.setAttribute('type', type);
+        });
+      }
+    });
+  </script>
+</body></html>

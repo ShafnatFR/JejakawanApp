@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profil Traveler - Shafnat Fuaini Ramadhan | Jejakawan</title>
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              900: '#312E81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Global Custom Styles -->
+<style data-purpose="base-styling">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F8FAFC;
+      color: #1E293B;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased text-slate-800">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo & Brand -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 group" href="#">
+<div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-sm shadow-brand-500/30 group-hover:bg-brand-700 transition-colors">
+<svg class="w-5 h-5 stroke-[2.2]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M10.5 13.5l3-3m0 0l-1.5 6m1.5-6l-6 1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</a>
+<!-- Main Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Discover</a>
+<a class="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Explore</a>
+<a class="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Trip Match</a>
+<a class="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Open Trip</a>
+<a class="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Gamifikasi</a>
+</nav>
+</div>
+<!-- Right Action Items (Messages, Notification, Profile) -->
+<div class="flex items-center gap-3.5">
+<!-- Chat Button -->
+<button aria-label="Pesan &amp; Diskusi" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</button>
+<!-- Notification Button with Indicator Badge -->
+<button aria-label="Notifikasi" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+<span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- User Profile Avatar Pill -->
+<a class="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors" href="#">
+<div class="w-7 h-7 rounded-full bg-brand-100 text-brand-700 font-bold text-xs flex items-center justify-center">
+              S
+            </div>
+<span class="text-sm font-semibold text-slate-800">Shafnat</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+<!-- BEGIN: HeroProfileCard -->
+<section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" data-purpose="profile-card">
+<!-- Landscape Cover Banner -->
+<div class="relative h-48 sm:h-56 bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-800/60 to-indigo-900/60 z-10"></div>
+<!-- Vector Mountain Silhouette Pattern -->
+<svg class="absolute inset-0 w-full h-full object-cover opacity-20" preserveaspectratio="none" viewbox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,224L60,208C120,192,240,160,360,165.3C480,171,600,213,720,208C840,203,960,149,1080,138.7C1200,128,1320,160,1380,176L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" fill="#ffffff"></path>
+</svg>
+<!-- Ubah Cover Button -->
+<button class="absolute top-4 right-4 z-20 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/40 hover:bg-black/60 text-white text-xs font-semibold backdrop-blur-md transition-all">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Ubah Cover
+          </button>
+</div>
+<!-- Profile Details Strip -->
+<div class="px-6 pb-6 pt-0 relative">
+<div class="flex flex-col md:flex-row md:items-end justify-between -mt-16 sm:-mt-20 gap-4 mb-6">
+<!-- User Avatar & Core Identity -->
+<div class="flex flex-col sm:flex-row items-start sm:items-end gap-4">
+<div class="relative">
+<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-indigo-50 border-4 border-white shadow-md flex items-center justify-center text-brand-600 font-extrabold text-4xl sm:text-5xl select-none">
+                  S
+                </div>
+<!-- Badge Level 1 Explorer -->
+<span class="absolute -bottom-2 -right-2 bg-amber-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full border-2 border-white shadow-sm flex items-center gap-1">
+<svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" fill-rule="evenodd"></path>
+</svg>
+                  Lvl 1
+                </span>
+</div>
+<!-- Name & Badges -->
+<div class="space-y-1 sm:mb-1">
+<div class="flex flex-wrap items-center gap-2">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Shafnat Fuaini Ramadhan</h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
+<svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                    Tourist / Solo Explorer
+                  </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+<svg class="w-3 h-3 text-amber-500 fill-amber-500" viewbox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+                    0.0
+                  </span>
+</div>
+<p class="text-sm font-medium text-slate-500">@shafnat</p>
+</div>
+</div>
+<!-- Profile Actions -->
+<div class="flex items-center gap-2.5">
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold shadow-sm transition-all">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Edit Profil
+              </button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-sm shadow-brand-500/25 transition-all">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Bagikan
+              </button>
+</div>
+</div>
+<!-- Bio & Metadata Info -->
+<div class="space-y-3 pt-2 border-t border-slate-100">
+<p class="text-slate-700 text-sm leading-relaxed max-w-3xl">
+              Penjelajah alam Indonesia, pencinta gunung &amp; pantai tersembunyi. Gemar mencari kawan seperjalanan untuk trip santai dan eksplorasi budaya lokal.
+            </p>
+<div class="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-500 font-medium">
+<span class="inline-flex items-center gap-1.5">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Jakarta Selatan, Indonesia
+              </span>
+<span class="inline-flex items-center gap-1.5">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Bergabung sejak Maret 2026
+              </span>
+<span class="inline-flex items-center gap-1 text-emerald-600 font-semibold">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Status: Terbuka untuk Trip Bareng
+              </span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroProfileCard -->
+<!-- BEGIN: KeyMetricsGrid -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4" data-purpose="metrics-summary">
+<!-- Metric 1: Trip Selesai -->
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<div class="text-xl font-bold text-slate-900 leading-none">0</div>
+<div class="text-xs font-medium text-slate-500 mt-1">Total Trip Selesai</div>
+</div>
+</div>
+<!-- Metric 2: Destinasi Terjelajah -->
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<div class="text-xl font-bold text-slate-900 leading-none">1</div>
+<div class="text-xs font-medium text-slate-500 mt-1">Destinasi Dikunjungi</div>
+</div>
+</div>
+<!-- Metric 3: Koleksi Badge -->
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<div class="text-xl font-bold text-slate-900 leading-none">0</div>
+<div class="text-xs font-medium text-slate-500 mt-1">Badge Didapat</div>
+</div>
+</div>
+<!-- Metric 4: Ulasan Komunitas -->
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<div class="text-xl font-bold text-slate-900 leading-none">0</div>
+<div class="text-xs font-medium text-slate-500 mt-1">Ulasan Diberikan</div>
+</div>
+</div>
+</section>
+<!-- END: KeyMetricsGrid -->
+<!-- BEGIN: TwoColumnLayout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Trust, Safety & Gamification Status (4 Cols) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Trust & Verification Card -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-5" data-purpose="trust-safety-card">
+<!-- Header with Trust Score -->
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-bold text-slate-900">Skor Kepercayaan</h3>
+<p class="text-xs text-slate-500">Berdasarkan verifikasi &amp; aktivitas</p>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-amber-700">
+<svg class="w-4 h-4 fill-amber-500 text-amber-500" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-sm font-extrabold">20</span>
+<span class="text-[11px] font-medium text-amber-600">/ 100</span>
+</div>
+</div>
+<!-- Trust Meter Progress -->
+<div class="space-y-1.5">
+<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-amber-500 h-2 rounded-full" style="width: 20%"></div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-slate-500 font-medium">
+<span>Tingkat Pemula</span>
+<span class="text-amber-600 font-semibold">Perlu Verifikasi Lanjutan</span>
+</div>
+</div>
+<!-- Checklist Verification Items -->
+<div class="space-y-3 pt-3 border-t border-slate-100 text-xs">
+<span class="font-bold uppercase tracking-wider text-[10px] text-slate-400">Verifikasi Identitas</span>
+<!-- Item 1: Phone Verified -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+<svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<span class="font-medium text-slate-800">Nomor Ponsel (HP)</span>
+<p class="text-[11px] text-slate-500">+62 812 •••• 921</p>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Terverifikasi</span>
+</div>
+<!-- Item 2: KTP Verification (Pending) -->
+<div class="p-3 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<span class="font-semibold text-slate-800">Verifikasi KTP / Paspor</span>
+<p class="text-[11px] text-slate-500">Buka akses Open Trip &amp; Trip Match</p>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-lg shadow-sm text-xs transition-colors" href="#">
+                  Verifikasi KTP Sekarang
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<!-- Item 3: Social Account -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+<svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<span class="font-medium text-slate-800">Akun Google Terhubung</span>
+<p class="text-[11px] text-slate-500">shafnat@gmail.com</p>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Aktif</span>
+</div>
+</div>
+</div>
+<!-- Gamification & XP Progress Card -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4" data-purpose="gamification-card">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-indigo-50 text-brand-600 flex items-center justify-center font-bold text-sm">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-sm">Level 1: Pemula Petualang</h4>
+<p class="text-xs text-slate-500">Mulai langkah jelajahmu</p>
+</div>
+</div>
+<span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded-md">0 XP</span>
+</div>
+<!-- Progress to Level 2 -->
+<div class="space-y-1.5">
+<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-brand-600 h-2 rounded-full" style="width: 5%"></div>
+</div>
+<p class="text-[11px] text-slate-500">Tersisa <strong class="text-slate-700">500 XP</strong> lagi untuk naik ke <span class="font-semibold text-brand-600">Level 2 (Pencari Jejak)</span></p>
+</div>
+<!-- Quick Tips to Earn XP -->
+<div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs">
+<span class="font-semibold text-slate-700 block">Cara Cepat Tambah XP:</span>
+<ul class="space-y-1.5 text-slate-600 text-[11px]">
+<li class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                  Lengkapi Verifikasi KTP (+150 XP)
+                </li>
+<li class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                  Tulis ulasan destinasi pertama (+50 XP)
+                </li>
+<li class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                  Gabung trip komunitas perdana (+100 XP)
+                </li>
+</ul>
+</div>
+<button class="w-full py-2 px-3 border border-slate-200 hover:border-slate-300 rounded-xl text-slate-700 hover:bg-slate-50 font-semibold text-xs transition-colors">
+              Lihat Misi Petualangan
+            </button>
+</div>
+</div>
+<!-- Right Column: Interactive Content Tabs (8 Cols) -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Main Interactive Card with Tabbed Navigation -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" data-purpose="tabbed-container">
+<!-- Navigation Tabs Bar -->
+<div class="flex items-center border-b border-slate-200 px-6 pt-2 bg-slate-50/50">
+<button class="tab-button inline-flex items-center gap-2 py-4 px-3 border-b-2 border-brand-600 text-brand-600 font-bold text-sm -mb-px" id="tabBtnBadge" onclick="switchTab('badge')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Badge Koleksi (0)
+              </button>
+<button class="tab-button inline-flex items-center gap-2 py-4 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm -mb-px transition-colors" id="tabBtnTrip" onclick="switchTab('trip')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Riwayat &amp; Rencana Trip (0)
+              </button>
+<button class="tab-button inline-flex items-center gap-2 py-4 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm -mb-px transition-colors" id="tabBtnReview" onclick="switchTab('review')">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                Ulasan &amp; Komunitas
+              </button>
+</div>
+<!-- Tab Content Pane: BADGES -->
+<div class="p-6 space-y-6" id="contentBadge">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-bold text-slate-900 text-base">Pencapaian &amp; Badge Petualang</h3>
+<p class="text-xs text-slate-500">Selesaikan misi untuk membuka koleksi lencana eksklusif</p>
+</div>
+<span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-md">Total Tersedia: 12</span>
+</div>
+<!-- Badge Grid Showcase -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Badge 1: First Step (Ready to claim / In progress) -->
+<div class="p-4 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/40 relative overflow-hidden flex items-start gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-white border border-indigo-100 flex items-center justify-center text-brand-600 shadow-sm shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-sm text-slate-900">First Step Explorer</h4>
+<span class="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold">Siap Buka</span>
+</div>
+<p class="text-xs text-slate-500">Lengkapi data profil dan pasang bio petualanganmu.</p>
+<div class="pt-1 flex items-center gap-2">
+<div class="w-24 bg-indigo-100 rounded-full h-1.5">
+<div class="bg-brand-600 h-1.5 rounded-full" style="width: 80%"></div>
+</div>
+<span class="text-[11px] font-semibold text-brand-700">80%</span>
+</div>
+</div>
+</div>
+<!-- Badge 2: Mountain Conqueror (Locked) -->
+<div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-start gap-3.5 opacity-70">
+<div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<div class="space-y-1">
+<h4 class="font-bold text-sm text-slate-700">Mountain Conqueror</h4>
+<p class="text-xs text-slate-500">Selesaikan minimal 1 ekspedisi pendakian gunung via Open Trip.</p>
+<span class="text-[10px] text-slate-400 font-medium">Terkunci • 0 / 1 Trip</span>
+</div>
+</div>
+<!-- Badge 3: Hidden Gem Seeker (Locked) -->
+<div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-start gap-3.5 opacity-70">
+<div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<div class="space-y-1">
+<h4 class="font-bold text-sm text-slate-700">Hidden Gem Seeker</h4>
+<p class="text-xs text-slate-500">Bagikan review atau lokasi spot tersembunyi di Peta Jejakawan.</p>
+<span class="text-[10px] text-slate-400 font-medium">Terkunci • 0 / 3 Ulasan</span>
+</div>
+</div>
+<!-- Badge 4: Verified Explorer (Locked) -->
+<div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-start gap-3.5 opacity-70">
+<div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<div class="space-y-1">
+<h4 class="font-bold text-sm text-slate-700">Verified Explorer</h4>
+<p class="text-xs text-slate-500">Selesaikan verifikasi identitas resmi (KTP / Paspor).</p>
+<span class="text-[10px] text-slate-400 font-medium">Terkunci • Menunggu Verifikasi</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tab Content Pane: TRIPS (Empty State) -->
+<div class="p-8 hidden" id="contentTrip">
+<div class="max-w-md mx-auto text-center space-y-4 py-6">
+<!-- Illustrated Empty Backpack / Compass -->
+<div class="w-20 h-20 mx-auto rounded-3xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400 shadow-inner">
+<svg class="w-10 h-10" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="space-y-1.5">
+<h4 class="text-base font-bold text-slate-900">Belum ada riwayat petualangan</h4>
+<p class="text-xs text-slate-500 leading-relaxed">
+                    Waktunya merencanakan trip impianmu! Temukan destinasi baru di Indonesia atau cari teman satu frekuensi lewat Trip Match.
+                  </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs shadow-sm transition-colors" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                    Cari Destinasi di Explore
+                  </a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors" href="#">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                    Buat Trip Match Baru
+                  </a>
+</div>
+</div>
+</div>
+<!-- Tab Content Pane: REVIEWS -->
+<div class="p-8 hidden" id="contentReview">
+<div class="max-w-md mx-auto text-center space-y-3 py-6">
+<div class="w-16 h-16 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h4 class="text-base font-bold text-slate-900">Belum Ada Ulasan Diterima</h4>
+<p class="text-xs text-slate-500">
+                  Setelah kamu menyelesaikan trip bersama traveler lain atau bergabung dalam Open Trip komunitas, ulasan dan penilaian akan tampil di sini.
+                </p>
+</div>
+</div>
+</div>
+<!-- Bottom Info / Safety Note Card -->
+<div class="p-4 rounded-xl border border-slate-200 bg-white flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-800">Komitmen Keamanan &amp; Etika Komunitas Jejakawan</p>
+<p class="text-[11px] text-slate-500">Akun terverifikasi mendapatkan respon 3x lebih cepat dan perlindungan perjalanan bersama mitra asuransi.</p>
+</div>
+</div>
+<a class="text-xs font-semibold text-brand-600 hover:text-brand-700 whitespace-nowrap" href="#">Pelajari Panduan →</a>
+</div>
+</div>
+</div>
+<!-- END: TwoColumnLayout -->
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="mt-16 bg-white border-t border-slate-200 pt-12 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Footer Columns -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<!-- Brand Description -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M10.5 13.5l3-3m0 0l-1.5 6m1.5-6l-6 1.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<span class="text-lg font-bold text-slate-900">Jejakawan</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Col 2: Jelajahi -->
+<div class="space-y-3">
+<h5 class="text-xs font-bold uppercase tracking-wider text-slate-900">Jelajahi</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Rekomendasi Destinasi</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Peta Wisata Interaktif</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Open Trip Bersama</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Hidden Gems Indonesia</a></li>
+</ul>
+</div>
+<!-- Col 3: Komunitas -->
+<div class="space-y-3">
+<h5 class="text-xs font-bold uppercase tracking-wider text-slate-900">Komunitas</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Cari Teman Perjalanan</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Misi &amp; Perolehan Badge</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Papan Peringkat Traveler</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Panduan Komunitas Aman</a></li>
+</ul>
+</div>
+<!-- Col 4: Bantuan & Kontak -->
+<div class="space-y-3">
+<h5 class="text-xs font-bold uppercase tracking-wider text-slate-900">Bantuan</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Pengaturan Akun</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Kebijakan Privasi</a></li>
+<li class="pt-1 text-slate-500">Kontak: <a class="text-brand-600 font-semibold hover:underline" href="mailto:halo@jejakawan.id">halo@jejakawan.id</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright Bar -->
+<div class="pt-8 border-t border-slate-100 text-center text-xs text-slate-400">
+        © 2026 Jejakawan. Semua hak dilindungi.
+      </div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="tab-switcher">
+    // Simple JavaScript to handle tab switching between Badges, Trips, and Reviews
+    function switchTab(tabName) {
+      // Elements
+      const contentBadge = document.getElementById('contentBadge');
+      const contentTrip = document.getElementById('contentTrip');
+      const contentReview = document.getElementById('contentReview');
+
+      const btnBadge = document.getElementById('tabBtnBadge');
+      const btnTrip = document.getElementById('tabBtnTrip');
+      const btnReview = document.getElementById('tabBtnReview');
+
+      // Reset Active styles on all buttons
+      const buttons = [btnBadge, btnTrip, btnReview];
+      buttons.forEach(btn => {
+        btn.classList.remove('border-brand-600', 'text-brand-600', 'font-bold');
+        btn.classList.add('border-transparent', 'text-slate-500', 'font-semibold');
+      });
+
+      // Hide all contents
+      contentBadge.classList.add('hidden');
+      contentTrip.classList.add('hidden');
+      contentReview.classList.add('hidden');
+
+      // Set current active
+      if (tabName === 'badge') {
+        contentBadge.classList.remove('hidden');
+        btnBadge.classList.add('border-brand-600', 'text-brand-600', 'font-bold');
+        btnBadge.classList.remove('border-transparent', 'text-slate-500');
+      } else if (tabName === 'trip') {
+        contentTrip.classList.remove('hidden');
+        btnTrip.classList.add('border-brand-600', 'text-brand-600', 'font-bold');
+        btnTrip.classList.remove('border-transparent', 'text-slate-500');
+      } else if (tabName === 'review') {
+        contentReview.classList.remove('hidden');
+        btnReview.classList.add('border-brand-600', 'text-brand-600', 'font-bold');
+        btnReview.classList.remove('border-transparent', 'text-slate-500');
+      }
+    }
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>

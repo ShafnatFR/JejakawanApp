@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Laporan Pengguna &amp; Moderasi Kasus - Jejakawan Admin</title>
+<!-- Tailwind CSS CDN with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles for Layout & Utilities -->
+<style data-purpose="custom-scrollbars">
+    /* Subtle custom scrollbar for dashboard panels */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<style data-purpose="interactive-states">
+    .report-card-active {
+      border-color: #6366F1 !important;
+      background-color: #F8FAFC !important;
+      box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.08), 0 2px 4px -2px rgba(99, 102, 241, 0.05);
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Left: Logo & Platform Identity -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 group" href="#">
+<div class="w-9 h-9 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-sm shadow-brand-600/30 group-hover:scale-105 transition-transform">
+<!-- Compass Icon -->
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
+              Jejakawan
+            </span>
+</a>
+<!-- Main Navigation Links -->
+<nav class="hidden md:flex items-center space-x-1" data-purpose="primary-navigation">
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Discover</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Explore</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Trip Match</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Open Trip</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Gamifikasi</a>
+</nav>
+</div>
+<!-- Right: Admin Status & User Profile -->
+<div class="flex items-center gap-3">
+<!-- Role Badge -->
+<div class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+<span class="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></span>
+            Super Admin
+          </div>
+<!-- Chat Icon -->
+<button class="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="Pesan Masuk" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+</button>
+<!-- Notification Icon with Badge -->
+<button class="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="Notifikasi Baru" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- User Avatar Menu -->
+<div class="flex items-center pl-2 ml-1 border-l border-slate-200">
+<button class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center justify-center font-bold text-sm text-slate-700 transition" type="button">
+              S
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Admin Sub-Navigation Tabs -->
+<div class="border-t border-slate-100 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<nav aria-label="Tabs Admin" class="flex space-x-6 -mb-px overflow-x-auto">
+<a class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-xs sm:text-sm flex items-center gap-2" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="9" width="7" x="3" y="3"></rect><rect height="5" width="7" x="14" y="3"></rect><rect height="9" width="7" x="14" y="12"></rect><rect height="5" width="7" x="3" y="16"></rect></svg>
+            Ringkasan
+          </a>
+<a class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-xs sm:text-sm flex items-center gap-2" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Moderasi Konten
+          </a>
+<!-- Active Tab -->
+<a class="border-brand-600 text-brand-600 whitespace-nowrap py-3 px-1 border-b-2 font-semibold text-xs sm:text-sm flex items-center gap-2" href="#">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+            Laporan Pengguna
+            <span class="ml-1 bg-rose-100 text-rose-700 py-0.5 px-2 rounded-full text-xs font-bold">5 Baru</span>
+</a>
+<a class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-xs sm:text-sm flex items-center gap-2" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Manajemen User
+          </a>
+<a class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-xs sm:text-sm flex items-center gap-2" href="#">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Log Aktivitas
+          </a>
+</nav>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+<!-- Top Headline & Action Area -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Laporan &amp; Keluhan Pengguna</h1>
+<p class="text-sm text-slate-500 mt-1 max-w-2xl">
+          Pantau, investigasi, dan tindak lanjuti laporan aktivitas mencurigakan, penipuan tiket/open trip, serta pelanggaran integritas komunitas Jejakawan.
+        </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 shadow-sm transition" type="button">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+          Export CSV / PDF
+        </button>
+<button class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-brand-600 rounded-lg hover:bg-brand-700 shadow-sm transition" type="button">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="16"></line><line x1="8" x2="16" y1="12" y2="12"></line></svg>
+          Buat Tiket Investigasi
+        </button>
+</div>
+</div>
+<!-- Quick Stats Cards Section -->
+<section aria-label="Statistik Cepat Laporan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1: Total -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Laporan Aktif</p>
+<p class="text-2xl font-bold text-slate-900 mt-1">18 Kasus</p>
+<span class="inline-flex items-center text-xs text-slate-500 mt-1">
+<span class="text-emerald-600 font-semibold mr-1">↓ 12%</span> vs minggu lalu
+          </span>
+</div>
+<div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+</div>
+</div>
+<!-- Card 2: Menunggu Review -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-rose-200 shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-rose-500"></div>
+<div>
+<p class="text-xs font-semibold text-rose-600 uppercase tracking-wider">Menunggu Review</p>
+<p class="text-2xl font-bold text-slate-900 mt-1">5 Laporan</p>
+<span class="inline-flex items-center text-xs font-semibold text-rose-600 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-500 mr-1.5 animate-ping"></span>
+            Perlu tindakan segera
+          </span>
+</div>
+<div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+</div>
+</div>
+<!-- Card 3: Sedang Investigasi -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-amber-200 shadow-sm flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-amber-600 uppercase tracking-wider">Sedang Diinvestigasi</p>
+<p class="text-2xl font-bold text-slate-900 mt-1">4 Laporan</p>
+<span class="text-xs text-slate-500 mt-1 block">Oleh Tim Trust &amp; Safety</span>
+</div>
+<div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+</div>
+</div>
+<!-- Card 4: Selesai Ditutup -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-emerald-200 shadow-sm flex items-center justify-between">
+<div>
+<p class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Terselesaikan Hari Ini</p>
+<p class="text-2xl font-bold text-slate-900 mt-1">9 Kasus</p>
+<span class="text-xs text-slate-500 mt-1 block">Rata-rata resolusi: 3.2 Jam</span>
+</div>
+<div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+</div>
+</div>
+</section>
+<!-- Filters & Search Toolbar -->
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+<!-- Search Bar -->
+<div class="relative flex-grow max-w-md">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+</div>
+<input class="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-slate-800 placeholder-slate-400 transition" placeholder="Cari ID laporan (#LP-...), nama pelapor, terlapor..." type="text"/>
+</div>
+<!-- Filter Dropdowns & Category Chips -->
+<div class="flex flex-wrap items-center gap-2.5">
+<!-- Status Filter -->
+<select class="text-xs sm:text-sm py-2 pl-3 pr-8 border border-slate-300 rounded-lg bg-white text-slate-700 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+<option value="all">Semua Status</option>
+<option selected="" value="pending">Menunggu Review (5)</option>
+<option value="investigation">Sedang Diinvestigasi (4)</option>
+<option value="resolved">Terselesaikan (9)</option>
+</select>
+<!-- Category Filter -->
+<select class="text-xs sm:text-sm py-2 pl-3 pr-8 border border-slate-300 rounded-lg bg-white text-slate-700 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+<option value="all">Semua Kategori</option>
+<option value="fraud">Penipuan Open Trip</option>
+<option value="harassment">Ujaran Kasar / Toxic</option>
+<option value="cancellation">Pembatalan Sepihak</option>
+<option value="spam">Spam / Akun Palsu</option>
+</select>
+<!-- Urgency Filter -->
+<select class="text-xs sm:text-sm py-2 pl-3 pr-8 border border-slate-300 rounded-lg bg-white text-slate-700 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+<option value="all">Semua Prioritas</option>
+<option value="urgent">Mendesak / Urgent</option>
+<option value="medium">Sedang</option>
+<option value="low">Rendah</option>
+</select>
+<!-- Reset Button -->
+<button class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition" title="Reset Filter" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+</button>
+</div>
+</div>
+<!-- Main Workspace: Report Cards (Left) + Detail & Action Panel (Right) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- BEGIN: ReportListSection -->
+<section aria-label="Daftar Kasus Laporan" class="lg:col-span-7 space-y-3.5">
+<div class="flex items-center justify-between text-xs text-slate-500 px-1 font-medium">
+<span>Menampilkan 4 dari 18 laporan</span>
+<span>Urutkan: <strong class="text-slate-700 font-semibold cursor-pointer">Paling Mendesak</strong></span>
+</div>
+<!-- Case Card 1 (Active / High Priority) -->
+<article class="report-card-active bg-white border-2 rounded-xl p-4 sm:p-5 transition hover:shadow-md cursor-pointer relative" data-purpose="report-card-selected">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-700 border border-rose-200">
+                #LP-1042
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold bg-rose-50 text-rose-600">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+                Urgent / Prioritas Tinggi
+              </span>
+</div>
+<span class="text-xs text-slate-400 font-medium">25 Menit lalu</span>
+</div>
+<div class="mt-2.5">
+<h2 class="text-base font-bold text-slate-900 leading-snug">
+              Indikasi Penipuan Open Trip &amp; Uang Muka Tidak Masuk Kuota
+            </h2>
+<p class="text-xs text-slate-600 mt-1 line-clamp-2">
+              Pelapor mentransfer DP sebesar Rp 850.000 untuk paket "Pendakian Rinjani 4D3N", namun terlapor tidak memasukkan peserta ke grup koordinasi dan memblokir kontak WhatsApp.
+            </p>
+</div>
+<!-- User Metadata -->
+<div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-4">
+<div>
+<span class="text-slate-400 block text-[11px]">Terlapor:</span>
+<span class="font-semibold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded">Eko Travel Liar (Akun Baru)</span>
+</div>
+<div class="border-l border-slate-200 pl-4">
+<span class="text-slate-400 block text-[11px]">Pelapor:</span>
+<span class="font-medium text-slate-700">Shafnat Fuaini</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              Menunggu Review
+            </div>
+</div>
+</article>
+<!-- Case Card 2 (Medium Priority / Under Investigation) -->
+<article class="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 transition hover:border-slate-300 hover:shadow-sm cursor-pointer relative" data-purpose="report-card">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                #LP-1039
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold bg-amber-50 text-amber-700">
+                Prioritas Sedang
+              </span>
+</div>
+<span class="text-xs text-slate-400 font-medium">2 Jam lalu</span>
+</div>
+<div class="mt-2.5">
+<h2 class="text-base font-bold text-slate-900 leading-snug">
+              Pelanggaran Komunitas: Pelecehan Verbal di Forum Diskusi Trip
+            </h2>
+<p class="text-xs text-slate-600 mt-1 line-clamp-2">
+              Terlapor melontarkan kata-kata diskriminatif dan mengancam anggota komunitas lain pada room publik "Trip Match Derawan Backpacker".
+            </p>
+</div>
+<div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-4">
+<div>
+<span class="text-slate-400 block text-[11px]">Terlapor:</span>
+<span class="font-semibold text-slate-800">Rian_Adventurer</span>
+</div>
+<div class="border-l border-slate-200 pl-4">
+<span class="text-slate-400 block text-[11px]">Pelapor:</span>
+<span class="font-medium text-slate-700">Maya Putri</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              Dalam Investigasi
+            </div>
+</div>
+</article>
+<!-- Case Card 3 (Cancellation dispute) -->
+<article class="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 transition hover:border-slate-300 hover:shadow-sm cursor-pointer relative" data-purpose="report-card">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                #LP-1035
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">
+                Sengketa Pembatalan
+              </span>
+</div>
+<span class="text-xs text-slate-400 font-medium">5 Jam lalu</span>
+</div>
+<div class="mt-2.5">
+<h2 class="text-base font-bold text-slate-900 leading-snug">
+              Pembatalan Sepihak Tanpa Refund H-1 Keberangkatan
+            </h2>
+<p class="text-xs text-slate-600 mt-1 line-clamp-2">
+              Pihak organizer membatalkan paket Sunrise Bromo Jeep secara sepihak dan tidak mengembalikan jaminan 100% sesuai klausul garansi Jejakawan.
+            </p>
+</div>
+<div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-4">
+<div>
+<span class="text-slate-400 block text-[11px]">Terlapor:</span>
+<span class="font-semibold text-slate-800">Bromo Sunrise Squad</span>
+</div>
+<div class="border-l border-slate-200 pl-4">
+<span class="text-slate-400 block text-[11px]">Pelapor:</span>
+<span class="font-medium text-slate-700">Budi Santoso</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              Menunggu Respon Mitra
+            </div>
+</div>
+</article>
+<!-- Case Card 4 (Resolved) -->
+<article class="bg-white/80 border border-slate-200 rounded-xl p-4 sm:p-5 transition hover:border-slate-300 opacity-80 hover:opacity-100 cursor-pointer relative" data-purpose="report-card">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                #LP-1028
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700">
+                Prioritas Rendah
+              </span>
+</div>
+<span class="text-xs text-slate-400 font-medium">1 Hari lalu</span>
+</div>
+<div class="mt-2.5">
+<h2 class="text-base font-bold text-slate-900 leading-snug line-through text-slate-500">
+              Dugaan Akun Kloning / Foto Profil Palsu Pemandu Wisata
+            </h2>
+<p class="text-xs text-slate-500 mt-1 line-clamp-1">
+              Akun telah diverifikasi ulang dengan melampirkan e-KTP dan lisensi HPI resmi. Status selesai.
+            </p>
+</div>
+<div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-4">
+<div>
+<span class="text-slate-400 block text-[11px]">Terlapor:</span>
+<span class="font-medium text-slate-600">Guide_Lombok99</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Selesai Ditutup
+            </div>
+</div>
+</article>
+<!-- Pagination -->
+<nav aria-label="Navigasi Halaman Laporan" class="flex items-center justify-between border-t border-slate-200 pt-3 px-2">
+<div class="text-xs text-slate-500">Halaman 1 dari 5</div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1.5 text-xs font-medium text-slate-400 bg-white border border-slate-200 rounded-lg cursor-not-allowed">Sebelumnya</button>
+<button class="px-3 py-1.5 text-xs font-medium text-brand-600 bg-brand-50 border border-brand-200 rounded-lg">1</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg">2</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg">3</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg">Selanjutnya</button>
+</div>
+</nav>
+</section>
+<!-- END: ReportListSection -->
+<!-- BEGIN: InvestigationDetailSidebar -->
+<aside class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm sticky top-28 space-y-6" data-purpose="quick-investigation-panel">
+<!-- Header Panel Detail -->
+<div class="flex items-start justify-between border-b border-slate-100 pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold px-2 py-0.5 bg-rose-100 text-rose-700 rounded-md">Investigasi Kasus</span>
+<span class="text-xs text-slate-400">ID: LP-1042</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 mt-1">Detail &amp; Aksi Moderasi</h3>
+</div>
+<button class="text-slate-400 hover:text-slate-600 p-1 rounded-md hover:bg-slate-100" title="Tutup / Minimize" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+</button>
+</div>
+<!-- Terlapor vs Pelapor Comparison Box -->
+<div class="grid grid-cols-2 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs">
+<!-- Kolom Pelapor -->
+<div>
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Pelapor</span>
+<div class="font-bold text-slate-800 text-sm mt-0.5">Shafnat Fuaini</div>
+<div class="text-slate-500 mt-0.5">Member Sejak: Jan 2024</div>
+<div class="text-emerald-600 font-medium flex items-center gap-1 mt-1">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Identitas Terverifikasi
+            </div>
+</div>
+<!-- Kolom Terlapor -->
+<div class="border-l border-slate-200 pl-3">
+<span class="text-[11px] font-semibold text-rose-500 uppercase tracking-wider block">Terlapor (Pelaku)</span>
+<div class="font-bold text-rose-600 text-sm mt-0.5">Eko Travel Liar</div>
+<div class="text-slate-500 mt-0.5">Member: Baru (3 hari lalu)</div>
+<div class="text-rose-600 font-semibold flex items-center gap-1 mt-1">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+              3 Laporan Serupa
+            </div>
+</div>
+</div>
+<!-- Deskripsi Kronologi Kasus -->
+<div>
+<h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Kronologi Lengkap</h4>
+<div class="text-xs leading-relaxed text-slate-600 bg-slate-50/70 p-3.5 rounded-lg border border-slate-200">
+            "Saya mendaftar slot open trip Rinjani dan telah mentransfer DP Rp 850.000 ke rekening BCA atas nama Eko Supriyadi. Setelah konfirmasi bukti pembayaran, nomor saya diblokir dan saya dikeluarkan dari link WhatsApp group koordinasi. Mohon Jejakawan menindak tegas akun ini."
+          </div>
+</div>
+<!-- Bukti Pendukung (Attachments) -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Bukti Pendukung (3 Berkas)</h4>
+<span class="text-[11px] text-brand-600 font-semibold cursor-pointer hover:underline">Buka Semua</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<!-- Bukti 1: Transfer -->
+<div class="group relative rounded-lg border border-slate-200 bg-slate-100 p-2 text-center hover:border-brand-500 cursor-pointer transition">
+<div class="w-full h-14 bg-white rounded flex items-center justify-center text-slate-400 group-hover:text-brand-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+</div>
+<span class="block text-[11px] text-slate-600 truncate mt-1 font-medium">BCA_Transfer.png</span>
+</div>
+<!-- Bukti 2: Screenshot Chat -->
+<div class="group relative rounded-lg border border-slate-200 bg-slate-100 p-2 text-center hover:border-brand-500 cursor-pointer transition">
+<div class="w-full h-14 bg-white rounded flex items-center justify-center text-slate-400 group-hover:text-brand-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+</div>
+<span class="block text-[11px] text-slate-600 truncate mt-1 font-medium">Chat_WA_Block.jpg</span>
+</div>
+<!-- Bukti 3: Link Postingan -->
+<div class="group relative rounded-lg border border-slate-200 bg-slate-100 p-2 text-center hover:border-brand-500 cursor-pointer transition">
+<div class="w-full h-14 bg-white rounded flex items-center justify-center text-slate-400 group-hover:text-brand-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+</div>
+<span class="block text-[11px] text-slate-600 truncate mt-1 font-medium">Post_Trip_URL.pdf</span>
+</div>
+</div>
+</div>
+<!-- Catatan Internal Moderator -->
+<div>
+<label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="moderator-note">
+            Catatan Investigasi Internal
+          </label>
+<textarea class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-brand-500 focus:outline-none placeholder-slate-400 bg-white" id="moderator-note" placeholder="Tulis catatan tindakan atau arahan ke tim legal/finance..." rows="2">Rekening tujuan telah dicocokkan dengan blacklist bank. Nomor kontak sudah tidak aktif.</textarea>
+</div>
+<!-- Tombol Aksi Moderasi Eksekutif -->
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<p class="text-xs font-semibold text-slate-500">Tindakan Admin yang Direkomendasikan:</p>
+<div class="grid grid-cols-2 gap-2">
+<!-- Aksi 1: Bekukan Akun -->
+<button class="w-full px-3 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-lg shadow-sm flex items-center justify-center gap-1.5 transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" x2="19.07" y1="4.93" y2="19.07"></line></svg>
+              Bekukan &amp; Blokir Akun
+            </button>
+<!-- Aksi 2: Mediasi / Minta Klarifikasi -->
+<button class="w-full px-3 py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold text-xs border border-brand-200 rounded-lg flex items-center justify-center gap-1.5 transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              Panggil Mediasi
+            </button>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<!-- Aksi Selesai / Abaikan -->
+<button class="flex-1 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-xs border border-emerald-200 rounded-lg transition" type="button">
+              Tandai Selesai (Refunded)
+            </button>
+<button class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium text-xs rounded-lg transition" title="Laporan tidak valid atau palsu" type="button">
+              Tolak Laporan
+            </button>
+</div>
+</div>
+</aside>
+<!-- END: InvestigationDetailSidebar -->
+</div>
+<!-- BEGIN: EmptyStateTemplate (Hidden Helper Component / Toggle Concept) -->
+<!-- Elemen ini merepresentasikan tampilan ketika semua laporan sudah selesai/bersih seperti gambar referensi -->
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden mt-8 group" data-purpose="empty-state-preview">
+<summary class="p-3 text-xs font-semibold text-slate-500 hover:text-slate-800 bg-slate-50 flex items-center justify-between cursor-pointer select-none">
+<span>Pratinjau Status Kosong (Zero Reports State)</span>
+<span class="text-brand-600 text-[11px] group-open:rotate-180 transition-transform">▼ Klik untuk melihat</span>
+</summary>
+<div class="py-16 px-4 text-center">
+<!-- Gray Warning/Alert Shield Icon identical to image reference -->
+<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-100 text-slate-400 mb-4">
+<svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+<line x1="12" x2="12" y1="9" y2="13"></line>
+<line x1="12" x2="12.01" y1="17" y2="17"></line>
+</svg>
+</div>
+<h3 class="text-xl font-bold text-slate-800 tracking-tight">Tidak ada laporan</h3>
+<p class="text-sm text-slate-500 max-w-sm mx-auto mt-1">
+          Bagus sekali! Seluruh laporan pengguna dan keluhan saat ini sudah ditinjau dan ditindaklanjuti.
+        </p>
+<button class="mt-4 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" type="button">
+          Perbarui Data
+        </button>
+</div>
+</details>
+<!-- END: EmptyStateTemplate -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-16 pt-12 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Footer Columns -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-100 text-sm">
+<!-- Column 1: Platform Info -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-900 text-base">Jejakawan</h4>
+<p class="text-slate-500 leading-relaxed text-xs sm:text-sm">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Column 2: Jelajahi -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-900 text-base">Jelajahi</h4>
+<ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Rekomendasi</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Peta</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Open Trip</a></li>
+</ul>
+</div>
+<!-- Column 3: Komunitas -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-900 text-base">Komunitas</h4>
+<ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Cari Teman</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Misi &amp; Badge</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Profil</a></li>
+</ul>
+</div>
+<!-- Column 4: Bantuan & Kontak -->
+<div class="space-y-3">
+<h4 class="font-bold text-slate-900 text-base">Bantuan</h4>
+<ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Pengaturan</a></li>
+<li>
+<a class="text-brand-600 font-medium hover:underline" href="mailto:halo@jejakawan.id">
+                Kontak: halo@jejakawan.id
+              </a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Notice -->
+<div class="pt-6 text-center text-xs text-slate-500">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="report-card-selection">
+    // Interactive feedback when clicking on a report card
+    document.querySelectorAll('[data-purpose="report-card"]').forEach(card => {
+      card.addEventListener('click', function() {
+        // Remove active class from previous
+        const currentActive = document.querySelector('.report-card-active');
+        if (currentActive) {
+          currentActive.classList.remove('report-card-active');
+          currentActive.classList.add('border-slate-200');
+        }
+        
+        // Add active styling to clicked
+        this.classList.remove('border-slate-200');
+        this.classList.add('report-card-active');
+      });
+    });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>

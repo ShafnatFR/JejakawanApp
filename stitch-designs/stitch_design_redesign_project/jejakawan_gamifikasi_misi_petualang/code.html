@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gamifikasi Petualang - Jejakawan</title>
+<!-- Tailwind CSS v3 with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration for Jejakawan Design System -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5', // Primary Royal Indigo
+              700: '#4338CA',
+              800: '#3730A3',
+              900: '#312E81',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Style Tag for Component Polish -->
+<style data-purpose="custom-utilities">
+    .card-hover-transition {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover-transition:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.08), 0 8px 10px -6px rgba(79, 70, 229, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<!-- BEGIN: TopNavigationBar -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo and Primary Brand Mark -->
+<div class="flex items-center space-x-8">
+<a class="flex items-center space-x-2.5 group" href="#">
+<div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-sm shadow-brand-500/30 group-hover:bg-brand-700 transition-colors">
+<!-- Compass Brand Icon -->
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</a>
+<!-- Main Desktop Navigation -->
+<nav aria-label="Main Navigation" class="hidden md:flex items-center space-x-1">
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Discover</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Explore</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Trip Match</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors" href="#">Open Trip</a>
+<a aria-current="page" class="px-3.5 py-2 text-sm font-semibold text-brand-600 bg-brand-50/70 rounded-lg flex items-center gap-1.5 transition-colors" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span>
+              Gamifikasi
+            </a>
+</nav>
+</div>
+<!-- Right Quick Actions & Profile -->
+<div class="flex items-center space-x-3">
+<!-- Chat Button -->
+<button class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" title="Pesan Komunitas" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Notification Bell with Unread Badge -->
+<button class="relative p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" title="Notifikasi Misi" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Profile Badge -->
+<div class="flex items-center pl-2 ml-1 border-l border-slate-200">
+<div class="relative cursor-pointer group flex items-center gap-2">
+<div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center font-bold text-slate-700 text-sm shadow-sm group-hover:border-brand-500 transition-colors">
+                S
+              </div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-brand-100 text-brand-700 border border-brand-200">
+                Lv. 1
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopNavigationBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
+<!-- BEGIN: HeaderSection -->
+<section data-purpose="page-introduction">
+<div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+<div>
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Gamifikasi Petualang</h1>
+<p class="mt-1 text-slate-500 text-sm sm:text-base">Kumpulkan XP perjalanan, raih badge penjelajah, selesaikan misi, dan tukarkan rewards eksklusif.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-sm transition-colors" type="button">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Panduan XP &amp; Level
+          </button>
+</div>
+</div>
+</section>
+<!-- END: HeaderSection -->
+<!-- BEGIN: LevelDashboardCard -->
+<section class="bg-gradient-to-r from-brand-700 via-brand-600 to-indigo-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg shadow-brand-700/20 relative overflow-hidden" data-purpose="user-level-status">
+<!-- Background Ambient Glow -->
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Level Progress & Current Status -->
+<div class="lg:col-span-8 space-y-5">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-xs font-medium uppercase tracking-wider text-indigo-100">
+                Peringkat Petualang
+              </span>
+<span class="text-xs text-brand-100 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Aktif Berpetualang
+              </span>
+</div>
+<span class="text-xs sm:text-sm text-brand-100 font-medium">Target: Level 2 (Penjelajah Muda)</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl sm:text-5xl font-black tracking-tight">Level 1</span>
+<span class="text-lg sm:text-xl font-medium text-brand-100">— Pejalan Pemula</span>
+</div>
+<!-- XP Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs sm:text-sm font-medium">
+<span class="text-brand-100">Progress Level</span>
+<span class="font-bold text-white tracking-wide">0 / 200 XP (0%)</span>
+</div>
+<div class="w-full bg-black/20 rounded-full h-3.5 p-0.5 backdrop-blur-sm overflow-hidden">
+<div class="bg-white h-full rounded-full w-1 shadow-sm transition-all duration-500"></div>
+</div>
+<p class="text-xs text-brand-100/90 pt-1">
+              ✨ Butuh <strong class="text-white font-semibold">200 XP lagi</strong> untuk naik ke Level 2 dan membuka diskon Open Trip 5%!
+            </p>
+</div>
+</div>
+<!-- Metric Stat Counters -->
+<div class="lg:col-span-4 bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/15 grid grid-cols-2 gap-4">
+<div class="space-y-0.5">
+<span class="text-xs text-brand-100 font-medium block">Total XP</span>
+<span class="text-2xl font-bold tracking-tight">0</span>
+</div>
+<div class="space-y-0.5">
+<span class="text-xs text-brand-100 font-medium block">Misi Selesai</span>
+<span class="text-2xl font-bold tracking-tight">0 <span class="text-sm font-normal text-brand-200">/ 10</span></span>
+</div>
+<div class="space-y-0.5 pt-2 border-t border-white/10">
+<span class="text-xs text-brand-100 font-medium block">Badge Dikoleksi</span>
+<span class="text-2xl font-bold tracking-tight">1</span>
+</div>
+<div class="space-y-0.5 pt-2 border-t border-white/10">
+<span class="text-xs text-brand-100 font-medium block">Peringkat Nasional</span>
+<span class="text-2xl font-bold tracking-tight">#1.420</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: LevelDashboardCard -->
+<!-- BEGIN: NavigationTabs -->
+<section class="border-b border-slate-200" data-purpose="gamification-tabs">
+<div class="flex space-x-1 sm:space-x-4 overflow-x-auto pb-px" role="tablist">
+<!-- Tab: Misi (Active) -->
+<button aria-selected="true" class="inline-flex items-center gap-2 px-4 py-3 border-b-2 border-brand-600 text-sm font-semibold text-brand-600 whitespace-nowrap" role="tab">
+<!-- Mission Icon -->
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Misi Eksplorasi
+          <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-brand-100 text-brand-700">10 Tersedia</span>
+</button>
+<!-- Tab: Badges -->
+<button aria-selected="false" class="inline-flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-sm font-medium text-slate-500 hover:text-slate-800 hover:border-slate-300 whitespace-nowrap transition-colors" role="tab">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Badge &amp; Prestasi
+          <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">1 / 12</span>
+</button>
+<!-- Tab: Leaderboard -->
+<button aria-selected="false" class="inline-flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-sm font-medium text-slate-500 hover:text-slate-800 hover:border-slate-300 whitespace-nowrap transition-colors" role="tab">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Leaderboard Penjelajah
+        </button>
+<!-- Tab: XP Log -->
+<button aria-selected="false" class="inline-flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-sm font-medium text-slate-500 hover:text-slate-800 hover:border-slate-300 whitespace-nowrap transition-colors" role="tab">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          XP Log &amp; Riwayat
+        </button>
+</div>
+</section>
+<!-- END: NavigationTabs -->
+<!-- BEGIN: FilterChipsBar -->
+<section class="flex flex-wrap items-center justify-between gap-3 pt-1" data-purpose="mission-filters">
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white shadow-sm">Semua Misi (10)</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-colors">Gunung &amp; Dataran Tinggi</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-colors">Pantai &amp; Laut</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-colors">Hidden Gem</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-colors">Komunitas Jejakawan</button>
+</div>
+<!-- Weekly Reset Countdown Timer -->
+<div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-100/80 px-3 py-1.5 rounded-lg border border-slate-200/60">
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Reset misi mingguan: <strong class="text-slate-700 font-semibold">4 hari lagi</strong></span>
+</div>
+</section>
+<!-- END: FilterChipsBar -->
+<!-- BEGIN: MissionGrid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-5" data-purpose="missions-collection">
+<!-- Mission Card 1: Jelajahi Ciletuh Geopark -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              UNESCO Geopark
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +200 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900 group-hover:text-brand-600">Jelajahi Ciletuh Geopark</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Kunjungi UNESCO Global Geopark Ciletuh Pelabuhanratu dan upload bukti foto geotagging resmi.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Ciletuh Geopark, Sukabumi, Jawa Barat</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 100</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 2: Sunrise di Bromo -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">
+              Gunung Api
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +300 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Sunrise di Bromo</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Saksikan panorama sunrise ikonik dari Kingkong Hill / Penanjakan 1 Bromo dan bagikan ulasan rute.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Taman Nasional Bromo Tengger Semeru, Jawa Timur</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 50</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 3: Blue Fire Kawah Ijen -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200">
+              Fenomena Alam
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +400 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Blue Fire Kawah Ijen</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Saksikan fenomena api biru langka di kawah belerang Ijen saat pendakian dini hari.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Kawah Ijen, Banyuwangi, Jawa Timur</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 30</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 4: Nusa Penida Explorer -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200">
+              Bahari &amp; Pulau
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +350 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Nusa Penida Explorer</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Snorkeling dengan manta ray di Manta Point Nusa Penida dan kunjungi tebing Kelingking Beach.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Nusa Penida, Klungkung, Bali</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 50</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 5: Karimun Jawa Diving -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">
+              Taman Nasional
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +400 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Karimun Jawa Diving</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Eksplorasi terumbu karang di kawasan konservasi laut Taman Nasional Kepulauan Karimunjawa.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Kepulauan Karimunjawa, Jepara, Jawa Tengah</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 30</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 6: Tumpak Sewu Adventure -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+              Air Terjun
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +250 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Tumpak Sewu Adventure</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Kunjungi air terjun tirai spektakuler Tumpak Sewu dan turun hingga dasar lembah sungai Coban.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Tumpak Sewu, Lumajang, Jawa Timur</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 50</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 7: Hidden Gem Hunter -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-violet-50 text-violet-700 border border-violet-200">
+              Eksplorasi Khusus
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +500 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Hidden Gem Hunter</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Kunjungi 3 destinasi underrated di platform Jejakawan dalam kurun waktu 1 bulan kalender.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Destinasi Pilihan Se-Indonesia</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 200</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 8: Trip Matching Pioneer -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              Komunitas
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +300 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Trip Matching Pioneer</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Buat rencana perjalanan trip request pertama dan dapatkan match dengan minimal 2 traveler baru.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Fitur Trip Match Jejakawan</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 100</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 9: Review Master Challenge -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-orange-50 text-orange-700 border border-orange-200">
+              Kontributor
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +250 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Review Master Challenge</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Tulis 5 review destinasi yang mendalam dan informatif lengkap dengan foto kondisi terkini.</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Review Komunitas Jejakawan</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 150</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+<!-- Mission Card 10: Java Explorer -->
+<article class="bg-white border border-slate-200 rounded-2xl p-5 card-hover-transition flex flex-col justify-between shadow-sm">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+              Ekspedisi Akbar
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 shadow-sm">
+<svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+              +600 XP
+            </span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900">Java Explorer</h3>
+<p class="text-xs text-slate-500 mt-1 line-clamp-2">Kunjungi destinasi di minimal 3 provinsi berbeda di pulau Jawa (Jabar, Jateng, Jatim/DIY).</p>
+</div>
+<div class="flex items-center text-xs text-slate-500 gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="truncate">Lintas Provinsi Pulau Jawa</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="text-[11px] font-medium text-slate-400">Kuota Terklaim: <span class="font-semibold text-slate-600">0 / 100</span></div>
+<div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-0"></div>
+</div>
+</div>
+<button class="px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-xl hover:bg-brand-600 hover:text-white transition-all shadow-sm" type="button">
+            Klaim Misi
+          </button>
+</div>
+</article>
+</section>
+<!-- END: MissionGrid -->
+<!-- BEGIN: GamificationHighlights -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4" data-purpose="gamification-rewards-preview">
+<!-- Badge Showcase Card -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-brand-600"></span>
+            Badge Penjelajah Berikutnya
+          </h4>
+<a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Lihat Semua</a>
+</div>
+<!-- Next Unlock Preview -->
+<div class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+<div class="w-12 h-12 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center shrink-0">
+<span class="text-2xl">🌋</span>
+</div>
+<div>
+<div class="text-xs font-bold text-slate-900">Penakluk Gunung Api</div>
+<p class="text-[11px] text-slate-500 mt-0.5">Selesaikan 2 misi pendakian vulkanik di Jawa</p>
+<span class="inline-block mt-1 text-[10px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">
+              0 / 2 Misi Selesai
+            </span>
+</div>
+</div>
+<div class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+<div class="w-12 h-12 rounded-xl bg-indigo-100 border border-indigo-200 flex items-center justify-center shrink-0">
+<span class="text-2xl">💎</span>
+</div>
+<div>
+<div class="text-xs font-bold text-slate-900">Sultan Hidden Gem</div>
+<p class="text-[11px] text-slate-500 mt-0.5">Jelajahi dan review 3 destinasi terpencil</p>
+<span class="inline-block mt-1 text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-1.5 py-0.2 rounded border border-indigo-200">
+              0 / 3 Destinasi
+            </span>
+</div>
+</div>
+</div>
+<!-- Travel Inspiration Visual Banner -->
+<div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col justify-end p-5 min-h-[200px] group">
+<img alt="Petualang Muda di Bromo" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1XZnEF6EcvTjZVQYS_Yo6le8XAKpMNSSdKKOhr0sm6_o6EI9g0i8CvpNlBHdfNwtwODNhs4T9qS1xvWD3V4qV7KOGgt2x1f044KnxHMejp9ad5rsnD0XeLmtTpMEL4i-NpERr53OsizzpFFcKulg5kRyvinW86AvpMr0teQO3cMXwPyFUekdXkSSUDXnualDTQUj3VnU49pLwtFKlRZLxBMaE9n_Tm1YTv38MFRJAbXyYIJTlChRKmvDQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-transparent"></div>
+<div class="relative z-10 text-white space-y-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-slate-950 uppercase tracking-wide inline-block">Tips Eksplorasi</span>
+<h4 class="text-base font-bold leading-tight">Pendakian Pertama? Temukan Rekan di Trip Match</h4>
+<p class="text-xs text-slate-300">Dapatkan bonus 150 XP ketika berhasil mendaki bersama teman dari Jejakawan.</p>
+</div>
+</div>
+<!-- Perks & Voucher Exchange Preview -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Hadiah Tukar XP
+          </h4>
+<span class="text-xs text-slate-400">XP Diperlukan</span>
+</div>
+<div class="space-y-2.5">
+<div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 hover:border-brand-200 hover:bg-brand-50/30 transition-all">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">
+                %
+              </div>
+<div>
+<div class="text-xs font-bold text-slate-800">Diskon Open Trip 15%</div>
+<div class="text-[10px] text-slate-400">Untuk trip Gunung &amp; Pantai</div>
+</div>
+</div>
+<span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded-md">800 XP</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 hover:border-brand-200 hover:bg-brand-50/30 transition-all">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs">
+                👕
+              </div>
+<div>
+<div class="text-xs font-bold text-slate-800">Kaos Eksklusif Jejakawan</div>
+<div class="text-[10px] text-slate-400">Bahan quick-dry petualang</div>
+</div>
+</div>
+<span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded-md">1.200 XP</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 hover:border-brand-200 hover:bg-brand-50/30 transition-all">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs">
+                🏨
+              </div>
+<div>
+<div class="text-xs font-bold text-slate-800">Voucher Homestay Rp150k</div>
+<div class="text-[10px] text-slate-400">Partner penginapan lokal</div>
+</div>
+</div>
+<span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded-md">2.000 XP</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: GamificationHighlights -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="mt-16 bg-white border-t border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- 4 Columns Footer Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Col 1: Brand Info -->
+<div class="space-y-3">
+<div class="flex items-center space-x-2">
+<div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span class="text-base font-bold text-slate-900 tracking-tight">Jejakawan</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler mandiri, menemukan destinasi tersembunyi, dan menciptakan petualangan bermakna tak terlupakan.
+          </p>
+</div>
+<!-- Col 2: Jelajahi -->
+<div class="space-y-3">
+<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">Jelajahi</h4>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Rekomendasi Wisata</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Peta Destinasi Interaktif</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Open Trip Nusantara</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Destinasi Geopark</a></li>
+</ul>
+</div>
+<!-- Col 3: Komunitas -->
+<div class="space-y-3">
+<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">Komunitas</h4>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Cari Teman Jalan</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Misi &amp; Koleksi Badge</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Profil Petualang</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Forum Diskusi Jalur</a></li>
+</ul>
+</div>
+<!-- Col 4: Bantuan & Hubungi -->
+<div class="space-y-3">
+<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">Bantuan &amp; Kontak</h4>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Panduan Sistem XP &amp; Reward</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Pengaturan Akun</a></li>
+<li class="pt-1 text-slate-700 font-medium flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>halo@jejakawan.id</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Sub-footer -->
+<div class="pt-8 mt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+<p>© 2026 Jejakawan. Semua hak dilindungi undang-undang.</p>
+<div class="flex space-x-6">
+<a class="hover:text-slate-600 transition-colors" href="#">Kebijakan Privasi</a>
+<a class="hover:text-slate-600 transition-colors" href="#">Syarat &amp; Ketentuan</a>
+<a class="hover:text-slate-600 transition-colors" href="#">Etika Penjelajah</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

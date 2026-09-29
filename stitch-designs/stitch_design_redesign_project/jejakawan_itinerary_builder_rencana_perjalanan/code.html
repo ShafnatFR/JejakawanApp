@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Itinerary Builder - Jejakawan</title>
+<!-- Tailwind CSS v3 with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              200: '#C7D2FE',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Core Layout Styles -->
+<style data-purpose="base-layout">
+    body {
+      background-color: #F8FAFC;
+      color: #1E293B;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 19px;
+      width: 2px;
+      background-color: #E2E8F0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Logo and Brand -->
+<div class="flex items-center space-x-8">
+<a class="flex items-center space-x-2.5 text-brand-600 focus:outline-none" data-purpose="brand-logo" href="#">
+<!-- Compass Icon -->
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon fill="currentColor" fill-opacity="0.15" points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span class="text-xl font-bold tracking-tight text-brand-600">Jejakawan</span>
+</a>
+<!-- Main Navigation Links -->
+<nav class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-600">
+<a class="hover:text-brand-600 transition-colors" href="#">Discover</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Explore</a>
+<a class="text-brand-600 font-semibold transition-colors" href="#">Trip Match</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Open Trip</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Gamifikasi</a>
+</nav>
+</div>
+<!-- Right Header Actions (Chat, Notif, Profile) -->
+<div class="flex items-center space-x-4">
+<!-- Chat Icon with Badge -->
+<button aria-label="Pesan" class="relative p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-full transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Notification Bell with Badge -->
+<button aria-label="Notifikasi" class="relative p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-full transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-brand-600 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Profile Avatar with Online Status Indicator -->
+<div class="relative pl-1">
+<div class="w-9 h-9 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-semibold text-sm cursor-pointer select-none">
+            S
+          </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- BEGIN: BreadcrumbAndHeaderSection -->
+<section class="mb-6" data-purpose="page-meta-header">
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-xs text-slate-500 mb-3">
+<a class="hover:text-slate-800" href="#">Beranda</a>
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<a class="hover:text-slate-800" href="#">Trip Match</a>
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-slate-700 font-medium truncate">Rinjani Sunrise &amp; Segara Anak</span>
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-brand-600 font-medium">Itinerary Builder</span>
+</nav>
+<!-- Main Title & Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Itinerary Builder &amp; Rencana Perjalanan</h1>
+<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-2.5 py-0.5 rounded-full font-medium">Terkonfirmasi</span>
+</div>
+<p class="text-sm text-slate-600 mt-1.5 flex flex-wrap items-center gap-y-1 gap-x-2">
+<span>Eksplorasi Gunung Rinjani &amp; Danau Segara Anak (4 Hari 3 Malam)</span>
+<span class="text-slate-300">•</span>
+<span class="font-medium text-slate-700">14 - 17 Mei 2026</span>
+<span class="text-slate-300">•</span>
+<span class="text-brand-600 font-medium">4 Anggota Bergabung</span>
+</p>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center px-4 py-2 border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-semibold shadow-sm transition-all focus:outline-none" type="button">
+<svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Ekspor PDF / Share
+          </button>
+<button class="inline-flex items-center px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-all focus:outline-none" type="button">
+<svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+            Tambah Aktivitas
+          </button>
+</div>
+</div>
+<!-- Quick Summary Pills Bar -->
+<div class="flex flex-wrap items-center gap-3 mt-4">
+<div class="flex items-center text-xs font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-md text-slate-700 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-brand-600 mr-2"></span>
+          Total Aktivitas: <strong class="ml-1 text-slate-900">12 Spot</strong>
+</div>
+<div class="flex items-center text-xs font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-md text-slate-700 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>
+          Estimasi Budget: <strong class="ml-1 text-slate-900">Rp 2.450.000 / orang</strong>
+</div>
+<div class="flex items-center text-xs font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-md text-slate-700 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-amber-500 mr-2"></span>
+          Tingkat Kesulitan: <strong class="ml-1 text-slate-900">Menengah (Trekking)</strong>
+</div>
+</div>
+</section>
+<!-- END: BreadcrumbAndHeaderSection -->
+<!-- BEGIN: DaySelectorTabs -->
+<div class="mb-8" data-purpose="tab-day-selector">
+<div class="flex items-center space-x-2 overflow-x-auto pb-2 border-b border-slate-200 scrollbar-none">
+<button class="whitespace-nowrap px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" type="button">
+          Semua Hari (Overview)
+        </button>
+<button class="whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white shadow-sm flex items-center gap-2" type="button">
+<span>Hari 1</span>
+<span class="text-xs bg-brand-700 px-2 py-0.5 rounded-full font-normal">Sembalun &amp; Plawangan</span>
+</button>
+<button class="whitespace-nowrap px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors flex items-center gap-2" type="button">
+<span>Hari 2</span>
+<span class="text-xs text-slate-500 font-normal">Puncak &amp; Danau</span>
+</button>
+<button class="whitespace-nowrap px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors flex items-center gap-2" type="button">
+<span>Hari 3</span>
+<span class="text-xs text-slate-500 font-normal">Hot Spring &amp; Camp</span>
+</button>
+<button class="whitespace-nowrap px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors flex items-center gap-2" type="button">
+<span>Hari 4</span>
+<span class="text-xs text-slate-500 font-normal">Torean &amp; Selesai</span>
+</button>
+</div>
+</div>
+<!-- END: DaySelectorTabs -->
+<!-- BEGIN: MainTwoColumnContent -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Day 1 Timeline & Activities (~65% width) -->
+<section class="lg:col-span-8 space-x-0" data-purpose="itinerary-timeline-column">
+<!-- Day Banner Info -->
+<div class="flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 mb-6 shadow-sm">
+<div>
+<span class="text-xs font-bold uppercase tracking-wider text-brand-600">Kamis, 14 Mei 2026</span>
+<h2 class="text-lg font-bold text-slate-800">Hari 1: Sembalun Gate menuju Pelawangan Sembalun</h2>
+<p class="text-xs text-slate-500 mt-0.5">Total jarak perkiraan: 10 km • Elevasi naik: 1.500 m • 5 Kegiatan terencana</p>
+</div>
+<span class="hidden sm:inline-flex items-center text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md">
+            Cuaca Diprediksi: Cerah Berawan
+          </span>
+</div>
+<!-- Timeline Container -->
+<div class="relative timeline-line space-y-6">
+<!-- Activity 1 -->
+<div class="relative flex items-start space-x-4">
+<!-- Node Marker -->
+<div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-brand-600 flex items-center justify-center shadow-sm">
+<svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Card Body -->
+<div class="flex-grow bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">06:30 - 07:45</span>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">Logistik &amp; Registrasi</span>
+<span class="text-xs text-slate-400">Durasi: 1j 15m</span>
+</div>
+<h3 class="text-base font-bold text-slate-900">Kumpul di Basecamp Sembalun &amp; Registrasi Simaksi</h3>
+</div>
+<!-- Card Dropdown Menu Action -->
+<button aria-label="Menu Aksi" class="text-slate-400 hover:text-slate-600 p-1 self-start" type="button">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+</button>
+</div>
+<p class="text-sm text-slate-600 mt-2">
+                Briefing awal bersama porter lokal, pemeriksaan surat kesehatan fisik, verifikasi e-tiket Taman Nasional Gunung Rinjani, dan pembagian beban bawaan tenda.
+              </p>
+<div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center text-slate-500">
+<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Pintu Masuk Sembalun (1.156 MDPL)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500">Penanggung Jawab:</span>
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 font-medium px-2 py-0.5 rounded-full">
+<span class="w-4 h-4 bg-brand-500 text-white rounded-full flex items-center justify-center text-[10px]">S</span>
+                    Shafnat F.
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="relative flex items-start space-x-4">
+<div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-slate-300 flex items-center justify-center shadow-sm">
+<svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">08:00 - 11:30</span>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">Trekking Ringan</span>
+<span class="text-xs text-slate-400">Durasi: 3j 30m</span>
+</div>
+<h3 class="text-base font-bold text-slate-900">Trekking Pos 1 menuju Pos 2 (Tengengean)</h3>
+</div>
+<button aria-label="Menu Aksi" class="text-slate-400 hover:text-slate-600 p-1 self-start" type="button">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+</button>
+</div>
+<p class="text-sm text-slate-600 mt-2">
+                Melintasi hamparan padang savana terbuka Sembalun dengan kontur jalur landai bergelombang. Siapkan topi lapangan dan sunscreen anti UV.
+              </p>
+<div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center text-slate-500">
+<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Pos 2 Tengengean (1.500 MDPL) • Jarak: 4.8 km</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500">Penanggung Jawab:</span>
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 font-medium px-2 py-0.5 rounded-full">
+<span class="w-4 h-4 bg-slate-600 text-white rounded-full flex items-center justify-center text-[10px]">D</span>
+                    Dimas R.
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity 3 -->
+<div class="relative flex items-start space-x-4">
+<div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-slate-300 flex items-center justify-center shadow-sm">
+<svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">12:15 - 13:30</span>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">Kuliner &amp; Istirahat</span>
+<span class="text-xs text-slate-400">Durasi: 1j 15m</span>
+</div>
+<h3 class="text-base font-bold text-slate-900">Makan Siang Hangat di Pos 3 (Pada Balong)</h3>
+</div>
+<button aria-label="Menu Aksi" class="text-slate-400 hover:text-slate-600 p-1 self-start" type="button">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+</button>
+</div>
+<p class="text-sm text-slate-600 mt-2">
+                Menikmati hidangan sup ayam rempah hangat dan nasi timbel yang disiapkan porter. Istirahat sejenak, rehidrasi elektrolit, dan peregangan otot kaki.
+              </p>
+<div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center text-slate-500">
+<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Pos 3 Pada Balong (1.800 MDPL)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500">Penanggung Jawab:</span>
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 font-medium px-2 py-0.5 rounded-full">
+<span class="w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]">N</span>
+                    Nadia K.
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity 4 -->
+<div class="relative flex items-start space-x-4">
+<div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-rose-500 flex items-center justify-center shadow-sm">
+<svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 11l7-7 7 7M5 19l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">13:45 - 17:15</span>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-100">Trekking Intensif</span>
+<span class="text-xs text-slate-400">Durasi: 3j 30m</span>
+</div>
+<h3 class="text-base font-bold text-slate-900">Pendakian Ekstrem 7 Bukit Penyesalan Menuju Plawangan</h3>
+</div>
+<button aria-label="Menu Aksi" class="text-slate-400 hover:text-slate-600 p-1 self-start" type="button">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+</button>
+</div>
+<p class="text-sm text-slate-600 mt-2">
+                Bagian rute paling menantang hari pertama. Lereng terjal dengan 7 igir bukit menanjak tanpa jeda datar. Menggunakan trekking pole sangat dianjurkan untuk menjaga stabilitas lutut.
+              </p>
+<div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center text-slate-500">
+<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Bukit Penyesalan → Pelawangan Sembalun (2.639 MDPL)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500">Penanggung Jawab:</span>
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 font-medium px-2 py-0.5 rounded-full">
+<span class="w-4 h-4 bg-brand-500 text-white rounded-full flex items-center justify-center text-[10px]">S</span>
+                    Shafnat F. &amp; Tim Porter
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity 5 -->
+<div class="relative flex items-start space-x-4">
+<div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-brand-600 flex items-center justify-center shadow-sm">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-grow bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">17:30 - 20:00</span>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-50 text-brand-700 border border-brand-100">Camping &amp; Sunset</span>
+<span class="text-xs text-slate-400">Durasi: 2j 30m</span>
+</div>
+<h3 class="text-base font-bold text-slate-900">Pasang Tenda &amp; Menikmati Sunset Pelawangan Sembalun</h3>
+</div>
+<button aria-label="Menu Aksi" class="text-slate-400 hover:text-slate-600 p-1 self-start" type="button">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+</button>
+</div>
+<p class="text-sm text-slate-600 mt-2">
+                Mendirikan camp site di bibir kaldera, menikmati golden hour dengan panorama Segara Anak dan Gunung Barujari di kejauhan. Makan malam bergizi, dilanjutkan istirahat awal untuk persiapan summit attack pukul 02:00 dini hari.
+              </p>
+<div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center text-slate-500">
+<svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Camp Area Pelawangan Sembalun (2.639 MDPL)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-slate-500">Penanggung Jawab:</span>
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 font-medium px-2 py-0.5 rounded-full">
+<span class="w-4 h-4 bg-sky-600 text-white rounded-full flex items-center justify-center text-[10px]">F</span>
+                    Farhan B.
+                  </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Add Button for the Day -->
+<div class="mt-8 pt-4">
+<button class="w-full py-3.5 border-2 border-dashed border-slate-300 hover:border-brand-500 rounded-xl text-slate-600 hover:text-brand-600 bg-white font-medium text-sm flex items-center justify-center gap-2 transition-colors" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Tambah Aktivitas di Hari 1
+          </button>
+</div>
+</section>
+<!-- RIGHT COLUMN: Trip Meta, Trail Map Preview & Checklists (~35% width) -->
+<aside class="lg:col-span-4 space-y-6" data-purpose="itinerary-sidebar-column">
+<!-- Card 1: Peta Rute & Titik Penting Preview -->
+<div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" data-purpose="map-preview-card">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              Peta Rute &amp; Profil Ketinggian
+            </h3>
+<span class="text-xs text-brand-600 font-medium hover:underline cursor-pointer">Buka Peta Penuh</span>
+</div>
+<!-- Stylized Trail Map Canvas Mockup -->
+<div class="bg-slate-100 border border-slate-200 rounded-lg p-4 relative overflow-hidden">
+<div class="flex justify-between items-center text-[11px] font-semibold text-slate-600 mb-3">
+<span>Sembalun (1.156m)</span>
+<span>→</span>
+<span class="text-brand-600">Pelawangan (2.639m)</span>
+<span>→</span>
+<span>Puncak (3.726m)</span>
+</div>
+<!-- Altitude Visual Chart Line Mockup -->
+<div class="h-24 w-full flex items-end justify-between gap-1.5 pt-3 pb-1">
+<div class="w-1/6 bg-slate-300 rounded-t h-[30%] flex items-center justify-center text-[9px] text-slate-700">P1</div>
+<div class="w-1/6 bg-slate-400 rounded-t h-[45%] flex items-center justify-center text-[9px] text-white">P2</div>
+<div class="w-1/6 bg-brand-400 rounded-t h-[58%] flex items-center justify-center text-[9px] text-white">P3</div>
+<div class="w-1/6 bg-brand-600 rounded-t h-[75%] flex items-center justify-center text-[9px] text-white font-bold">PLW</div>
+<div class="w-1/6 bg-amber-500 rounded-t h-[100%] flex items-center justify-center text-[9px] text-white font-bold">TOP</div>
+<div class="w-1/6 bg-teal-500 rounded-t h-[52%] flex items-center justify-center text-[9px] text-white">DANAU</div>
+</div>
+<p class="text-[11px] text-slate-500 mt-3 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Jalur Sembalun memiliki sumber mata air aktif di Pos 2 dan Danau Segara Anak.</span>
+</p>
+</div>
+</div>
+<!-- Card 2: Checklist Perlengkapan Tim -->
+<div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" data-purpose="team-checklist-card">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              Checklist Perlengkapan Tim
+            </h3>
+<span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">3/4 Siap</span>
+</div>
+<div class="space-y-2.5 text-xs">
+<label class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer">
+<span class="flex items-center text-slate-700">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 mr-2.5" type="checkbox"/>
+                Tenda Dome 4P Kapasitas Angin Kencang
+              </span>
+<span class="text-[11px] font-semibold text-emerald-600">Siap</span>
+</label>
+<label class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer">
+<span class="flex items-center text-slate-700">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 mr-2.5" type="checkbox"/>
+                Kotak P3K &amp; Obat Hipotermia / Oksigen
+              </span>
+<span class="text-[11px] font-semibold text-emerald-600">Siap</span>
+</label>
+<label class="flex items-center justify-between p-2 rounded-lg bg-amber-50/60 border border-amber-200 cursor-pointer">
+<span class="flex items-center text-slate-800 font-medium">
+<input class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 mr-2.5" type="checkbox"/>
+                Kompor Portable &amp; Gas Kaleng Tambahan
+              </span>
+<span class="text-[11px] font-semibold text-amber-600">Kurang 2 Kaleng</span>
+</label>
+<label class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer">
+<span class="flex items-center text-slate-700">
+<input checked="" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 mr-2.5" type="checkbox"/>
+                Headlamp &amp; Ekstra Baterai Cadangan
+              </span>
+<span class="text-[11px] font-semibold text-emerald-600">Siap</span>
+</label>
+</div>
+</div>
+<!-- Card 3: Anggota Tim & Pembagian Tugas -->
+<div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" data-purpose="team-members-card">
+<h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Anggota Tim &amp; Pembagian Tugas
+          </h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-7 h-7 rounded-full bg-brand-600 text-white font-semibold flex items-center justify-center text-xs">S</div>
+<div>
+<p class="text-xs font-semibold text-slate-800">Shafnat F.</p>
+<p class="text-[10px] text-slate-500">Trip Leader</p>
+</div>
+</div>
+<span class="text-[11px] font-medium px-2 py-0.5 bg-brand-50 text-brand-700 rounded border border-brand-100">Koor Tim &amp; Simaksi</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-7 h-7 rounded-full bg-slate-700 text-white font-semibold flex items-center justify-center text-xs">D</div>
+<div>
+<p class="text-xs font-semibold text-slate-800">Dimas R.</p>
+<p class="text-[10px] text-slate-500">Anggota</p>
+</div>
+</div>
+<span class="text-[11px] font-medium px-2 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">Navigasi Jalur &amp; P3K</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-semibold flex items-center justify-center text-xs">N</div>
+<div>
+<p class="text-xs font-semibold text-slate-800">Nadia K.</p>
+<p class="text-[10px] text-slate-500">Anggota</p>
+</div>
+</div>
+<span class="text-[11px] font-medium px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded border border-emerald-100">Logistik &amp; Makanan</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-7 h-7 rounded-full bg-sky-600 text-white font-semibold flex items-center justify-center text-xs">F</div>
+<div>
+<p class="text-xs font-semibold text-slate-800">Farhan B.</p>
+<p class="text-[10px] text-slate-500">Anggota</p>
+</div>
+</div>
+<span class="text-[11px] font-medium px-2 py-0.5 bg-sky-50 text-sky-700 rounded border border-sky-100">Dokumentasi &amp; Media</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Quick Action Links -->
+<div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm space-y-2 text-xs" data-purpose="quick-trip-tools">
+<a class="flex items-center justify-between p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors text-slate-700 font-medium" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              Split Bill &amp; Catatan Pengeluaran
+            </span>
+<span class="text-slate-400">→</span>
+</a>
+<a class="flex items-center justify-between p-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors text-slate-700 font-medium" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              Grup Chat Koordinasi Trip (4 Baru)
+            </span>
+<span class="text-slate-400">→</span>
+</a>
+</div>
+</aside>
+</div>
+<!-- END: MainTwoColumnContent -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-16" data-purpose="platform-footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- 4 Column Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+<!-- Col 1: Brand Info (span 2 on lg) -->
+<div class="lg:col-span-2">
+<div class="flex items-center space-x-2 text-brand-600 mb-4">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon fill="currentColor" fill-opacity="0.15" points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span class="text-lg font-bold">Jejakawan</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed max-w-sm">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Col 2: Jelajahi -->
+<div>
+<h4 class="text-sm font-semibold text-slate-900 mb-4 tracking-wider">Jelajahi</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Rekomendasi</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Peta Destinasi</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Open Trip</a></li>
+</ul>
+</div>
+<!-- Col 3: Komunitas -->
+<div>
+<h4 class="text-sm font-semibold text-slate-900 mb-4 tracking-wider">Komunitas</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Cari Teman</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Misi &amp; Badge</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Profil Traveler</a></li>
+</ul>
+</div>
+<!-- Col 4: Bantuan -->
+<div>
+<h4 class="text-sm font-semibold text-slate-900 mb-4 tracking-wider">Bantuan</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Pengaturan</a></li>
+<li><a class="hover:text-brand-600 transition-colors font-medium" href="mailto:halo@jejakawan.id">halo@jejakawan.id</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright Sub-footer -->
+<div class="mt-12 pt-8 border-t border-slate-100 text-center">
+<p class="text-xs text-slate-500">
+          © 2026 Jejakawan. Semua hak dilindungi.
+        </p>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

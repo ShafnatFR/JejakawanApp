@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Konten Saya - Jejakawan</title>
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              200: '#C7D2FE',
+              300: '#A5B4FC',
+              400: '#818CF8',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+              900: '#312E81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F8FAFC;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo & Navigation Links -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 text-brand-600 font-bold text-xl tracking-tight" href="#">
+<div class="w-9 h-9 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 border border-brand-200 shadow-xs">
+<svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon fill="currentColor" fill-opacity="0.2" points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span>Jejakawan</span>
+</a>
+<!-- Desktop Navigation Items -->
+<nav class="hidden md:flex items-center space-x-1 text-sm font-medium text-slate-600">
+<a class="px-3.5 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition" href="#">Discover</a>
+<a class="px-3.5 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition" href="#">Explore</a>
+<a class="px-3.5 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition" href="#">Trip Match</a>
+<a class="px-3.5 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition" href="#">Open Trip</a>
+<a class="px-3.5 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition" href="#">Gamifikasi</a>
+</nav>
+</div>
+<!-- Right Header Actions -->
+<div class="flex items-center gap-3">
+<!-- Chat icon button -->
+<button class="w-10 h-10 flex items-center justify-center text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-full transition" title="Pesan Komunitas" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Notification bell with dot -->
+<button class="w-10 h-10 flex items-center justify-center text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-full transition relative" title="Notifikasi" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- User Profile Dropdown Avatar -->
+<div class="flex items-center gap-2 pl-2 border-l border-slate-200">
+<button class="flex items-center gap-2.5 p-1 rounded-full hover:bg-slate-100 transition focus:outline-none" type="button">
+<div class="w-8 h-8 rounded-full bg-brand-100 border border-brand-300 text-brand-700 font-bold text-sm flex items-center justify-center">
+              S
+            </div>
+<span class="hidden sm:inline-block text-sm font-semibold text-slate-700">Shafnat</span>
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+<!-- Hero / Title Section -->
+<div class="mb-8">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Konten &amp; Galeri Petualang</h1>
+<p class="text-sm sm:text-base text-slate-500 mt-1 max-w-3xl">
+        Bagikan dokumentasi, review foto destinasi tersembunyi, dan dapatkan XP gamifikasi untuk setiap kontribusi valid.
+      </p>
+</div>
+<!-- Tab Navigation Segment -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-slate-200 pb-3">
+<div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-sm font-medium">
+<!-- Active Upload Tab -->
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white font-semibold text-brand-700 shadow-xs border border-slate-200/60 transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Upload Foto Destinasi</span>
+</button>
+<!-- Galeri Saya Tab -->
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Galeri Saya</span>
+<span class="ml-1 px-1.5 py-0.5 text-xs font-semibold rounded-full bg-slate-200 text-slate-700">12</span>
+</button>
+</div>
+<!-- Quick status indicator / Draft link -->
+<a class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-brand-600 transition" href="#">
+<svg class="w-4 h-4 text-amber-500" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<span>1 draft foto tersimpan otomatis</span>
+</a>
+</div>
+<!-- Main Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Upload Form Container -->
+<div class="lg:col-span-8 bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+<!-- Form Header Card -->
+<div class="p-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-4 bg-slate-50/50">
+<div>
+<h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-brand-600"></span>
+              Upload Foto Destinasi
+            </h2>
+<p class="text-xs text-slate-500 mt-0.5">Sumbangkan foto otentik perjalananmu untuk membantu sesama petualang</p>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold">
+<svg class="w-3.5 h-3.5 text-amber-500 fill-amber-500" viewbox="0 0 20 20">
+<polygon points="10 1.5 12.8 7.2 19 8.1 14.5 12.5 15.6 18.7 10 15.7 4.4 18.7 5.5 12.5 1 8.1 7.2 7.2 10 1.5"></polygon>
+</svg>
+            +100 XP Gamifikasi
+          </span>
+</div>
+<form class="p-6 space-y-6" onsubmit="event.preventDefault();">
+<!-- Field 1: Pilih Destinasi -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="destination">
+              Destinasi Wisata <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<select class="w-full rounded-xl border-slate-300 py-2.5 pl-3.5 pr-10 text-sm focus:border-brand-500 focus:ring-brand-500 bg-white" id="destination">
+<option disabled="" selected="" value="">Pilih destinasi yang ingin diulas...</option>
+<option value="1">Air Terjun Tumpak Sewu, Lumajang, Jawa Timur</option>
+<option value="2">Kawah Ijen &amp; Blue Fire, Banyuwangi, Jawa Timur</option>
+<option value="3">Gunung Prau Sunrise Point, Dieng, Wonosobo</option>
+<option value="4">Pantai Kelingking, Nusa Penida, Bali</option>
+<option value="5">Taman Nasional Way Kambas, Lampung</option>
+<option value="other">+ Daftarkan Destinasi Baru...</option>
+</select>
+</div>
+<p class="mt-1 text-xs text-slate-400">Pilih dari database Jejakawan agar geotag otomatis terkoneksi ke peta wisata.</p>
+</div>
+<!-- Field 2: Upload Area (Drag & Drop + URL switch) -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="block text-sm font-semibold text-slate-700">
+                File Foto Destinasi <span class="text-rose-500">*</span>
+</label>
+<div class="flex items-center text-xs gap-3">
+<button class="text-brand-600 font-medium hover:underline" type="button">Unggah Berkas</button>
+<span class="text-slate-300">|</span>
+<button class="text-slate-500 hover:text-slate-700" type="button">URL Gambar</button>
+</div>
+</div>
+<!-- Drag and Drop Box -->
+<div class="border-2 border-dashed border-slate-300 hover:border-brand-500 rounded-2xl p-6 sm:p-8 text-center bg-slate-50/70 hover:bg-brand-50/20 transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 text-brand-600 flex items-center justify-center mx-auto mb-3 transition">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<p class="text-sm font-semibold text-slate-700">
+                Tarik &amp; lepas foto di sini, atau <span class="text-brand-600 hover:underline">pilih file dari perangkat</span>
+</p>
+<p class="text-xs text-slate-400 mt-1">
+                Format yang didukung: JPG, PNG, atau WebP (Maksimal 10 MB per berkas)
+              </p>
+</div>
+<!-- Alternative URL Input fallback -->
+<div class="mt-3">
+<label class="block text-xs font-medium text-slate-500 mb-1" for="photo-url">
+                Atau tempel URL gambar eksternal (CDN/Cloud):
+              </label>
+<div class="relative">
+<input class="w-full text-sm rounded-xl border-slate-300 placeholder-slate-400 focus:border-brand-500 focus:ring-brand-500 py-2 px-3" id="photo-url" placeholder="https://images.unsplash.com/photo-..." type="url"/>
+</div>
+</div>
+</div>
+<!-- Field 3: Caption & Cerita Perjalanan -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-sm font-semibold text-slate-700" for="caption">
+                Caption &amp; Cerita Perjalanan <span class="text-rose-500">*</span>
+</label>
+<span class="text-xs text-slate-400 font-mono">0 / 500 karakter</span>
+</div>
+<textarea class="w-full rounded-xl border-slate-300 text-sm focus:border-brand-500 focus:ring-brand-500 p-3 leading-relaxed placeholder-slate-400" id="caption" placeholder="Ceritakan pengalamanmu... rute terbaik, tiket masuk, waktu kunjungan ideal, atau tips penting untuk kawan traveler lainnya." rows="4"></textarea>
+<p class="mt-1 text-xs text-slate-400">Deskripsi yang informatif berpotensi terpilih sebagai "Review Pilihan Minggu Ini".</p>
+</div>
+<!-- Field 4: Tag & Kategori Suasana -->
+<div>
+<label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+              Kategori &amp; Tag Penanda (Opsional)
+            </label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 rounded-full text-xs font-medium border border-brand-200 bg-brand-50 text-brand-700" type="button">
+                #SpotSunrise
+              </button>
+<button class="px-3 py-1 rounded-full text-xs font-medium border border-slate-200 text-slate-600 hover:border-slate-300 bg-white" type="button">
+                #HiddenSpot
+              </button>
+<button class="px-3 py-1 rounded-full text-xs font-medium border border-slate-200 text-slate-600 hover:border-slate-300 bg-white" type="button">
+                #AmanUntukSolo
+              </button>
+<button class="px-3 py-1 rounded-full text-xs font-medium border border-slate-200 text-slate-600 hover:border-slate-300 bg-white" type="button">
+                #BudgetFriendly
+              </button>
+<button class="px-3 py-1 rounded-full text-xs font-medium border border-slate-200 text-slate-600 hover:border-slate-300 bg-white" type="button">
+                #AestheticPhoto
+              </button>
+</div>
+</div>
+<!-- Field 5: Komitmen Orisinalitas -->
+<div class="pt-2">
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" type="checkbox"/>
+<span class="text-xs text-slate-600 leading-normal">
+                Saya menyatakan foto ini merupakan dokumentasi pribadi saya yang orisinal, serta bersedia mematuhi pedoman komunitas dan etika kelestarian lingkungan Jejakawan.
+              </span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-end gap-3">
+<button class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-semibold text-sm transition" type="button">
+              Simpan sebagai Draft
+            </button>
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-sm hover:shadow transition flex items-center justify-center gap-2" type="submit">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Upload (+100 XP)</span>
+</button>
+</div>
+</form>
+</div>
+<!-- RIGHT COLUMN: Sidebar Stats, Guidelines, and Mini Gallery -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Card 1: Status Kontributor Traveler -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+<div class="flex items-center justify-between pb-4 border-b border-slate-100">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold">
+                S
+              </div>
+<div>
+<h3 class="text-sm font-bold text-slate-900 leading-none">Shafnat Petualang</h3>
+<span class="text-xs text-brand-600 font-semibold">Level 1 Adventurer</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-amber-50 text-amber-700 text-[11px] font-bold rounded-md border border-amber-200">
+              Rank #42
+            </span>
+</div>
+<!-- Quick Stats Grid -->
+<div class="grid grid-cols-3 gap-2 py-4 text-center">
+<div class="bg-slate-50 rounded-xl p-2.5 border border-slate-100">
+<div class="text-lg font-bold text-slate-800">12</div>
+<div class="text-[11px] text-slate-500">Foto</div>
+</div>
+<div class="bg-slate-50 rounded-xl p-2.5 border border-slate-100">
+<div class="text-lg font-bold text-slate-800">3.4k</div>
+<div class="text-[11px] text-slate-500">Dilihat</div>
+</div>
+<div class="bg-slate-50 rounded-xl p-2.5 border border-slate-100">
+<div class="text-lg font-bold text-slate-800">240</div>
+<div class="text-[11px] text-slate-500">Disukai</div>
+</div>
+</div>
+<!-- Milestone Progress Bar -->
+<div class="mt-1 pt-3 border-t border-slate-100">
+<div class="flex justify-between text-xs mb-1.5">
+<span class="text-slate-600 font-medium">Misi: Master Fotografer Alam</span>
+<span class="font-bold text-brand-600">12 / 20 Foto</span>
+</div>
+<div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full rounded-full transition-all duration-300" style="width: 60%"></div>
+</div>
+<p class="text-[11px] text-slate-400 mt-2">Unggah 8 foto valid lagi untuk mendapatkan Badge Gold &amp; 500 XP tambahan.</p>
+</div>
+</div>
+<!-- Card 2: Pedoman Konten & Kurasi -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+<h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+<svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            Pedoman Konten Komunitas
+          </h3>
+<ul class="text-xs text-slate-600 space-y-2.5">
+<li class="flex items-start gap-2">
+<svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Foto jernih &amp; beresolusi tinggi tanpa watermark yang menutupi objek utama.</span>
+</li>
+<li class="flex items-start gap-2">
+<svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Lokasi otentik di Indonesia dengan deskripsi jujur dan membantu pelancong lain.</span>
+</li>
+<li class="flex items-start gap-2">
+<svg class="w-4 h-4 text-rose-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Dilarang mengunggah foto satwa dilindungi yang dieksploitasi atau sampah visual.</span>
+</li>
+</ul>
+</div>
+<!-- Card 3: Pratinjau Galeri Terbaru -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-sm font-bold text-slate-900">Galeri Terakhirmu</h3>
+<a class="text-xs font-semibold text-brand-600 hover:text-brand-700" href="#">Lihat Semua</a>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<!-- Thumbnail 1 -->
+<div class="group relative rounded-lg overflow-hidden aspect-square bg-slate-100 border border-slate-200 cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-slate-200">
+<svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between text-[10px] text-white font-medium drop-shadow-xs">
+<span class="truncate">Tumpak Sewu</span>
+<span class="flex items-center gap-0.5">❤️ 42</span>
+</div>
+</div>
+<!-- Thumbnail 2 -->
+<div class="group relative rounded-lg overflow-hidden aspect-square bg-slate-100 border border-slate-200 cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-slate-200">
+<svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between text-[10px] text-white font-medium drop-shadow-xs">
+<span class="truncate">Bromo Sunrise</span>
+<span class="flex items-center gap-0.5">❤️ 88</span>
+</div>
+</div>
+<!-- Thumbnail 3 -->
+<div class="group relative rounded-lg overflow-hidden aspect-square bg-slate-100 border border-slate-200 cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition"></div>
+<div class="absolute inset-0 flex items-center justify-center bg-slate-200">
+<svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between text-[10px] text-white font-medium drop-shadow-xs">
+<span class="truncate">Kelingking</span>
+<span class="flex items-center gap-0.5">❤️ 110</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- 4 Columns Footer Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Kolom 1: Profil Brand -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-brand-600 font-bold text-lg">
+<div class="w-7 h-7 rounded-lg bg-brand-50 flex items-center justify-center border border-brand-200">
+<svg class="w-4 h-4 stroke-current" fill="none" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon fill="currentColor" fill-opacity="0.2" points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+</div>
+<span>Jejakawan</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan bersama komunitas yang saling mendukung.
+          </p>
+</div>
+<!-- Kolom 2: Jelajahi -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 tracking-wide uppercase mb-4">Jelajahi</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Rekomendasi Wisata</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Peta Destinasi &amp; Rute</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Open Trip Komunitas</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Hidden Gems Nusantara</a></li>
+</ul>
+</div>
+<!-- Kolom 3: Komunitas -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 tracking-wide uppercase mb-4">Komunitas</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Cari Teman Jalan</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Misi &amp; Badge Petualang</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Leaderboard Kontributor</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Profil Saya</a></li>
+</ul>
+</div>
+<!-- Kolom 4: Bantuan & Kontak -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 tracking-wide uppercase mb-4">Bantuan</h4>
+<ul class="space-y-2.5 text-sm text-slate-600">
+<li><a class="hover:text-brand-600 transition" href="#">Pusat Bantuan &amp; FAQ</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Pengaturan Akun</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Syarat &amp; Kebijakan Kurasi</a></li>
+<li class="pt-1">
+<span class="block text-xs text-slate-400">Hubungi Kami:</span>
+<a class="text-brand-600 font-medium hover:underline text-sm" href="mailto:halo@jejakawan.id">halo@jejakawan.id</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Bottom Copyright Bar -->
+<div class="pt-8 mt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+<div class="flex items-center space-x-6">
+<a class="hover:text-slate-800 transition" href="#">Kebijakan Privasi</a>
+<a class="hover:text-slate-800 transition" href="#">Ketentuan Layanan</a>
+<a class="hover:text-slate-800 transition" href="#">Keamanan Komunitas</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

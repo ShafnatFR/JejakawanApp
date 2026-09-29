@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chat Room - Ekspedisi Rinjani | Jejakawan</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- BEGIN: CustomStyles -->
+<style data-purpose="chat-custom-scroll">
+    /* Custom subtle scrollbar for realistic chat area */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+<!-- END: CustomStyles -->
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-30 bg-white border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo and Brand -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 text-brand-600 hover:opacity-90 transition-opacity" href="#">
+<div class="w-9 h-9 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600">
+<i class="w-5 h-5" data-lucide="compass"></i>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">Jejakawan</span>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-600">
+<a class="hover:text-brand-600 transition-colors" href="#">Discover</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Explore</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Trip Match</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Open Trip</a>
+<a class="hover:text-brand-600 transition-colors" href="#">Gamifikasi</a>
+</nav>
+</div>
+<!-- Top Right Actions & User Avatar -->
+<div class="flex items-center gap-3">
+<!-- Chat Action (Active) -->
+<button class="relative p-2 rounded-full text-brand-600 bg-brand-50 hover:bg-brand-100 transition-colors" title="Pesan Aktif" type="button">
+<i class="w-5 h-5" data-lucide="message-square"></i>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-brand-600 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Notification Bell -->
+<button class="relative p-2 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors" title="Notifikasi" type="button">
+<i class="w-5 h-5" data-lucide="bell"></i>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Divider -->
+<div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+<!-- User Profile Avatar -->
+<div class="relative flex items-center cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center font-semibold text-slate-700 hover:bg-slate-200 transition-colors text-sm">
+              S
+            </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" title="Status Online"></span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: ChatContainer -->
+<main class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6 flex flex-col">
+<!-- Main Chat Window Card -->
+<div class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-[760px] overflow-hidden">
+<!-- BEGIN: ChatHeader -->
+<div class="px-4 sm:px-6 py-3.5 border-b border-slate-200 flex items-center justify-between bg-white z-10">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Back button leading back to conversations list -->
+<a class="p-1.5 -ml-1 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1 text-sm font-medium" href="#">
+<i class="w-5 h-5" data-lucide="chevron-left"></i>
+<span class="hidden sm:inline">Kembali</span>
+</a>
+<!-- Travel Partner Profile & Badges -->
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative flex-shrink-0">
+<div class="w-11 h-11 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center border-2 border-white shadow-sm ring-1 ring-slate-200">
+                SF
+              </div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<h1 class="text-sm sm:text-base font-semibold text-slate-900 truncate">
+                  Shafnat Fuaini Ramadhan
+                </h1>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+<i class="w-3 h-3" data-lucide="badge-check"></i>
+                  KTP Terverifikasi
+                </span>
+<span class="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-brand-600 border border-indigo-100">
+<i class="w-3 h-3" data-lucide="shield"></i>
+                  Trust Score 98%
+                </span>
+</div>
+<p class="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
+<span class="text-emerald-600 font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Online
+                </span>
+<span>•</span>
+<span>Malang, Jatim</span>
+<span class="hidden sm:inline">•</span>
+<span class="hidden sm:inline text-slate-400">Ekspedisi Rinjani &amp; Segara Anak</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Call & Action Toolbars -->
+<div class="flex items-center gap-1 sm:gap-2">
+<!-- Voice Call -->
+<button class="p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-lg transition-colors" title="Panggilan Suara" type="button">
+<i class="w-4 h-4 sm:w-5 sm:h-5" data-lucide="phone"></i>
+</button>
+<!-- Video Call -->
+<button class="p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-lg transition-colors" title="Panggilan Video" type="button">
+<i class="w-4 h-4 sm:w-5 sm:h-5" data-lucide="video"></i>
+</button>
+<!-- Trip Itinerary Fast Access -->
+<button class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-brand-600 bg-brand-50 hover:bg-brand-100 rounded-lg transition-colors border border-brand-100" title="Rencana Perjalanan" type="button">
+<i class="w-3.5 h-3.5" data-lucide="map-pin"></i>
+<span>Itinerary</span>
+</button>
+<!-- Options menu -->
+<button class="p-2 text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="Opsi Percakapan" type="button">
+<i class="w-4 h-4 sm:w-5 sm:h-5" data-lucide="more-vertical"></i>
+</button>
+</div>
+</div>
+<!-- END: ChatHeader -->
+<!-- BEGIN: ChatBody -->
+<div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50/50 custom-scrollbar" data-purpose="chat-messages-container">
+<!-- Date Separator -->
+<div class="flex items-center justify-center my-2">
+<div class="px-3.5 py-1 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-500 shadow-sm flex items-center gap-1.5">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="calendar"></i>
+            Hari ini, 24 Mei 2026
+          </div>
+</div>
+<!-- System Safety Tip Note -->
+<div class="bg-amber-50/90 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex items-start gap-2.5 max-w-2xl mx-auto shadow-xs">
+<i class="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" data-lucide="shield-alert"></i>
+<p>
+<span class="font-semibold">Tips Keamanan Jejakawan:</span> Selalu simpan kontak darurat TNGR Sembalun &amp; jangan bagikan dokumen penting perbankan. Gunakan fitur itinerary bersama untuk verifikasi logistik tim.
+          </p>
+</div>
+<!-- Incoming Message from Travel Buddy -->
+<div class="flex items-start gap-3 max-w-[85%] sm:max-w-[70%]">
+<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-semibold text-xs flex items-center justify-center flex-shrink-0 border border-white shadow-xs">
+            SF
+          </div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-xs font-semibold text-slate-800">Shafnat</span>
+<span class="text-[11px] text-slate-400">09:15</span>
+</div>
+<div class="bg-white border border-slate-200 text-slate-800 p-3.5 rounded-2xl rounded-tl-none shadow-xs text-sm leading-relaxed">
+              Halo! Gimana rencana pendakian Rinjani minggu depan? Tenda sama logistik sudah aman dari porter Sembalun?
+            </div>
+</div>
+</div>
+<!-- Outgoing Message from Current User -->
+<div class="flex items-start gap-3 justify-end max-w-[85%] sm:max-w-[70%] ml-auto">
+<div class="space-y-1 flex flex-col items-end">
+<div class="flex items-center gap-2">
+<span class="text-[11px] text-slate-400">09:18</span>
+<span class="text-xs font-semibold text-slate-800">Saya</span>
+</div>
+<div class="bg-brand-600 text-white p-3.5 rounded-2xl rounded-tr-none shadow-xs text-sm leading-relaxed">
+              Halo! Aman, tadi barusan koordinasi sama Guide Mas Budi. Kuota porter 2 orang sudah dikonfirmasi. Ini detail itinerary singkatnya ya.
+            </div>
+<!-- Read receipt status -->
+<div class="flex items-center gap-1 text-[11px] text-brand-600 font-medium">
+<span>Dibaca</span>
+<i class="w-3.5 h-3.5" data-lucide="check-check"></i>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-slate-200 text-slate-700 font-semibold text-xs flex items-center justify-center flex-shrink-0 border border-white shadow-xs">
+            S
+          </div>
+</div>
+<!-- Rich Embedded Interactive Card: Trip Itinerary -->
+<div class="max-w-[85%] sm:max-w-[65%] ml-auto">
+<div class="bg-white border border-brand-200 rounded-2xl p-4 shadow-sm hover:shadow transition-shadow">
+<div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2.5">
+<div class="flex items-center gap-2">
+<span class="p-1.5 bg-brand-50 text-brand-600 rounded-lg">
+<i class="w-4 h-4" data-lucide="compass"></i>
+</span>
+<span class="text-xs font-semibold text-slate-900 tracking-wide uppercase">Open Trip Terverifikasi</span>
+</div>
+<span class="px-2 py-0.5 text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
+                Terkonfirmasi
+              </span>
+</div>
+<h4 class="text-sm font-bold text-slate-900">Trekking Rinjani 3D2N - Jalur Sembalun</h4>
+<div class="grid grid-cols-2 gap-2 my-3 text-xs text-slate-600">
+<div class="flex items-center gap-1.5">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="calendar"></i>
+<span>1 - 3 Juni 2026</span>
+</div>
+<div class="flex items-center gap-1.5">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="users"></i>
+<span>5 Anggota Tim</span>
+</div>
+<div class="flex items-center gap-1.5">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="map-pin"></i>
+<span>Basecamp Sembalun</span>
+</div>
+<div class="flex items-center gap-1.5">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="mountain"></i>
+<span>3.726 MDPL (Puncak)</span>
+</div>
+</div>
+<button class="w-full mt-1 py-2 px-3 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border border-brand-200" type="button">
+<i class="w-3.5 h-3.5" data-lucide="external-link"></i>
+              Lihat Itinerary Lengkap &amp; Dokumen
+            </button>
+</div>
+</div>
+<!-- Incoming Message with Follow-up Advice -->
+<div class="flex items-start gap-3 max-w-[85%] sm:max-w-[70%]">
+<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-semibold text-xs flex items-center justify-center flex-shrink-0 border border-white shadow-xs">
+            SF
+          </div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-xs font-semibold text-slate-800">Shafnat</span>
+<span class="text-[11px] text-slate-400">09:22</span>
+</div>
+<div class="bg-white border border-slate-200 text-slate-800 p-3.5 rounded-2xl rounded-tl-none shadow-xs text-sm leading-relaxed">
+              Mantap banget! Jangan lupa bawa jaket windproof tebal ya, semalam suhunya kabarnya sampai 6°C di Plawangan.
+            </div>
+</div>
+</div>
+<!-- Incoming Shared Photo Attachment -->
+<div class="flex items-start gap-3 max-w-[85%] sm:max-w-[70%]">
+<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-semibold text-xs flex items-center justify-center flex-shrink-0 border border-white shadow-xs">
+            SF
+          </div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-xs font-semibold text-slate-800">Shafnat</span>
+<span class="text-[11px] text-slate-400">09:23</span>
+</div>
+<div class="bg-white border border-slate-200 rounded-2xl rounded-tl-none p-2 shadow-xs max-w-sm">
+<!-- Shared Image Preview Container -->
+<div class="relative rounded-xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[16/10] flex items-center justify-center group">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent z-10"></div>
+<!-- Stylized Map/Camp Visual Representation -->
+<div class="text-center p-4 z-20 text-white">
+<div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md mx-auto flex items-center justify-center mb-2">
+<i class="w-5 h-5 text-emerald-300" data-lucide="tent"></i>
+</div>
+<p class="text-xs font-medium">Titik Kemah: Danau Segara Anak</p>
+<p class="text-[10px] text-slate-200">Koordinat: 8°25'00"S 116°24'00"E</p>
+</div>
+</div>
+<p class="p-2 text-xs text-slate-700 font-medium">
+                Spot camp kita di Danau Segara Anak nanti 🏕️ View langsung menghadap Gunung Barujari!
+              </p>
+</div>
+</div>
+</div>
+<!-- User typing status indicator -->
+<div class="flex items-center gap-2 text-xs text-slate-400 italic pl-11 pt-1">
+<span>Shafnat sedang mengetik</span>
+<span class="flex gap-1">
+<span class="w-1 h-1 bg-slate-400 rounded-full animate-bounce"></span>
+<span class="w-1 h-1 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+<span class="w-1 h-1 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+</span>
+</div>
+</div>
+<!-- END: ChatBody -->
+<!-- BEGIN: QuickReplies -->
+<div class="px-4 py-2 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+<span class="text-slate-400 flex items-center gap-1 flex-shrink-0 font-medium">
+<i class="w-3.5 h-3.5 text-brand-500" data-lucide="sparkles"></i> Saran:
+        </span>
+<button class="whitespace-nowrap px-3 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-full text-slate-600 transition-colors border border-slate-200" type="button">
+          Siap, sudah dipacking! 👍
+        </button>
+<button class="whitespace-nowrap px-3 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-full text-slate-600 transition-colors border border-slate-200" type="button">
+          Mau share lokasi sekarang?
+        </button>
+<button class="whitespace-nowrap px-3 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-full text-slate-600 transition-colors border border-slate-200" type="button">
+          Berapa split bill logistik?
+        </button>
+</div>
+<!-- END: QuickReplies -->
+<!-- BEGIN: MessageInputArea -->
+<div class="p-3 sm:p-4 bg-white border-t border-slate-200" data-purpose="chat-input-controls">
+<form class="flex items-center gap-2">
+<!-- Attachment Button -->
+<button class="p-2.5 text-slate-500 hover:text-brand-600 hover:bg-slate-100 rounded-xl transition-colors" title="Lampirkan File / Foto" type="button">
+<i class="w-5 h-5" data-lucide="paperclip"></i>
+</button>
+<!-- Location Share Button -->
+<button class="p-2.5 text-slate-500 hover:text-brand-600 hover:bg-slate-100 rounded-xl transition-colors hidden sm:block" title="Bagikan Titik Kumpul / Lokasi GPS" type="button">
+<i class="w-5 h-5" data-lucide="map-pin"></i>
+</button>
+<!-- Text Input Container -->
+<div class="relative flex-1">
+<input class="w-full bg-slate-50 border border-slate-300 focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-100 rounded-xl pl-4 pr-10 py-2.5 text-sm text-slate-800 placeholder-slate-400 transition-all outline-none" placeholder="Ketik pesan untuk Shafnat atau tim ekspedisi..." type="text"/>
+<!-- Emoji Button Inside Input -->
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600" title="Sisipkan Emoji" type="button">
+<i class="w-4 h-4" data-lucide="smile"></i>
+</button>
+</div>
+<!-- Audio Note Button -->
+<button class="p-2.5 text-slate-500 hover:text-brand-600 hover:bg-slate-100 rounded-xl transition-colors hidden sm:block" title="Kirim Pesan Suara" type="button">
+<i class="w-5 h-5" data-lucide="mic"></i>
+</button>
+<!-- Send Message Button -->
+<button class="p-2.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl font-medium shadow-sm transition-all flex items-center justify-center" title="Kirim Pesan" type="submit">
+<i class="w-5 h-5" data-lucide="send"></i>
+</button>
+</form>
+</div>
+<!-- END: MessageInputArea -->
+</div>
+</main>
+<!-- END: ChatContainer -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-8 pt-10 pb-6 text-sm text-slate-600">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<!-- Column 1: Brand Info -->
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-brand-600 font-bold text-lg">
+<i class="w-5 h-5" data-lucide="compass"></i>
+<span>Jejakawan</span>
+</div>
+<p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Column 2: Jelajahi -->
+<div class="space-y-3">
+<h3 class="font-semibold text-slate-900 text-sm">Jelajahi</h3>
+<ul class="space-y-2 text-xs sm:text-sm">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Rekomendasi</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Peta</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Open Trip</a></li>
+</ul>
+</div>
+<!-- Column 3: Komunitas -->
+<div class="space-y-3">
+<h3 class="font-semibold text-slate-900 text-sm">Komunitas</h3>
+<ul class="space-y-2 text-xs sm:text-sm">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Cari Teman</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Misi &amp; Badge</a></li>
+<li><a class="hover:text-brand-600 transition-colors" href="#">Profil</a></li>
+</ul>
+</div>
+<!-- Column 4: Bantuan & Kontak -->
+<div class="space-y-3">
+<h3 class="font-semibold text-slate-900 text-sm">Bantuan</h3>
+<ul class="space-y-2 text-xs sm:text-sm">
+<li><a class="hover:text-brand-600 transition-colors" href="#">Pengaturan</a></li>
+<li>
+<a class="text-brand-600 hover:underline" href="mailto:halo@jejakawan.id">
+                Kontak: halo@jejakawan.id
+              </a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Sub-footer -->
+<div class="border-t border-slate-100 pt-6 text-center text-xs text-slate-400">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: Scripts -->
+<script data-purpose="icon-initialization">
+    // Initialize Lucide icons
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+  </script>
+<!-- END: Scripts -->
+</body></html>

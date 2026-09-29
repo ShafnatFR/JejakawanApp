@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Traveler - Jejakawan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <!-- Global Header / Navbar (Logged In State) -->
+  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-8">
+        <a href="#" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-200 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-compass text-lg"></i>
+          </div>
+          <span class="text-xl font-bold tracking-tight text-indigo-600">Jejakawan</span>
+        </a>
+
+        <!-- Main Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1 sm:gap-2">
+          <a href="#" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Discover</a>
+          <a href="#" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Explore</a>
+          <a href="#" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Trip Match</a>
+          <a href="#" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Open Trip</a>
+          <a href="#" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Gamifikasi</a>
+        </nav>
+      </div>
+
+      <!-- User Nav Right Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Messages Link -->
+        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors relative" title="Pesan">
+          <i class="fa-regular fa-comment-dots text-lg"></i>
+          <span class="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-white"></span>
+        </a>
+        <!-- Notifications Link -->
+        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors relative" title="Notifikasi">
+          <i class="fa-regular fa-bell text-lg"></i>
+          <span class="absolute top-2 right-2 w-2 h-2 bg-indigo-600 rounded-full ring-2 ring-white"></span>
+        </a>
+        <!-- Active User Avatar Bubble -->
+        <div class="pl-2 border-l border-slate-200">
+          <a href="#" class="w-9 h-9 rounded-full bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-700 font-bold text-sm hover:ring-2 hover:ring-indigo-400 transition-all">
+            S
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb & Back Navigation -->
+  <div class="bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-sm text-slate-500">
+        <a href="#" class="hover:text-indigo-600 flex items-center gap-1">
+          <i class="fa-solid fa-arrow-left text-xs mr-1"></i> Kembali ke Komunitas
+        </a>
+        <span>/</span>
+        <span class="text-slate-400">Direktori Traveler</span>
+        <span>/</span>
+        <span class="text-slate-800 font-semibold truncate max-w-[200px] sm:max-w-none">Aditya Pratama Putra</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors" title="Bagikan Profil">
+          <i class="fa-solid fa-arrow-up-from-bracket text-sm"></i>
+        </button>
+        <button class="p-2 text-slate-400 hover:text-red-500 rounded-lg hover:bg-slate-100 transition-colors" title="Laporkan Pengguna">
+          <i class="fa-regular fa-flag text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Profile Page Body -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+    <!-- Profile Header Card (Hero Banner + Profile Info) -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+      <!-- Cover Banner -->
+      <div class="h-44 sm:h-56 w-full relative bg-slate-800 overflow-hidden">
+        <img src="https://lh3.googleusercontent.com/aida/AEtjO1Vz7DPQaS9-d1Z_Snn5oRa1lJ-IIV5w36hf6rGtbOdlACd5XAsLK-7rM2akNJGp-_4WFw6VWSPTDAcE3HPrH3INvUFQm-l9T1LBsb_m87yXOLROKxhVb9qdg25yk8ddbmuCASLYHetVEjoWL4RlnV6XydB4qnRsvDD0h67fuLVKVlBzHw7FE0AXkak8IoWCXwBpAcoCtXaifLk5jW1eeC-rFIpMQ_9zPsDwOBbKqgj-GAhWJcfGDaKr8-U" alt="Cover Landscape" class="w-full h-full object-cover object-center opacity-85 brightness-90">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent"></div>
+        <div class="absolute top-4 right-4 bg-slate-900/60 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 border border-white/20">
+          <i class="fa-solid fa-camera text-slate-300"></i> Segara Anak, Rinjani
+        </div>
+      </div>
+
+      <!-- Main Profile Identity & Action Bar -->
+      <div class="px-6 sm:px-8 pb-8 pt-0 relative">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 -mt-16 sm:-mt-20">
+          <!-- Avatar and Basic Badges -->
+          <div class="flex flex-col sm:flex-row items-center sm:items-end gap-5 text-center sm:text-left">
+            <div class="relative group">
+              <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl ring-4 ring-white bg-slate-100 shadow-xl overflow-hidden flex items-center justify-center border border-slate-200">
+                <img src="https://lh3.googleusercontent.com/aida/AEtjO1XZnEF6EcvTjZVQYS_Yo6le8XAKpMNSSdKKOhr0sm6_o6EI9g0i8CvpNlBHdfNwtwODNhs4T9qS1xvWD3V4qV7KOGgt2x1f044KnxHMejp9ad5rsnD0XeLmtTpMEL4i-NpERr53OsizzpFFcKulg5kRyvinW86AvpMr0teQO3cMXwPyFUekdXkSSUDXnualDTQUj3VnU49pLwtFKlRZLxBMaE9n_Tm1YTv38MFRJAbXyYIJTlChRKmvDQ" alt="Aditya Pratama" class="w-full h-full object-cover object-top">
+              </div>
+              <span class="absolute -bottom-2 -right-2 bg-emerald-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full ring-2 ring-white shadow flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-[10px]"></i> KTP Verified
+              </span>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Aditya Pratama Putra</h1>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                  <i class="fa-solid fa-compass text-[11px]"></i> Explorer Mode
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                  <i class="fa-solid fa-medal text-amber-500"></i> Donatur Gold
+                </span>
+              </div>
+              <p class="text-sm text-slate-500 font-medium flex items-center justify-center sm:justify-start gap-3">
+                <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Bandung, Jawa Barat</span>
+                <span>•</span>
+                <span><i class="fa-regular fa-calendar-check text-slate-400 mr-1"></i>Bergabung Maret 2024</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Buttons (Ajak Trip, Kirim Pesan, Bookmark) -->
+          <div class="flex items-center justify-center sm:justify-end gap-3 w-full md:w-auto">
+            <button class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-sm shadow-md shadow-indigo-200 hover:bg-indigo-700 hover:shadow-lg transition-all active:scale-[0.98]">
+              <i class="fa-solid fa-paper-plane text-xs"></i> Kirim Pesan
+            </button>
+            <button class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-indigo-200 text-indigo-600 font-semibold text-sm hover:bg-indigo-50/70 transition-all active:scale-[0.98]">
+              <i class="fa-solid fa-user-plus text-xs"></i> Ajak Trip Bareng
+            </button>
+            <button class="p-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-rose-500 transition-colors" title="Simpan ke Favorit">
+              <i class="fa-regular fa-bookmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bio & Key Stats Row -->
+        <div class="mt-7 pt-6 border-t border-slate-100 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Bio Narrative -->
+          <div class="lg:col-span-2 space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Tentang Petualang</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Pecinta trekking gunung dan eksplorasi hidden gem air terjun tropis di nusantara. Berpengalaman mendaki Rinjani, Semeru, Prau, serta trip pulau di Nusa Penida & Karimunjawa. Suka berbagi biaya trip secara adil (split bill) dan hunting foto landscape saat golden hour. Terbuka untuk gabung open trip hiking atau motoran santai akhir pekan!
+            </p>
+            
+            <!-- Travel Style Tags -->
+            <div class="flex flex-wrap gap-2 pt-1">
+              <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium text-slate-600"><i class="fa-solid fa-mountain text-slate-400 mr-1.5"></i>Gunung & Trekking</span>
+              <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium text-slate-600"><i class="fa-solid fa-water text-slate-400 mr-1.5"></i>Air Terjun</span>
+              <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium text-slate-600"><i class="fa-solid fa-camera text-slate-400 mr-1.5"></i>Fotografi</span>
+              <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium text-slate-600"><i class="fa-solid fa-campground text-slate-400 mr-1.5"></i>Camping</span>
+              <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium text-slate-600"><i class="fa-solid fa-motorcycle text-slate-400 mr-1.5"></i>Touring Motor</span>
+            </div>
+          </div>
+
+          <!-- Trust Score & Community Rating Card -->
+          <div class="bg-slate-50/80 rounded-xl p-4 border border-slate-200/80 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Skor Kepercayaan</span>
+                <span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
+                  <i class="fa-solid fa-shield-halved text-[10px]"></i> Sangat Terpercaya
+                </span>
+              </div>
+              <div class="flex items-baseline gap-2 mb-2">
+                <span class="text-3xl font-extrabold text-slate-900">96</span>
+                <span class="text-sm font-semibold text-slate-400">/ 100</span>
+              </div>
+              <!-- Progress Bar -->
+              <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-2">
+                <div class="bg-emerald-500 h-full rounded-full w-[96%]"></div>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-tight">
+                Terverifikasi KTP, No. HP aktif, dan memiliki 18 ulasan positif tanpa catatan pembatalan sepihak.
+              </p>
+            </div>
+
+            <div class="pt-3 mt-3 border-t border-slate-200/60 flex items-center justify-between text-xs font-medium text-slate-600">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-star text-amber-400"></i>
+                <strong class="text-slate-900 font-bold">4.95</strong> (18 Ulasan)
+              </span>
+              <span class="flex items-center gap-1 text-slate-500">
+                <i class="fa-regular fa-clock text-slate-400"></i> Respon &lt; 1 jam
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Numeric Quick Stats Highlights -->
+        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center hover:border-indigo-300 transition-colors">
+            <span class="block text-2xl font-black text-indigo-600">14</span>
+            <span class="text-xs font-semibold text-slate-500">Trip Selesai</span>
+          </div>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center hover:border-indigo-300 transition-colors">
+            <span class="block text-2xl font-black text-slate-800">8</span>
+            <span class="text-xs font-semibold text-slate-500">Badge Koleksi</span>
+          </div>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center hover:border-indigo-300 transition-colors">
+            <span class="block text-2xl font-black text-slate-800">Level 4</span>
+            <span class="text-xs font-semibold text-slate-500">Explorer (1,850 XP)</span>
+          </div>
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center hover:border-indigo-300 transition-colors">
+            <span class="block text-2xl font-black text-emerald-600">100%</span>
+            <span class="text-xs font-semibold text-slate-500">Tingkat Kehadiran</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Tabs & Two-Column Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left Column: Detailed Badges, Verification Details, and Travel Preferences (1 col) -->
+      <div class="space-y-6">
+        
+        <!-- Gamification & Badges Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <h3 class="font-bold text-slate-900">Lencana Petualangan</h3>
+            </div>
+            <span class="text-xs font-semibold text-slate-500">8 Diperoleh</span>
+          </div>
+
+          <div class="grid grid-cols-4 gap-3 text-center">
+            <!-- Badge 1 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-mountain text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Peak Conqueror</span>
+            </div>
+            <!-- Badge 2 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-water text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Cascades</span>
+            </div>
+            <!-- Badge 3 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-fire text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Ijen Blue Fire</span>
+            </div>
+            <!-- Badge 4 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-fish-fins text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Island Hopper</span>
+            </div>
+            <!-- Badge 5 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-handshake-angle text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Trip Pioneer</span>
+            </div>
+            <!-- Badge 6 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-camera-retro text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Photophile</span>
+            </div>
+            <!-- Badge 7 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center text-orange-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-gem text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Hidden Gem</span>
+            </div>
+            <!-- Badge 8 -->
+            <div class="group cursor-pointer">
+              <div class="w-14 h-14 mx-auto rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 group-hover:scale-105 transition-transform shadow-xs">
+                <i class="fa-solid fa-tree text-xl"></i>
+              </div>
+              <span class="block text-[11px] font-semibold text-slate-700 mt-1.5 truncate">Java Eco</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verification Checklist Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-user-shield text-indigo-600"></i> Status Keamanan & Verifikasi
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-center justify-between text-xs">
+              <span class="text-slate-600 flex items-center gap-2">
+                <i class="fa-solid fa-id-card text-emerald-500"></i> Identitas KTP Indonesia
+              </span>
+              <span class="font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Terverifikasi</span>
+            </li>
+            <li class="flex items-center justify-between text-xs">
+              <span class="text-slate-600 flex items-center gap-2">
+                <i class="fa-solid fa-phone text-emerald-500"></i> Nomor Telepon WhatsApp
+              </span>
+              <span class="font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Aktif</span>
+            </li>
+            <li class="flex items-center justify-between text-xs">
+              <span class="text-slate-600 flex items-center gap-2">
+                <i class="fa-solid fa-envelope text-emerald-500"></i> Alamat Email Resmi
+              </span>
+              <span class="font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Terhubung</span>
+            </li>
+            <li class="flex items-center justify-between text-xs">
+              <span class="text-slate-600 flex items-center gap-2">
+                <i class="fa-solid fa-users text-indigo-600"></i> Rekomendasi Komunitas
+              </span>
+              <span class="font-semibold text-slate-800">12 Rekomendasi</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Travel Preferences Detail -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-indigo-600"></i> Preferensi Berpetualang
+          </h3>
+          <div class="space-y-3.5 text-xs">
+            <div>
+              <span class="text-slate-400 block mb-1">Kisaran Anggaran per Trip:</span>
+              <span class="font-bold text-slate-800 text-sm">Rp500.000 — Rp2.500.000</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block mb-1">Moda Transportasi Favorit:</span>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">Kereta Api</span>
+                <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">Motor Pribadi</span>
+                <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">Sewa Mobil Elf</span>
+              </div>
+            </div>
+            <div>
+              <span class="text-slate-400 block mb-1">Pola & Karakteristik Trip:</span>
+              <p class="text-slate-600 font-medium">
+                Pagi bangun subuh (sunrise lover), suka tenda outdoor daripada hotel mewah, tidak merokok saat trekking, disiplin jam kumpul.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Past Trips, Shared Gallery, and Community Reviews (2 cols) -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <!-- Tabs Navigation -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-2 flex items-center gap-1 shadow-sm overflow-x-auto">
+          <button class="px-5 py-2.5 rounded-xl font-bold text-sm bg-indigo-600 text-white shadow-sm flex items-center gap-2 shrink-0">
+            <i class="fa-solid fa-route"></i> Jejak Petualangan (14)
+          </button>
+          <button class="px-5 py-2.5 rounded-xl font-semibold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors flex items-center gap-2 shrink-0">
+            <i class="fa-solid fa-images"></i> Galeri Foto (28)
+          </button>
+          <button class="px-5 py-2.5 rounded-xl font-semibold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors flex items-center gap-2 shrink-0">
+            <i class="fa-solid fa-star"></i> Ulasan Teman Seperjalanan (18)
+          </button>
+        </div>
+
+        <!-- Section: Completed Trips Card List -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base">Riwayat Ekspedisi Terakhir</h3>
+            <span class="text-xs font-semibold text-slate-500">Semua trip terverifikasi selesai</span>
+          </div>
+
+          <!-- Trip Card 1 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-indigo-300 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-slate-100">
+                  <img src="https://lh3.googleusercontent.com/aida/AEtjO1WzvsKZ0KOBgfsK7lCCn-IwRFNxemIdoaa_GYGcQUoera5ZGXt1MZicalws7BbUkbFI_XNcaZJIOZTPC4mm9agSSaDlJYNncVTZLsq6pZD9KBQiq7ogc-mOgl13zygkiudM71LybIpqHJjYKObytThKjtXUZ1t4oH1rlpp74fNpZGZazNZXFNI_tJ_Hk7kZGYJSFQMV2s6KEQRsYyVdvLwih5fa3WDa3z0sw_-pwgQDF0ok5ojqYdsZ4A" alt="Tumpak Sewu" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">Selesai • 3H2M</span>
+                    <span class="text-xs text-slate-400">Februari 2026</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-base hover:text-indigo-600 cursor-pointer">
+                    Eksplorasi Goa Tetes & Trekking Jurang Tumpak Sewu
+                  </h4>
+                  <p class="text-xs text-slate-500 flex items-center gap-2">
+                    <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Lumajang, Jawa Timur</span>
+                    <span>•</span>
+                    <span><i class="fa-solid fa-users text-slate-400 mr-1"></i>Trip Match 4 Orang</span>
+                  </p>
+                </div>
+              </div>
+              <div class="sm:text-right flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-100">
+                <span class="text-xs text-slate-400">Total Split Bill</span>
+                <span class="text-sm font-extrabold text-slate-800">Rp420.000 /org</span>
+                <span class="text-[11px] font-semibold text-emerald-600 mt-1 flex items-center gap-1">
+                  <i class="fa-solid fa-check-circle text-[10px]"></i> Lunas Tepat Waktu
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Card 2 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-indigo-300 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-slate-100">
+                  <img src="https://lh3.googleusercontent.com/aida/AEtjO1VIA9yS9syweYp5vYYs6GG9feRx6iJxI0kVIaM3qV2bdTNOVxzxS8KdWPOtEvG5C5Za5ocrWNoHoVdfiRmv-lD7zgVKDbAKT_L7frgTgKVdhGxEFD3w72SXoy1w_T1hUVzK47tYf24oLY0LvSExDhnH10Qr8EbmFwUbZFwi5nM70wOXFFX4nOBkngWdlA9S9VNTvlibQn5KcpLfy8WnwB-6RRkaasW1QlxJFqhl3oysW2vkgXXxtzbveG4" alt="Bromo Sunrise" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">Selesai • 2H1M</span>
+                    <span class="text-xs text-slate-400">Januari 2026</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-base hover:text-indigo-600 cursor-pointer">
+                    Golden Sunrise Bromo, Penanjakan & Pasir Berbisik
+                  </h4>
+                  <p class="text-xs text-slate-500 flex items-center gap-2">
+                    <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Probolinggo, Jawa Timur</span>
+                    <span>•</span>
+                    <span><i class="fa-solid fa-users text-slate-400 mr-1"></i>Open Trip Bersama Bromo Tour</span>
+                  </p>
+                </div>
+              </div>
+              <div class="sm:text-right flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-100">
+                <span class="text-xs text-slate-400">Total Biaya</span>
+                <span class="text-sm font-extrabold text-slate-800">Rp375.000</span>
+                <span class="text-[11px] font-semibold text-emerald-600 mt-1 flex items-center gap-1">
+                  <i class="fa-solid fa-award text-[10px] text-amber-500"></i> Reviewer Terbaik
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Card 3 -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-indigo-300 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-slate-100">
+                  <img src="https://lh3.googleusercontent.com/aida/AEtjO1V-66IvL1GZFaDh-8nOnGF8njTVbGdCtpJjHba9O4zni5gZm585KZ52szwRIuTAlSsbM6YOW_wXy2j6LEKgd1HMMIt-aX7n6gxvg5YgMYZ9uhFLa1JikAyF-qzAc5XW1DFwFMjrriIRBT6-BmH1rGPZXFYan7ohBZlBF0_WveSRkwT6woaegZVsC_dTOpkRGYBHLI6h3zawNFAfGrB5MXdzPoURH23MQjatQ3O22fPMRn8eEhpusxJqAhE" alt="Gunung Prau" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">Selesai • 2H1M</span>
+                    <span class="text-xs text-slate-400">Desember 2025</span>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-base hover:text-indigo-600 cursor-pointer">
+                    Camping Ceria Sunrise Gunung Prau via Patakbanteng
+                  </h4>
+                  <p class="text-xs text-slate-500 flex items-center gap-2">
+                    <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Wonosobo, Jawa Tengah</span>
+                    <span>•</span>
+                    <span><i class="fa-solid fa-users text-slate-400 mr-1"></i>Trip Match 6 Orang</span>
+                  </p>
+                </div>
+              </div>
+              <div class="sm:text-right flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-100">
+                <span class="text-xs text-slate-400">Total Biaya</span>
+                <span class="text-sm font-extrabold text-slate-800">Rp260.000 /org</span>
+                <span class="text-[11px] font-semibold text-indigo-600 mt-1 flex items-center gap-1">
+                  <i class="fa-solid fa-star text-[10px] text-amber-400"></i> Nilai 5.0 (Host)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Traveler Photo Gallery Showcase -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-camera text-indigo-600"></i> Foto Jepretan Aditya
+            </h3>
+            <a href="#" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700">Lihat Semua 28 Foto &rarr;</a>
+          </div>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="aspect-square rounded-xl overflow-hidden group relative cursor-pointer">
+              <img src="https://lh3.googleusercontent.com/aida/AEtjO1Xd8gcA7izPIBGzfWjVxPlfJexOVF2Loi8pL6qZAXovsyUtsW_osuIkRidv-vKYCF2fwnpfqogr0IOA7UlegXvJMpiQVWQNJ-Vf4cVfZ8K2oc_0xFApnF_0HmqHyGDYqd4aO8vNXmhl5T5ybUwmrWuhslNtph9f28L002NXZj8r94--kOO5NN6_eSvWuxL1ywNwP_ok2ZvidxYx2h2nrFVB6odRNokq7rk4jFyRQPRmgahJ4v5F2u1kDpA" alt="Tumpak Sewu Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                <span class="text-[11px] text-white font-medium truncate">Tumpak Sewu</span>
+              </div>
+            </div>
+            <div class="aspect-square rounded-xl overflow-hidden group relative cursor-pointer">
+              <img src="https://lh3.googleusercontent.com/aida/AEtjO1WqxakPvDgeKDpA_sqUttXB7RZ98HFD8Cc_kDcD68fa6897xdByKNvZfIHLJHgaastcxjgkb6qial8DiWyQsshI-8vEE5GdCFRZKn5_ikpDCzKxtmUd-o0LFhCEgS022ZFJWsHaGRpHrF5pFcfC10tHoR28SJGvR-fpZOaG6AZO-kgF4zyW4LmRMEIFkoytXbwP8gAflidbD0XPZh1k2hgB_efY5iRLAX5JdLMrE1GXpH3Yjo9aqSCPhw" alt="Kawah Ijen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                <span class="text-[11px] text-white font-medium truncate">Kawah Ijen</span>
+              </div>
+            </div>
+            <div class="aspect-square rounded-xl overflow-hidden group relative cursor-pointer">
+              <img src="https://lh3.googleusercontent.com/aida/AEtjO1WFNtzI9Yph9R_utbBlR-0uJONRB73DVnHj4XnxwteEadYMhMUheTVT0vCcfrQGvE28kGccfLf9OR_erKamL8oX2LJuqSji3H5YbsdmuSfVxADvfB2oYBYm4hA6p-6Cls70ASX40FgpJtpeJPENgLUpjXMTZjNE3nr0sLVOQadm60nl7qwi1r8bTXZXSgkG9FFk-RbcSEQbuAAp9dCXOaKykI-RhUQ6WbtMik0kbsEmyy3o5SvQUhQbSw" alt="Kelingking Nusa Penida" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                <span class="text-[11px] text-white font-medium truncate">Nusa Penida</span>
+              </div>
+            </div>
+            <div class="aspect-square rounded-xl overflow-hidden group relative cursor-pointer">
+              <img src="https://lh3.googleusercontent.com/aida/AEtjO1XcyxoA9sIF3ds3jAchbPtwrrtO8YiA7VyqDp_0MNA5wqYvYwnMCTUEF_1gLNH1VC0fMn2xzz_FUW0YTcgzBe6zNS-TpjN5jjS4dyCZfluWeoh7FHCKGlFXQlnB8CQkUb9Pth767Sz9iMhofHiEqhGYT0NiE3-k-VbMXCk4tRTnJZ5spfU9WI3rhRQZdkaUTl1F5VR0TYj3vQ21pFClOgfBqLHEhtjNK114QD38RDESdtd4vhjZ_aedAG4" alt="Raja Ampat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                <span class="text-[11px] text-white font-medium truncate">Raja Ampat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Authentic Traveler Reviews -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-comments text-indigo-600"></i> Ulasan Rekan Seperjalanan
+            </h3>
+            <span class="text-xs font-semibold text-slate-500">18 Ulasan Positif</span>
+          </div>
+
+          <div class="space-y-4 divide-y divide-slate-100">
+            <!-- Review 1 -->
+            <div class="pt-4 first:pt-0">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-sm">
+                    R
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-slate-800">Rizky Maulana</h5>
+                    <p class="text-[11px] text-slate-400">Trip Match Tumpak Sewu • 2 minggu lalu</p>
+                  </div>
+                </div>
+                <div class="flex items-center text-amber-400 text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                "Adit orangnya asik banget dan solutif di lapangan! Pas trekking turun air terjun dia jagain teman-teman yang baru pertama kali hiking. Split bill juga super transparan dan langsung lunas."
+              </p>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="pt-4">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-sm">
+                    N
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-slate-800">Nabila Saraswati</h5>
+                    <p class="text-[11px] text-slate-400">Camping Prau Sunrise • 1 bulan lalu</p>
+                  </div>
+                </div>
+                <div class="flex items-center text-amber-400 text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                "Peralatan outdoor-nya lengkap, tepat waktu pas meeting point di Terminal Mendolo Wonosobo. Nggak pelit bagi kopi dan hasil foto kamera mirrorless-nya keren banget!"
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Comprehensive 4-Column Footer (Consistent with Jejakawan Ecosystem) -->
+  <footer class="bg-white border-t border-slate-200 mt-16 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <!-- Col 1: Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
+              <i class="fa-solid fa-compass text-sm"></i>
+            </div>
+            <span class="text-lg font-bold tracking-tight text-indigo-600">Jejakawan</span>
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+        </div>
+
+        <!-- Col 2: Jelajahi -->
+        <div>
+          <h4 class="text-sm font-bold text-slate-900 tracking-wider mb-4">Jelajahi</h4>
+          <ul class="space-y-2.5 text-sm text-slate-600">
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Rekomendasi Destinasi</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Peta Wisata Indonesia</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Open Trip Marketplace</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Paket Wisata Agensi</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Komunitas -->
+        <div>
+          <h4 class="text-sm font-bold text-slate-900 tracking-wider mb-4">Komunitas</h4>
+          <ul class="space-y-2.5 text-sm text-slate-600">
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Cari Teman (Trip Match)</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Misi Petualang & Badge</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Leaderboard Traveler</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Mitra Guide Lokal</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Bantuan & Legal -->
+        <div>
+          <h4 class="text-sm font-bold text-slate-900 tracking-wider mb-4">Bantuan</h4>
+          <ul class="space-y-2.5 text-sm text-slate-600">
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Pusat Bantuan & FAQ</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Syarat & Ketentuan</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Kebijakan Privasi</a></li>
+            <li><a href="#" class="hover:text-indigo-600 transition-colors">Kontak: halo@jejakawan.id</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Compliance -->
+      <div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+        <div class="flex items-center gap-6">
+          <span class="flex items-center gap-1.5 text-slate-400">
+            <i class="fa-solid fa-shield-halved text-emerald-500"></i> Platform Aman & Terverifikasi
+          </span>
+          <span class="text-slate-400">Mitra Resmi Kemenparekraf & ASITA</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

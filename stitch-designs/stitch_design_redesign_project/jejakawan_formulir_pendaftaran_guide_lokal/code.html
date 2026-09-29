@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Sebagai Guide Lokal - Jejakawan</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              200: '#C7D2FE',
+              300: '#A5B4FC',
+              400: '#818CF8',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+              900: '#312E81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scroll-and-focus">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F8FAFC;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+      border-color: #6366F1 !important;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo -->
+<div class="flex items-center space-x-8">
+<a class="flex items-center gap-2.5 text-brand-600 font-bold text-xl tracking-tight transition hover:opacity-90" href="#">
+<svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span class="text-slate-900 font-extrabold text-2xl tracking-tight">Jejak<span class="text-brand-600">awan</span></span>
+</a>
+<!-- Desktop Navigation Items -->
+<nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Discover</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Explore</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Trip Match</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Open Trip</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 rounded-lg transition-colors" href="#">Gamifikasi</a>
+<a class="px-3.5 py-2 text-sm font-semibold text-brand-600 bg-brand-50 rounded-lg transition-colors" href="#">Panduan Lokal</a>
+</nav>
+</div>
+<!-- User Notifications & Profile Info -->
+<div class="flex items-center space-x-3.5">
+<!-- Chat Icon -->
+<button aria-label="Pesan Chat" class="p-2 text-slate-500 hover:text-brand-600 hover:bg-slate-100 rounded-full transition relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Notification Bell -->
+<button aria-label="Notifikasi" class="p-2 text-slate-500 hover:text-brand-600 hover:bg-slate-100 rounded-full transition relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Profile Avatar Pill -->
+<div class="flex items-center pl-2">
+<button class="w-9 h-9 rounded-full bg-slate-100 border border-slate-300 text-slate-700 font-bold text-sm flex items-center justify-center hover:ring-2 hover:ring-brand-500 hover:ring-offset-1 transition" type="button">
+            S
+          </button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+<!-- Top Action Breadcrumb & Title Section -->
+<section class="mb-8" data-purpose="page-introduction">
+<a class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-brand-600 transition mb-3 group" href="#">
+<svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+        Kembali ke Panduan Lokal
+      </a>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Daftar Sebagai Guide Lokal</h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
+<svg class="w-3.5 h-3.5 text-brand-600" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+              Program Kemitraan
+            </span>
+</div>
+<p class="mt-1 text-slate-500 text-sm sm:text-base">
+            Bagikan pengalaman petualanganmu, pandu traveler menjelajahi keindahan Indonesia, dan dapatkan penghasilan tambahan.
+          </p>
+</div>
+</div>
+</section>
+<!-- Two-Column Form and Benefit Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Main Form Container -->
+<section class="lg:col-span-8 bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8" data-purpose="guide-registration-form">
+<div class="border-b border-slate-100 pb-5 mb-6 flex items-center justify-between">
+<div>
+<h2 class="text-xl font-bold text-slate-900">Informasi Profil Guide</h2>
+<p class="text-xs sm:text-sm text-slate-500 mt-0.5">Isi data dirimu dengan lengkap untuk ditinjau oleh tim Jejakawan</p>
+</div>
+<span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-md">Langkah 1 dari 1</span>
+</div>
+<form action="#" class="space-y-6" method="POST">
+<!-- Guide Full Name -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="guide-name">
+              Nama Lengkap Guide <span class="text-rose-500">*</span>
+</label>
+<input class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 text-sm transition focus:border-brand-600" id="guide-name" name="guide-name" placeholder="Nama yang akan ditampilkan ke wisatawan" required="" type="text"/>
+</div>
+<!-- Document & Avatar Upload Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Profile Photo Upload -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5">Foto Profil Guide <span class="text-rose-500">*</span></label>
+<div class="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center hover:border-brand-400 hover:bg-slate-50/50 transition cursor-pointer flex flex-col items-center justify-center min-h-[120px]">
+<div class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-600 mb-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<p class="text-xs font-semibold text-brand-600">Unggah Foto Diri</p>
+<p class="text-[11px] text-slate-400 mt-0.5">JPG/PNG maks. 2MB (Tampak Jelas)</p>
+</div>
+</div>
+<!-- KTP / Certification Upload -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5">Foto KTP / Sertifikat Guide <span class="text-rose-500">*</span></label>
+<div class="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center hover:border-brand-400 hover:bg-slate-50/50 transition cursor-pointer flex flex-col items-center justify-center min-h-[120px]">
+<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 mb-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<p class="text-xs font-semibold text-emerald-600">Unggah KTP / Lisensi</p>
+<p class="text-[11px] text-slate-400 mt-0.5">Data terlindungi &amp; terenkripsi aman</p>
+</div>
+</div>
+</div>
+<!-- Bio & Background Experience -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-sm font-semibold text-slate-700" for="bio">Bio &amp; Ringkasan Pengalaman</label>
+<span class="text-xs text-slate-400">Minimal 50 karakter</span>
+</div>
+<textarea class="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 text-sm transition focus:border-brand-600 leading-relaxed resize-y" id="bio" name="bio" placeholder="Ceritakan pengalaman memandu, rute favorit, pengetahuan budaya/alam, atau keahlian khusus seperti pertolongan pertama (P3K) dan fotografi..." rows="4"></textarea>
+</div>
+<!-- Operational Locations -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="locations">
+              Lokasi Operasional <span class="text-xs text-slate-400 font-normal">(Pilih atau pisahkan dengan koma)</span>
+</label>
+<input class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 text-sm transition focus:border-brand-600 mb-2.5" id="locations" name="locations" placeholder="Contoh: Bali, Lombok, Yogyakarta, Labuan Bajo" type="text" value="Bali, Lombok, Yogyakarta"/>
+<!-- Quick Chips / Badges for Location Selection -->
+<div class="flex flex-wrap gap-1.5 items-center">
+<span class="text-xs text-slate-500 mr-1">Rekomendasi Cepat:</span>
+<button class="px-2.5 py-1 text-xs bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-600 font-medium rounded-lg transition border border-slate-200" type="button">+ Labuan Bajo</button>
+<button class="px-2.5 py-1 text-xs bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-600 font-medium rounded-lg transition border border-slate-200" type="button">+ Bromo-Semeru</button>
+<button class="px-2.5 py-1 text-xs bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-600 font-medium rounded-lg transition border border-slate-200" type="button">+ Raja Ampat</button>
+<button class="px-2.5 py-1 text-xs bg-slate-100 hover:bg-brand-50 hover:text-brand-600 text-slate-600 font-medium rounded-lg transition border border-slate-200" type="button">+ Bandung</button>
+</div>
+</div>
+<!-- Pricing & WhatsApp Contact -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Daily Price Rate -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="daily-rate">
+                Tarif Jasa per Hari (IDR) <span class="text-rose-500">*</span>
+</label>
+<div class="relative rounded-xl">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+<span class="text-slate-500 text-sm font-semibold">Rp</span>
+</div>
+<input class="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 text-sm font-medium transition focus:border-brand-600" id="daily-rate" name="daily-rate" placeholder="200000" type="number" value="200000"/>
+</div>
+<p class="text-[11px] text-slate-400 mt-1">Rentang wajar lokal: Rp 200.000 - Rp 600.000/hari</p>
+</div>
+<!-- WhatsApp Number -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="whatsapp-number">
+                No. WhatsApp Aktif <span class="text-rose-500">*</span>
+</label>
+<div class="relative rounded-xl">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+<span class="text-slate-500 text-sm font-medium">+62</span>
+</div>
+<input class="w-full pl-12 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 text-sm transition focus:border-brand-600" id="whatsapp-number" name="whatsapp-number" placeholder="81234567890" type="tel"/>
+</div>
+<p class="text-[11px] text-slate-400 mt-1">Untuk konfirmasi booking tamu secara instan</p>
+</div>
+</div>
+<!-- Spoken Languages -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-1.5" for="languages">
+              Bahasa yang Dikuasai <span class="text-xs text-slate-400 font-normal">(pisahkan dengan koma)</span>
+</label>
+<input class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 text-sm transition focus:border-brand-600" id="languages" name="languages" placeholder="Contoh: Indonesia, Inggris, Jawa, Mandarin" type="text" value="Indonesia, English (Basic)"/>
+</div>
+<!-- Bank Account Info -->
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+<h3 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              Informasi Rekening Pembayaran Jasa
+            </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1" for="bank-name">Nama Bank / E-Wallet</label>
+<select class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-800 text-sm focus:border-brand-600" id="bank-name" name="bank-name">
+<option selected="" value="BCA">BCA (Bank Central Asia)</option>
+<option value="Mandiri">Bank Mandiri</option>
+<option value="BRI">BRI (Bank Rakyat Indonesia)</option>
+<option value="BNI">BNI (Bank Negara Indonesia)</option>
+<option value="Jago">Bank Jago</option>
+<option value="BSI">BSI (Bank Syariah Indonesia)</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1" for="account-number">Nomor Rekening</label>
+<input class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-800 text-sm focus:border-brand-600" id="account-number" name="account-number" placeholder="Nomor rekening" type="text" value="1234567890"/>
+</div>
+</div>
+</div>
+<!-- Terms and Policy Checkbox -->
+<div class="flex items-start gap-3 pt-2">
+<input class="h-4 w-4 mt-0.5 text-brand-600 focus:ring-brand-500 border-slate-300 rounded cursor-pointer" id="terms" name="terms" required="" type="checkbox"/>
+<label class="text-xs text-slate-600 leading-relaxed cursor-pointer select-none" for="terms">
+              Saya menyetujui <a class="text-brand-600 font-medium hover:underline" href="#">Kode Etik Pemandu Jejakawan</a> dan memastikan seluruh data identitas yang diunggah valid serta siap mematuhi standar keselamatan pariwisata Indonesia.
+            </label>
+</div>
+<!-- Submit CTA Button -->
+<div class="pt-2">
+<button class="w-full py-3.5 px-6 rounded-xl bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center gap-2 group" type="submit">
+<svg class="w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Daftar Sebagai Guide</span>
+</button>
+<p class="text-center text-xs text-slate-400 mt-2.5">Proses peninjauan profil memakan waktu maksimal 1x24 jam kerja.</p>
+</div>
+</form>
+</section>
+<!-- RIGHT COLUMN: Benefits, Requirements & Testimonials -->
+<aside class="lg:col-span-4 space-y-6" data-purpose="guide-benefits-sidebar">
+<!-- Benefit Card -->
+<div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+<h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-brand-600"></span>
+            Keuntungan Menjadi Guide Jejakawan
+          </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-800">Akses ke Ribuan Traveler</p>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Terhubung langsung dengan penjelajah solo dan komunitas open trip se-Indonesia.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-800">Pencairan Dana Cepat &amp; Aman</p>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Sistem pembayaran otomatis yang dicairkan langsung ke rekeningmu setelah trip selesai.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-800">Badge 'Verified Guide'</p>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Meningkatkan kepercayaan traveler dengan sertifikasi resmi dari Jejakawan.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="flex-shrink-0 w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-800">Komisi 0% (Peluncuran Awal)</p>
+<p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Dapatkan 100% dari tarifmu tanpa potongan biaya platform selama 3 bulan pertama.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Verification Requirements Pill -->
+<div class="bg-slate-100/80 border border-slate-200/80 rounded-2xl p-5">
+<h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">Syarat Verifikasi Akun</h4>
+<div class="space-y-2 text-xs text-slate-600">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>WNI dengan KTP / e-KTP resmi</span>
+</div>
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Berusia minimal 18 tahun</span>
+</div>
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Menguasai rute destinasi yang dipilih</span>
+</div>
+</div>
+</div>
+<!-- Testimonial Quote Card -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 border border-slate-300 flex items-center justify-center font-bold text-slate-700 text-sm">
+              MB
+            </div>
+<div>
+<h5 class="text-xs font-bold text-slate-900">Mas Bagus</h5>
+<p class="text-[11px] text-slate-500">Guide Bromo &amp; Semeru (Bergabung 2024)</p>
+</div>
+<div class="ml-auto flex items-center text-amber-500 text-xs font-bold">
+              ★ 4.9
+            </div>
+</div>
+<p class="text-xs text-slate-600 italic leading-relaxed">
+            "Bergabung di Jejakawan bikin jadwal trip saya selalu penuh setiap akhir pekan. Sistem pembayaran transparan dan travelernya seru-seru!"
+          </p>
+</div>
+<!-- Support Box -->
+<div class="p-4 bg-brand-50 border border-brand-100 rounded-2xl text-center">
+<p class="text-xs font-bold text-brand-900">Punya Pertanyaan Kemitraan?</p>
+<p class="text-xs text-brand-700 mt-0.5">Tim kami siap membantu proses pendaftaranmu.</p>
+<a class="mt-2 inline-flex items-center justify-center text-xs font-semibold text-brand-600 hover:text-brand-800 underline" href="mailto:partner@jejakawan.id">
+            partner@jejakawan.id
+          </a>
+</div>
+</aside>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-16 pt-12 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Footer 4-Column Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-100">
+<!-- Column 1: Brand Info -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span class="text-slate-900 font-extrabold text-xl tracking-tight">Jejak<span class="text-brand-600">awan</span></span>
+</div>
+<p class="text-slate-500 text-xs sm:text-sm leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+<!-- Column 2: Jelajahi -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 mb-3 tracking-wide">Jelajahi</h4>
+<ul class="space-y-2 text-xs sm:text-sm text-slate-500">
+<li><a class="hover:text-brand-600 transition" href="#">Rekomendasi Wisata</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Peta Destinasi</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Open Trip Komunitas</a></li>
+<li><a class="hover:text-brand-600 transition text-brand-600 font-medium" href="#">Panduan Lokal</a></li>
+</ul>
+</div>
+<!-- Column 3: Komunitas -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 mb-3 tracking-wide">Komunitas</h4>
+<ul class="space-y-2 text-xs sm:text-sm text-slate-500">
+<li><a class="hover:text-brand-600 transition" href="#">Cari Teman Jalan</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Misi &amp; Badge XP</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Leaderboard Petualang</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Profil &amp; Portofolio</a></li>
+</ul>
+</div>
+<!-- Column 4: Bantuan & Kontak -->
+<div>
+<h4 class="text-sm font-bold text-slate-900 mb-3 tracking-wide">Bantuan</h4>
+<ul class="space-y-2 text-xs sm:text-sm text-slate-500">
+<li><a class="hover:text-brand-600 transition" href="#">Pusat Pengaturan</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Syarat &amp; Kebijakan Privasi</a></li>
+<li><a class="hover:text-brand-600 transition" href="#">Kontak CS: <span class="font-medium text-slate-700">halo@jejakawan.id</span></a></li>
+<li><a class="hover:text-brand-600 transition" href="#">FAQ Guide Kemitraan</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright Notice -->
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+<p>© 2026 Jejakawan. Semua hak dilindungi.</p>
+<p class="flex items-center gap-4">
+<span>Bangga Menjelajahi Nusantara</span>
+<span>•</span>
+<span class="text-slate-500">Indonesia</span>
+</p>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

@@ -1,105 +1,394 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { useAuthStore } from "@/stores/auth"
-import { Destination } from "@/types/database"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Heart, MapPin, Star, Trash2, Loader2 } from "lucide-react"
-import Link from "next/link"
 
 export default function FavoritesPage() {
-  const { user } = useAuthStore()
-  const supabase = createClient()
-  const [favorites, setFavorites] = useState<any[]>([])
+  const { user, profile } = useAuthStore()
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => { if (user) fetchFavorites() }, [user])
-
-  async function fetchFavorites() {
-    setLoading(true)
-    const { data } = await supabase
-      .from("user_favorites")
-      .select("*, destination:destinations(*)")
-      .eq("user_id", user!.id)
-      .order("created_at", { ascending: false })
-    setFavorites(data || [])
+  useEffect(() => {
     setLoading(false)
-  }
-
-  async function removeFavorite(destId: string) {
-    await supabase
-      .from("user_favorites")
-      .delete()
-      .eq("user_id", user!.id)
-      .eq("destination_id", destId)
-    setFavorites(f => f.filter((x: any) => x.destination_id !== destId))
-  }
-
-  if (!user) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <Heart className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
-        <h2 className="text-xl font-semibold mb-2">Login dulu yuk</h2>
-        <p className="text-muted-foreground mb-4">Masuk untuk melihat destinasi favoritmu</p>
-        <Link href="/login"><Button>Masuk</Button></Link>
-      </div>
-    )
-  }
+  })
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Favorit Saya</h1>
-        <p className="text-muted-foreground">Destinasi yang kamu simpan</p>
-      </div>
 
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[...Array(6)].map((_, i) => <div key={i} className="h-48 bg-muted rounded-lg animate-pulse" />)}
-        </div>
-      ) : favorites.length === 0 ? (
-        <div className="text-center py-12">
-          <Heart className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
-          <h3 className="text-lg font-medium mb-2">Belum ada favorit</h3>
-          <p className="text-muted-foreground mb-4">Simpan destinasi yang kamu suka</p>
-          <Link href="/discover"><Button>Jelajahi Destinasi</Button></Link>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {favorites.map((fav: any) => {
-            const dest = fav.destination
-            if (!dest) return null
-            return (
-              <Card key={fav.id} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <h3 className="font-semibold">{dest.name}</h3>
-                      <p className="text-sm text-muted-foreground">{dest.province}</p>
-                    </div>
-                    <Button size="sm" variant="ghost" onClick={() => removeFavorite(dest.id)}>
-                      <Trash2 className="h-4 w-4 text-red-500" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm">{dest.rating_avg?.toFixed(1) || "0.0"}</span>
-                    {dest.is_underrated && <Badge variant="secondary" className="text-xs">Hidden Gem</Badge>}
-                  </div>
-                  <Link href={`/destinations/${dest.id}`}>
-                    <Button size="sm" variant="outline" className="w-full">
-                      <MapPin className="h-4 w-4 mr-1" /> Lihat Detail
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-      )}
-    </div>
+<header className="sticky top-0 z-40 bg-white border-b border-slate-200">
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div className="flex items-center justify-between h-16 gap-4">
+
+<div className="flex items-center gap-8">
+<a className="flex items-center gap-2.5 text-brand-600 font-bold text-xl tracking-tight" href="#">
+
+<svg className="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+</svg>
+<span className="text-brand-600 text-2xl font-extrabold tracking-tight">Jejakawan</span>
+</a>
+
+<nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+<a className="hover:text-brand-600 transition-colors" href="#">Discover</a>
+<a className="hover:text-brand-600 transition-colors" href="#">Explore</a>
+<a className="hover:text-brand-600 transition-colors" href="#">Trip Match</a>
+<a className="hover:text-brand-600 transition-colors" href="#">Open Trip</a>
+<a className="hover:text-brand-600 transition-colors" href="#">Gamifikasi</a>
+</nav>
+</div>
+
+<div className="flex items-center gap-4">
+
+<div className="relative hidden lg:block w-64">
+<input className="w-full text-xs pl-9 pr-4 py-2 rounded-full border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all text-slate-700 placeholder-slate-400" placeholder="Cari destinasi, kota..." type="text"/>
+<svg className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+</div>
+
+<button aria-label="Pesan Chat" className="relative p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-full transition-colors" type="button">
+<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
+</button>
+
+<button aria-label="Notifikasi" className="relative p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-full transition-colors" type="button">
+<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+</button>
+
+<div className="flex items-center gap-2 pl-2 border-l border-slate-200">
+<button className="flex items-center focus:outline-none ring-2 ring-slate-100 rounded-full">
+<div className="w-9 h-9 rounded-full bg-brand-50 text-brand-700 font-bold flex items-center justify-center border border-brand-200 text-sm">
+                S
+              </div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+
+<main className="flex-grow py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+
+<div className="flex flex-col md:flex-row md:items-end justify-between pb-6 gap-4 border-b border-slate-200">
+<div>
+<h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Favorit Saya</h1>
+<p className="text-slate-600 mt-1 text-sm sm:text-base">Destinasi impian dan rencana petualangan yang telah kamu simpan.</p>
+</div>
+
+<div className="flex items-center gap-3">
+<button className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-all" type="button">
+<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 4v16m8-8H4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+          Buat Wishlist Baru
+        </button>
+</div>
+</div>
+
+<div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+
+<div className="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-2 sm:pb-0">
+<button className="px-4 py-2 rounded-full text-xs font-semibold bg-brand-600 text-white whitespace-nowrap shadow-sm">
+          Semua Tersimpan (8)
+        </button>
+<button className="px-4 py-2 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 whitespace-nowrap transition-colors">
+          Gunung &amp; Trekking (3)
+        </button>
+<button className="px-4 py-2 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 whitespace-nowrap transition-colors">
+          Pantai &amp; Bahari (3)
+        </button>
+<button className="px-4 py-2 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 whitespace-nowrap transition-colors">
+          Hidden Gem (2)
+        </button>
+</div>
+
+<div className="flex items-center gap-3 self-end sm:self-auto">
+<div className="relative">
+<select className="text-xs font-medium bg-white border border-slate-200 text-slate-700 py-2 pl-3 pr-8 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+<option>Urutkan: Baru Disimpan</option>
+<option>Urutkan: Rating Tertinggi</option>
+<option>Urutkan: Biaya Terendah</option>
+</select>
+<svg className="w-4 h-4 text-slate-400 absolute right-2.5 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+</div>
+
+<div className="flex items-center bg-white border border-slate-200 rounded-lg p-1">
+<button className="p-1 rounded bg-slate-100 text-brand-600" title="Tampilan Grid">
+<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+</button>
+<button className="p-1 rounded text-slate-400 hover:text-slate-600" title="Tampilan List">
+<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+
+<section className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<article className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition duration-200">
+
+<div className="relative h-56 w-full overflow-hidden bg-slate-100">
+<img alt="Stunning scenic landscape photography of Mount Bromo East Java Indonesia at golden sunrise with soft sea of clouds and volcanic crater, professional travel photography, clear, crisp, high resolution" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPlwUPq5Q2eDmJJgOz38Ivq_G9903xNNH8mNkyfaqpK2KQo5VAy8y6Y_BB2IO54Fv8DPueUqITHNR0mYxwTVRrIHgOukGK2NZexLC6Urj5BjNHbdgxKUbDwpu7w_PNE7e92Il_P7GPXj4igU3ZN402NtksxOtEdRYfQa3VwjmTbR3zDLSbtDqaM9mc-0UvyDjEMUEG4XUk_BDbVZjZDVa2vKNN-HoW7r8c8Bf7z8fiHHg9yyxg1i1B"/>
+<div className="absolute top-3 left-3">
+<span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold bg-emerald-600 text-white">
+              Gunung
+            </span>
+</div>
+<button aria-label="Hapus dari favorit" className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm text-rose-500 flex items-center justify-center hover:bg-white transition-colors shadow-sm" type="button">
+<svg className="w-5 h-5 fill-rose-500 text-rose-500" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+</div>
+
+<div className="p-5 flex-1 flex flex-col justify-between">
+<div>
+<div className="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span className="inline-flex items-center gap-1 font-medium text-slate-500">
+<svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+                Probolinggo, Jawa Timur
+              </span>
+<div className="flex items-center gap-1 text-slate-700 font-semibold">
+<svg className="w-3.5 h-3.5 text-amber-500 fill-amber-500" viewBox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+                4.9 <span className="text-slate-400 font-normal">(2.5k)</span>
+</div>
+</div>
+<h2 className="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
+              Gunung Bromo &amp; Lautan Pasir
+            </h2>
+<p className="text-xs text-slate-500 mt-1">Eksplorasi sunrise point Penanjakan dan kaldera vulkanik legendaris.</p>
+</div>
+
+<div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+<div>
+<span className="block text-[11px] text-slate-400 uppercase font-semibold tracking-wider">Perkiraan Biaya</span>
+<span className="text-sm font-bold text-slate-900">Rp 250.000 <span className="text-xs font-normal text-slate-500">/ orang</span></span>
+</div>
+<div className="flex items-center gap-2">
+<a className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-50 text-brand-700 hover:bg-brand-100 transition-colors" href="#">
+                Rencanakan
+              </a>
+<a className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white hover:bg-brand-700 transition-colors" href="#">
+                Cari Teman
+              </a>
+</div>
+</div>
+</div>
+</article>
+
+<article className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition duration-200">
+
+<div className="relative h-56 w-full overflow-hidden bg-slate-100">
+<img alt="Aerial drone shot of turquoise tropical beach in Raja Ampat or Labuan Bajo Indonesia with limestone karst islands and coral reef, vibrant turquoise waters, clean professional travel photography" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAU-X6DH4ZXeUipHes4doKnHHbaEjPV18lll9on-4KubJpfZQKsZYnVG40b55TFH2623_ZyAkhRGms4rm9a94c7BJWjjZZEz45Qca-NHW-d2oFKcF0UJW3mVxQSx3GC74hdmV21QJpduHfXShHAc3TJz5ZmKP4mxutgflPMgKs-RfjdUIoTLHKzNzPH_ZfZJxrQstLSS3psTnljoHqLNWkD02cb22pk9GKY6dFNLk1BaXM5fEe0ynE"/>
+<div className="absolute top-3 left-3">
+<span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold bg-cyan-700 text-white">
+              Hidden Gem
+            </span>
+</div>
+<button aria-label="Hapus dari favorit" className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm text-rose-500 flex items-center justify-center hover:bg-white transition-colors shadow-sm" type="button">
+<svg className="w-5 h-5 fill-rose-500 text-rose-500" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+</div>
+
+<div className="p-5 flex-1 flex flex-col justify-between">
+<div>
+<div className="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span className="inline-flex items-center gap-1 font-medium text-slate-500">
+<svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+                Raja Ampat, Papua Barat
+              </span>
+<div className="flex items-center gap-1 text-slate-700 font-semibold">
+<svg className="w-3.5 h-3.5 text-amber-500 fill-amber-500" viewBox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+                4.9 <span className="text-slate-400 font-normal">(1.8k)</span>
+</div>
+</div>
+<h2 className="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
+              Kepulauan Misool &amp; Karst
+            </h2>
+<p className="text-xs text-slate-500 mt-1">Air laut toska jernih, labirin pulau karst, dan biota bawah laut kelas dunia.</p>
+</div>
+
+<div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+<div>
+<span className="block text-[11px] text-slate-400 uppercase font-semibold tracking-wider">Perkiraan Biaya</span>
+<span className="text-sm font-bold text-slate-900">Rp 1.850.000 <span className="text-xs font-normal text-slate-500">/ orang</span></span>
+</div>
+<div className="flex items-center gap-2">
+<a className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white hover:bg-brand-700 transition-colors" href="#">
+                Rencanakan Trip
+              </a>
+</div>
+</div>
+</div>
+</article>
+
+<article className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition duration-200">
+
+<div className="relative h-56 w-full overflow-hidden bg-slate-100">
+<img alt="Breathtaking view of Tumpak Sewu waterfall surrounded by lush green tropical jungle canyon East Java Indonesia, ultra high quality travel photography" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Lf0zU7_rxKidXJLaPFKI4BR94QMJZ9Cir0rlDBlZkBkxdnkaX7QLU3ozSkYdYuekCGoLS1Mfovyn4ZkN2a9lH-7PThusNSzUdbpwMLsC_5nRFigV8c8vJTd_e9AdQcB2sdUk4UM5XDHXm369mJ_q7P845RES2IfFj6xzCrXsRnDPMF4b0URtM-5pROEDH2Ev-PFkg58WYBECphTUa5b1Uu02fXFvL3EIGeOjIXfzNyzekCxNCKJY"/>
+<div className="absolute top-3 left-3">
+<span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold bg-sky-700 text-white">
+              Air Terjun
+            </span>
+</div>
+<button aria-label="Hapus dari favorit" className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm text-rose-500 flex items-center justify-center hover:bg-white transition-colors shadow-sm" type="button">
+<svg className="w-5 h-5 fill-rose-500 text-rose-500" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+</div>
+
+<div className="p-5 flex-1 flex flex-col justify-between">
+<div>
+<div className="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+<span className="inline-flex items-center gap-1 font-medium text-slate-500">
+<svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+                Lumajang, Jawa Timur
+              </span>
+<div className="flex items-center gap-1 text-slate-700 font-semibold">
+<svg className="w-3.5 h-3.5 text-amber-500 fill-amber-500" viewBox="0 0 20 20">
+<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+</svg>
+                4.8 <span className="text-slate-400 font-normal">(1.2k)</span>
+</div>
+</div>
+<h2 className="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1">
+              Tumpak Sewu Waterfall Canyon
+            </h2>
+<p className="text-xs text-slate-500 mt-1">Kemegahan tirai air terjun spektakuler di lembah jurang rimbun tropis.</p>
+</div>
+
+<div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+<div>
+<span className="block text-[11px] text-slate-400 uppercase font-semibold tracking-wider">Tiket Masuk</span>
+<span className="text-sm font-bold text-slate-900">Rp 35.000 <span className="text-xs font-normal text-slate-500">/ tiket</span></span>
+</div>
+<div className="flex items-center gap-2">
+<a className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white hover:bg-brand-700 transition-colors" href="#">
+                Rencanakan Trip
+              </a>
+</div>
+</div>
+</div>
+</article>
+</section>
+
+
+<section className="mt-10 bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+<div className="flex items-center gap-4">
+<div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 border border-brand-100">
+<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+</div>
+<div>
+<h3 className="text-base font-bold text-slate-900">Ingin berbagi wishlist ini kepada teman perjalanan?</h3>
+<p className="text-sm text-slate-500 mt-0.5">Buka kolaborasi, ajak teman voting destinasi bersama, atau buat itinerari perjalanan kolektif.</p>
+</div>
+</div>
+<div className="flex items-center gap-3 w-full md:w-auto shrink-0 justify-end">
+<button className="w-full md:w-auto px-4 py-2 text-xs font-semibold rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors" type="button">
+          Atur Jadi Publik/Privat
+        </button>
+<button className="w-full md:w-auto px-4 py-2 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-700 text-white transition-colors flex items-center justify-center gap-1.5" type="button">
+<svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+</svg>
+          Salin Tautan Koleksi
+        </button>
+</div>
+</section>
+
+
+
+<section className="mt-14 mb-4 border border-dashed border-slate-200 rounded-2xl bg-white p-12 text-center max-w-xl mx-auto">
+<div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
+
+<svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" strokeLinecap="round" strokeLinejoin="round"></path>
+</svg>
+</div>
+<h3 className="text-base font-bold text-slate-900">Belum ada favorit</h3>
+<p className="text-sm text-slate-500 mt-1 mb-6">Simpan destinasi yang kamu suka untuk melihatnya kembali sewaktu-waktu.</p>
+<a className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold transition-colors shadow-sm" href="#">
+        Jelajahi Destinasi
+      </a>
+</section>
+
+</main>
+
+
+<footer className="bg-white border-t border-slate-200 mt-16 pt-12 pb-8">
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+<div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-100">
+
+<div className="space-y-3">
+<h4 className="font-bold text-slate-900 text-base">Jejakawan</h4>
+<p className="text-sm text-slate-500 leading-relaxed">
+            Platform perjalanan Indonesia yang menghubungkan traveler, menemukan destinasi tersembunyi, dan menciptakan petualangan tak terlupakan.
+          </p>
+</div>
+
+<div>
+<h4 className="font-bold text-slate-900 text-base mb-3">Jelajahi</h4>
+<ul className="space-y-2 text-sm text-slate-600">
+<li><a className="hover:text-brand-600 transition-colors" href="#">Rekomendasi</a></li>
+<li><a className="hover:text-brand-600 transition-colors" href="#">Peta</a></li>
+<li><a className="hover:text-brand-600 transition-colors" href="#">Open Trip</a></li>
+</ul>
+</div>
+
+<div>
+<h4 className="font-bold text-slate-900 text-base mb-3">Komunitas</h4>
+<ul className="space-y-2 text-sm text-slate-600">
+<li><a className="hover:text-brand-600 transition-colors" href="#">Cari Teman</a></li>
+<li><a className="hover:text-brand-600 transition-colors" href="#">Misi &amp; Badge</a></li>
+<li><a className="hover:text-brand-600 transition-colors" href="#">Profil</a></li>
+</ul>
+</div>
+
+<div>
+<h4 className="font-bold text-slate-900 text-base mb-3">Bantuan</h4>
+<ul className="space-y-2 text-sm text-slate-600">
+<li><a className="hover:text-brand-600 transition-colors" href="#">Pengaturan</a></li>
+<li><a className="hover:text-brand-600 transition-colors" href="mailto:halo@jejakawan.id">Kontak: halo@jejakawan.id</a></li>
+</ul>
+</div>
+</div>
+
+<div className="pt-6 text-center text-xs text-slate-500">
+        © 2026 Jejakawan. Semua hak dilindungi.
+      </div>
+</div>
+</footer>
+
   )
 }

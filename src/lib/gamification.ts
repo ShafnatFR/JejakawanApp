@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
-
-const LEVEL_THRESHOLDS = [0, 200, 500, 1000, 2000, 3500, 5500, 8000, 12000, 18000]
+import { LEVEL_THRESHOLDS } from '@/lib/constants'
 
 const XP_REWARDS: Record<string, number> = {
   trip_created: 50,

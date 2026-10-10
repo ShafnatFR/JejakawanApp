@@ -7,13 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Check, Crown, Zap, Star, Shield } from "lucide-react"
+import { SUBSCRIPTION_PLANS } from "@/lib/constants"
 
-const plans = [
-  { name: "Free", price: "Rp 0", period: "Selamanya", icon: Star, features: ["3 rekomendasi/hari", "Trip matching", "Iklan ditampilkan", "XP 1x multiplier"], color: "border-gray-200" },
-  { name: "Weekly", price: "Rp 9.900", period: "/minggu", icon: Zap, features: ["10 rekomendasi/hari", "Bebas iklan", "XP 1.5x multiplier"], color: "border-blue-200" },
-  { name: "Monthly", price: "Rp 29.000", period: "/bulan", icon: Crown, features: ["Rekomendasi unlimited", "Priority matching", "Filter partner detail", "XP 1.5x multiplier", "Bebas iklan"], color: "border-primary", popular: true },
-  { name: "Exclusive", price: "Rp 299.000", period: "/tahun", icon: Shield, features: ["Semua fitur Monthly", "Early access open trip", "Diskon 5% partner travel", "XP 2x multiplier", "Badge premium"], color: "border-amber-300" },
-]
+const ICON_MAP: Record<string, any> = { Free: Star, Weekly: Zap, Monthly: Crown, Exclusive: Shield }
+const plans = SUBSCRIPTION_PLANS.map(p => ({ ...p, icon: ICON_MAP[p.name] || Star }))
 
 export default function SubscriptionPage() {
   const { profile, updateProfile } = useAuthStore()

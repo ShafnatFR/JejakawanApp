@@ -16,14 +16,7 @@ interface ReportDialogProps {
   trigger?: React.ReactNode
 }
 
-const REPORT_REASONS = [
-  { value: "spam", label: "Spam" },
-  { value: "harassment", label: "Pelecehan / Bullying" },
-  { value: "fake_profile", label: "Profil Palsu" },
-  { value: "inappropriate_content", label: "Konten Tidak Pantas" },
-  { value: "scam", label: "Penipuan" },
-  { value: "other", label: "Lainnya" },
-]
+import { REPORT_REASONS } from "@/lib/constants"
 
 export function ReportDialog({ reportedId, reportedType = "user", trigger }: ReportDialogProps) {
   const { user } = useAuthStore()

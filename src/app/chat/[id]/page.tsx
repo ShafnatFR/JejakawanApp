@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client"
 import { useAuthStore } from "@/stores/auth"
 import { ChatMessage } from "@/types/database"
 import { ChatBubble } from "@/components/chat/chat-bubble"
+import { QUICK_REPLIES } from "@/lib/constants"
 import { ChatInput } from "@/components/chat/chat-input"
 import { ArrowLeft, Phone, Video, MapPin, MoreVertical, Paperclip, Smile, Mic, Send, Loader2, Shield, Calendar, Users, Mountain, Compass, Sparkles } from "lucide-react"
 
@@ -98,11 +99,7 @@ export default function ChatRoomPage() {
     setSending(false)
   }
 
-  const quickReplies = [
-    "Siap, sudah dipacking! 👍",
-    "Mau share lokasi sekarang?",
-    "Berapa split bill logistik?",
-  ]
+  const quickReplies = QUICK_REPLIES
 
   if (!user) {
     return (

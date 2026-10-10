@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/client'
 import { Destination, UserProfile, SubscriptionPlan } from '@/types/database'
+import { LEVEL_THRESHOLDS } from '@/lib/constants'
 
 export interface RecommendationResult {
   destinations: (Destination & { relevance_score: number })[]
@@ -14,8 +15,6 @@ const DAILY_LIMITS: Record<SubscriptionPlan, number> = {
   monthly: Infinity,
   exclusive: Infinity,
 }
-
-const LEVEL_THRESHOLDS = [0, 200, 500, 1000, 2000, 3500, 5500, 8000, 12000, 18000]
 
 function calculateRelevance(
   dest: Destination,

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Destination } from "@/types/database"
 import { DestinationCard } from "@/components/destination-card"
+import { PROVINCES } from "@/lib/constants"
 import { Search, MapPin, List, Grid3X3, SlidersHorizontal, ChevronDown, Compass, Mountain, TreePine, Waves, Building2, Gem } from "lucide-react"
 
 export default function ExplorePage() {
@@ -14,7 +15,7 @@ export default function ExplorePage() {
   const [view, setView] = useState<"grid" | "list">("grid")
   const [loading, setLoading] = useState(true)
 
-  const provinces = ["Jawa Barat", "Jawa Tengah", "Jawa Timur", "DIY", "Bali"]
+  const provinces = PROVINCES
 
   useEffect(() => { fetchDestinations() }, [province, underratedOnly])
 

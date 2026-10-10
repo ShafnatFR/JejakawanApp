@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { LEVEL_THRESHOLDS } from "@/lib/constants"
 import { cookies } from "next/headers"
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
     if (profile) {
       const newXp = (profile.xp_total || 0) + mission.xp_reward
-      const thresholds = [0, 200, 500, 1000, 2000, 3500, 5500, 8000, 12000, 18000]
+      const thresholds = LEVEL_THRESHOLDS
       let newLevel = 1
       for (let i = thresholds.length - 1; i >= 0; i--) {
         if (newXp >= thresholds[i]) { newLevel = i + 1; break }

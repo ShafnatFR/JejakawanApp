@@ -15,6 +15,7 @@ export default function ContentPage() {
   const [activeTab, setActiveTab] = useState("upload")
   const [form, setForm] = useState({ destination_id: "", caption: "", url: "" })
   const [selectedTags, setSelectedTags] = useState<string[]>(["#SpotSunrise"])
+  const [galleryPreviews, setGalleryPreviews] = useState<{ name: string; likes: number }[]>([])
 
   useEffect(() => {
     if (!user) { router.push("/login"); return }
@@ -26,8 +27,20 @@ export default function ContentPage() {
     const { data: dests } = await supabase.from("destinations").select("id,name,province").eq("is_active", true).order("name")
     setDestinations(dests || [])
     if (user) {
-      const { data: content } = await supabase.from("user_content").select("*, destination:destinations(name,province)").eq("user_id", user.id).order("created_at", { ascending: false })
+      const { data: content } = await supabase.from("user_content").select("*,destination:destinations(name)").eq("user_id", user.id).order("created_at", { ascending: false })
       setMyContent(content || [])
+    }
+    // Fetch top gallery previews
+    const { data: gallery } = await supabase
+      .from("user_content")
+      .select("destination:destinations(name)")
+      .order("created_at", { ascending: false })
+      .limit(3)
+    if (gallery) {
+      setGalleryPreviews(gallery.map((g: any) => ({
+        name: g.destination?.name || "Unknown",
+        likes: 0,
+      })))
     }
   }
 
@@ -48,17 +61,13 @@ export default function ContentPage() {
     fetchData()
   }
 
-  const tags = ["#SpotSunrise", "#HiddenSpot", "#AmanUntukSolo", "#BudgetFriendly", "#AestheticPhoto"]
+  const tags = CONTENT_TAGS
 
   function toggleTag(tag: string) {
     setSelectedTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag])
   }
 
-  const galleryPreviews = [
-    { name: "Tumpak Sewu", likes: 42 },
-    { name: "Bromo Sunrise", likes: 88 },
-    { name: "Kelingking", likes: 110 },
-  ]
+// galleryPreviews now fetched from Supabase in fetchData()
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 antialiased">

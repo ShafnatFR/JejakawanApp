@@ -6,6 +6,7 @@ import { Destination } from "@/types/database"
 import { getRecommendations, RecommendationResult } from "@/lib/recommendation"
 import { DestinationCard } from "@/components/destination-card"
 import { EmergencyButton } from "@/components/safety/emergency-button"
+import { DESTINATION_CATEGORIES } from "@/lib/constants"
 import { Compass, Search, Sparkles, MapPin, TrendingUp, Star, Eye, Zap, MessageCircle, Bell, ChevronDown, SlidersHorizontal, ArrowRight, Flame } from "lucide-react"
 
 export default function DiscoverPage() {
@@ -19,7 +20,7 @@ export default function DiscoverPage() {
   const [hasMore, setHasMore] = useState(false)
   const [offset, setOffset] = useState(0)
 
-  const categories = ["alam", "pantai", "budaya", "kuliner", "gunung", "air_terjun", "gua", "sejarah"]
+  const categories = DESTINATION_CATEGORIES
   const mode = profile?.current_mode || "tourist"
 
   useEffect(() => {

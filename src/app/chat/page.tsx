@@ -5,6 +5,7 @@ import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { useAuthStore } from "@/stores/auth"
 import { MessageCircle, Search, Plus, Users, Shield, Eye, Compass, Map, Trophy, User, Settings, Mail } from "lucide-react"
+import { AVATAR_COLORS } from "@/lib/constants"
 
 interface ChatRoomWithMeta {
   id: string
@@ -111,13 +112,7 @@ export default function ChatListPage() {
     return d.toLocaleDateString("id-ID", { day: "numeric", month: "short" })
   }
 
-  const avatarColors = [
-    "bg-indigo-100 text-brand-600",
-    "bg-orange-100 text-orange-700",
-    "bg-teal-100 text-teal-700",
-    "bg-emerald-100 text-emerald-700",
-    "bg-purple-100 text-purple-700",
-  ]
+  const avatarColors = AVATAR_COLORS
 
   if (!user) {
     return (

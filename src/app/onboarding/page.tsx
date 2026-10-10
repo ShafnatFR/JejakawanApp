@@ -4,25 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/stores/auth"
 import { MapPin, ArrowRight, Compass, Camera, Mountain, UtensilsCrossed, Car, Palmtree, ChevronRight, Star, Users, ShieldCheck } from "lucide-react"
-
-const interests = [
-  "Pantai", "Gunung", "Air Terjun", "Danau", "Hutan", "Desa Wisata",
-  "Kuliner", "Sejarah", "Budaya", "Snorkeling", "Diving", "Hiking",
-  "Camping", "Fotografi", "Sunrise", "Sunset", "Wildlife", "Festival"
-]
-
-const transportModes = ["Motor", "Mobil", "Bus", "Kereta", "Kapal", "Pesawat"]
-
-const personas = [
-  { value: "solo", emoji: "🧭", label: "Solo Backpacker" },
-  { value: "hidden-gems", emoji: "💎", label: "Hidden Gems" },
-  { value: "nature", emoji: "🌲", label: "Alam & Pendaki" },
-  { value: "culinary", emoji: "🍲", label: "Kuliner Autentik" },
-  { value: "roadtrip", emoji: "🚗", label: "Road Tripper" },
-  { value: "relaxed", emoji: "🏖️", label: "Santai & Resort" },
-]
-
-const quickCities = ["Jakarta", "Bandung", "Surabaya", "Yogyakarta", "Bali"]
+import { INTERESTS, TRANSPORT_MODES, PERSONAS, QUICK_CITIES, STEP_LABELS } from "@/lib/constants"
 
 export default function OnboardingPage() {
   const router = useRouter()
@@ -62,7 +44,7 @@ export default function OnboardingPage() {
     router.push("/discover")
   }
 
-  const stepLabels = ["Identitas & Asal", "Minat Wisata", "Preferensi Perjalanan"]
+  const stepLabels = STEP_LABELS
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -141,7 +123,7 @@ export default function OnboardingPage() {
                     </div>
                     <div className="flex items-center gap-1.5 mt-2 flex-wrap text-xs text-slate-500">
                       <span className="font-medium text-slate-400">Pilihan cepat:</span>
-                      {quickCities.map((city) => (
+                      {QUICK_CITIES.map((city) => (
                         <button
                           key={city}
                           type="button"
@@ -161,7 +143,7 @@ export default function OnboardingPage() {
                     Persona Petualangan Utama <span className="text-xs font-normal text-slate-400">(Pilih salah satu)</span>
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {personas.map((p) => (
+                    {PERSONAS.map((p) => (
                       <button
                         key={p.value}
                         type="button"
@@ -204,7 +186,7 @@ export default function OnboardingPage() {
             {step === 2 && (
               <div className="space-y-6">
                 <div className="flex flex-wrap gap-2">
-                  {interests.map((interest) => (
+                  {INTERESTS.map((interest) => (
                     <button
                       key={interest}
                       type="button"
@@ -262,7 +244,7 @@ export default function OnboardingPage() {
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Moda Transportasi</label>
                   <div className="flex flex-wrap gap-2">
-                    {transportModes.map((mode) => (
+                    {TRANSPORT_MODES.map((mode) => (
                       <button
                         key={mode}
                         type="button"

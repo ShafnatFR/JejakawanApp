@@ -82,10 +82,10 @@ export default function NotificationsPage() {
 
   const filters = [
     { key: "all", label: "Semua", count: notifications.length },
-    { key: "trip_match", label: "Trip Match", count: 3 },
-    { key: "booking", label: "Open Trip & Booking", count: 2 },
-    { key: "gamification", label: "Gamifikasi & XP", count: 2 },
-    { key: "system", label: "Sistem & Keamanan", count: 0 },
+    { key: "trip_match", label: "Trip Match", count: notifications.filter(n => n.type === "trip_match").length },
+    { key: "booking", label: "Open Trip & Booking", count: notifications.filter(n => n.type === "booking").length },
+    { key: "gamification", label: "Gamifikasi & XP", count: notifications.filter(n => n.type === "gamification").length },
+    { key: "system", label: "Sistem & Keamanan", count: notifications.filter(n => n.type === "system").length },
   ]
 
   if (!user) {

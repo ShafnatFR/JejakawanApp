@@ -1,25 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAuthStore } from "@/stores/auth"
 import { createClient } from "@/lib/supabase/client"
 import { Heart, Star, Award, Crown, Gift, Shield, Users, Globe, BarChart3, Lock, ChevronRight, Compass, Map, Trophy, MessageCircle, Bell, Search } from "lucide-react"
+import { QUICK_AMOUNTS, DONATION_TIERS } from "@/lib/constants"
 
-const TIERS = [
-  { name: "Bronze", min: 10000, color: "amber", icon: Star, xp: "+50 XP", perk: "Supporter" },
-  { name: "Silver", min: 50000, color: "indigo", icon: Award, xp: "+250 XP", perk: "Diskusi Privat", popular: true },
-  { name: "Gold", min: 200000, color: "yellow", icon: Crown, xp: "+1.000 XP", perk: "Merchandise" },
-  { name: "Platinum", min: 500000, color: "purple", icon: Gift, xp: "+3.000 XP", perk: "Wall of Fame" },
-]
+const TIER_ICONS: Record<string, any> = { Bronze: Star, Silver: Award, Gold: Crown, Platinum: Gift }
+const TIERS = DONATION_TIERS.map(t => ({ ...t, icon: TIER_ICONS[t.name] || Star }))
 
-const QUICK_AMOUNTS = [25000, 50000, 100000, 250000, 1000000]
-
-const SUPPORTERS = [
-  { name: "Dimas Anggara", initials: "DA", color: "purple", tier: "Platinum", amount: 500000, time: "4 menit yang lalu", message: "Semoga semakin banyak hidden gems terawat! Salam dari traveler Yogya." },
-  { name: "Rian & Lina", initials: "RL", color: "indigo", tier: "Silver", amount: 50000, time: "18 menit yang lalu", message: "Maju terus pariwisata Indonesia berdaya & bersih dari sampah plastik!" },
-  { name: "Kawan Petualang", initials: "?", color: "slate", tier: "Gold", amount: 200000, time: "1 jam yang lalu", message: "Untuk program reboisasi jalur pendakian Gunung Argopuro." },
-  { name: "Bima Wicaksono", initials: "BW", color: "amber", tier: "Bronze", amount: 20000, time: "3 jam yang lalu", message: "Dukungan kecil untuk platform favorit traveler lokal!" },
-]
+// SUPPORTERS now fetched from Supabase below
 
 function formatRupiah(n: number) {
   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(n)
@@ -33,8 +23,34 @@ export default function DonationsPage() {
   const [paymentMethod, setPaymentMethod] = useState("qris")
   const [isAnonymous, setIsAnonymous] = useState(false)
   const [message, setMessage] = useState("")
+  const [supporters, setSupporters] = useState<any[]>([])
 
   const selectedTier = TIERS.find((t) => amount >= t.min) || TIERS[0]
+
+  useEffect(() => {
+    async function fetchSupporters() {
+      const supabase = createClient()
+      const { data } = await supabase
+        .from("donations")
+        .select("id, amount, tier, created_at, user:user_profiles(display_name)")
+        .eq("payment_status", "paid")
+        .order("created_at", { ascending: false })
+        .limit(10)
+      if (data) {
+        const tierColors: Record<string, string> = { platinum: "purple", gold: "amber", silver: "indigo", bronze: "slate" }
+        setSupporters(data.map((d: any) => ({
+          name: d.user?.display_name || "Anonim",
+          initials: (d.user?.display_name || "A").split(" ").map((w: string) => w[0]).join("").slice(0, 2).toUpperCase(),
+          color: tierColors[d.tier || "bronze"] || "slate",
+          tier: d.tier ? d.tier.charAt(0).toUpperCase() + d.tier.slice(1) : "Bronze",
+          amount: d.amount,
+          time: new Date(d.created_at).toLocaleString("id-ID", { relativeTime: true }),
+          message: "",
+        })))
+      }
+    }
+    fetchSupporters()
+  }, [])
 
   async function handleDonate() {
     if (!user) return
@@ -282,7 +298,7 @@ export default function DonationsPage() {
                     <span className="text-[11px] font-semibold text-brand-600 bg-brand-50 px-2.5 py-0.5 rounded-full">Live Feed</span>
                   </div>
                   <div className="space-y-4 max-h-[460px] overflow-y-auto pr-1 custom-scrollbar">
-                    {SUPPORTERS.map((s, i) => {
+                    {supporters.map((s, i) => {
                       const tierColors: Record<string, string> = {
                         Platinum: "bg-purple-50 text-purple-700 border-purple-200",
                         Silver: "bg-indigo-50 text-brand-700 border-indigo-200",

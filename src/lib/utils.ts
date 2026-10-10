@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { LEVEL_THRESHOLDS, XP_FOR_NEXT_LEVEL } from "./constants"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -27,8 +28,7 @@ export function getLevelFromXP(xp: number): number {
 }
 
 export function getXPForNextLevel(level: number): number {
-  const thresholds = [0, 100, 300, 600, 1000, 1500, 2500, 4000, 6000, 10000, 999999]
-  return thresholds[level] || 999999
+  return XP_FOR_NEXT_LEVEL[level] || 999999
 }
 
 export function slugify(text: string): string {
@@ -42,8 +42,7 @@ export function formatXP(xp: number): string {
 }
 
 export function getLevelThreshold(level: number): number {
-  const thresholds = [0, 200, 500, 1000, 2000, 3500, 5500, 8000, 12000, 18000]
-  return thresholds[level - 1] ?? 0
+  return LEVEL_THRESHOLDS[level - 1] ?? 0
 }
 
 export function getTrustScoreColor(score: number): string {

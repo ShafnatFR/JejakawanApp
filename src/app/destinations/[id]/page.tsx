@@ -9,14 +9,7 @@ import { getTrustScoreColor } from "../../../lib/utils"
 import { useAuthStore } from "../../../stores/auth"
 import { MapPin, Star, Wifi, Calendar, DollarSign, Sparkles, Heart, Share2, MessageCircle, Flag, MoreVertical, Ban, Shield, ArrowLeft, Camera, Check, ChevronRight, Compass, Users, Mountain, Info, MessageSquare, User } from "lucide-react"
 
-const REPORT_REASONS = [
-  { value: "spam", label: "Spam atau iklan" },
-  { value: "inappropriate", label: "Konten tidak pantas" },
-  { value: "fake", label: "Informasi palsu" },
-  { value: "harassment", label: "Pelecehan atau intimidasi" },
-  { value: "scam", label: "Penipuan" },
-  { value: "other", label: "Lainnya" },
-]
+import { REPORT_REASONS } from "@/lib/constants"
 
 export default function DestinationDetailPage() {
   const params = useParams()

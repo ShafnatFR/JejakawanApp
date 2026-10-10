@@ -5,6 +5,7 @@ import { useAuthStore } from "@/stores/auth"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { User, Bell, Shield, CreditCard, Check, ChevronDown, Camera, X, Users, Eye, EyeOff, Ban } from "lucide-react"
+import { INTEREST_OPTIONS, TRANSPORT_MODES, SETTINGS_TABS } from "@/lib/constants"
 import { Separator } from "@/components/ui/separator"
 
 export default function SettingsPage() {
@@ -52,21 +53,12 @@ export default function SettingsPage() {
     setNewContact({ name: "", phone: "" })
   }
 
-  const interests = [
-    { id: "alam", label: "Alam" }, { id: "pantai", label: "Pantai" }, { id: "budaya", label: "Budaya" },
-    { id: "kuliner", label: "Kuliner" }, { id: "gunung", label: "Gunung" }, { id: "air_terjun", label: "Air Terjun" },
-    { id: "gua", label: "Gua" }, { id: "sejarah", label: "Sejarah" }, { id: "adventure", label: "Adventure" },
-    { id: "foto", label: "Foto" }, { id: "diving", label: "Diving" }, { id: "camping", label: "Camping" },
-  ]
+  const interests = INTEREST_OPTIONS
 
-  const transports = ["Motor", "Mobil", "Bus", "Kereta", "Pesawat", "Kapal"]
+  const transports = TRANSPORT_MODES
 
-  const tabs = [
-    { id: "profile" as const, label: "Profil", icon: User },
-    { id: "notifications" as const, label: "Notifikasi", icon: Bell },
-    { id: "safety" as const, label: "Keamanan", icon: Shield },
-    { id: "subscription" as const, label: "Langganan", icon: CreditCard },
-  ]
+  const TAB_ICONS: Record<string, any> = { profile: User, notifications: Bell, safety: Shield, subscription: CreditCard }
+  const tabs = SETTINGS_TABS.map(t => ({ ...t, id: t.id as any, icon: TAB_ICONS[t.id] || User }))
 
   return (
     <div className="flex-grow py-8 sm:py-10">

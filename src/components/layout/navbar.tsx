@@ -13,6 +13,7 @@ import {
 import { Compass, Menu, X, Trophy, MapPin, Users, User, Settings, LogOut, MessageCircle, Bell, Search } from "lucide-react"
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { NAV_LINKS } from "@/lib/constants"
 
 export function Navbar() {
   const { user, profile, setUser, setProfile, signOut } = useAuthStore()
@@ -51,13 +52,8 @@ export function Navbar() {
     }
   }
 
-  const navLinks = [
-    { href: "/discover", label: "Discover", icon: Compass },
-    { href: "/explore", label: "Explore", icon: MapPin },
-    { href: "/match", label: "Trip Match", icon: Users },
-    { href: "/open-trips", label: "Open Trip", icon: MapPin },
-    { href: "/gamification", label: "Gamifikasi", icon: Trophy },
-  ]
+  const NAV_ICONS: Record<string, any> = { "/discover": Compass, "/explore": MapPin, "/match": Users, "/open-trips": MapPin, "/gamification": Trophy }
+  const navLinks = NAV_LINKS.map(l => ({ ...l, icon: NAV_ICONS[l.href] || Compass }))
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 glass-nav border-b border-slate-200/80">

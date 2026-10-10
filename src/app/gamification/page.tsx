@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { useAuthStore } from "@/stores/auth"
 import { Badge as BadgeType, Mission, MissionClaim } from "@/types/database"
+import { GAMIFICATION_FILTERS } from "@/lib/constants"
 import { claimMission, completeMission, getLeaderboard, getXPHistory, getLevelFromXP, getNextLevelThreshold, getLevelThreshold } from "@/lib/gamification"
 import { formatXP } from "@/lib/utils"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -105,6 +106,7 @@ export default function GamificationPage() {
     ? ((xp - currentThreshold) / (nextThreshold - currentThreshold)) * 100
     : 100
 
+  // NOTE: tabs use icon refs + dynamic counts - kept inline
   const tabs = [
     { id: "missions" as const, label: "Misi Eksplorasi", icon: Target, count: missions.length },
     { id: "badges" as const, label: "Badge & Prestasi", icon: Award, count: `${userBadges.length}/${badges.length}` },
@@ -114,10 +116,7 @@ export default function GamificationPage() {
 
   const filters = [
     { id: "all", label: `Semua Misi (${missions.length})` },
-    { id: "gunung", label: "Gunung & Dataran Tinggi" },
-    { id: "pantai", label: "Pantai & Laut" },
-    { id: "hidden", label: "Hidden Gem" },
-    { id: "komunitas", label: "Komunitas Jejakawan" },
+    ...GAMIFICATION_FILTERS,
   ]
 
   return (

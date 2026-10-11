@@ -140,42 +140,87 @@ async function handleMayarWebhook(request: NextRequest): Promise<NextResponse> {
     );
   }
 
+  // Hanya event pembayaran yang memerlukan verifikasi &
+  // transisi status. Event lain (test, payment.reminder,
+  // shipper.status, membership.*) diakui (200) tanpa
+  // mengubah apa pun.
+  if (event.status !== "paid") {
+    console.log(
+      `[payments/webhook/mayar] Event non-payment.received diakui: status=${event.status}, providerRef=${event.providerRef ?? "-"}.`
+    );
+    return NextResponse.json({
+      status: "ok",
+      changed: false,
+      verified: false,
+      ignored: true,
+    });
+  }
+
   const providerRef = event.providerRef;
-  if (!providerRef) {
+  const orderNumber = event.orderNumber;
+  const supabase = adminClient();
+
+  // ── Cari transaksi Jejakawan yang cocok ────────────────
+  // Berdasarkan payment_ref (transactionId Mayar), atau —
+  // bila payload tidak memuat transactionId — orderNumber
+  // yang dikirim di extraData saat invoice dibuat
+  // (nilainya = id transaksi Jejakawan).
+  let tx: any = null;
+
+  if (providerRef) {
+    const { data, error } = await supabase
+      .from("transactions")
+      .select("*")
+      .eq("payment_ref", providerRef)
+      .maybeSingle();
+    if (!error && data) tx = data;
+  }
+  if (!tx && orderNumber) {
+    const { data, error } = await supabase
+      .from("transactions")
+      .select("*")
+      .eq("id", orderNumber)
+      .maybeSingle();
+    if (!error && data) tx = data;
+  }
+
+  if (!tx) {
+    console.warn(
+      `[payments/webhook/mayar] Tidak ada transaksi Jejakawan: providerRef=${providerRef ?? "-"}, orderNumber=${orderNumber ?? "-"}.`
+    );
     return NextResponse.json(
-      { error: "Payload webhook tidak memuat id transaksi Mayar." },
-      { status: 400 }
+      { error: "Transaksi tidak ditemukan." },
+      { status: 404 }
     );
   }
 
   // ── Verifikasi ulang ke API Mayar (satu-satunya sumber kebenaran) ──
-  let verified: PaymentStatusResult;
-  try {
-    verified = await mayarProvider.fetchStatus(providerRef);
-  } catch (error) {
-    console.error("Mayar verification failed:", error);
+  // Utamakan providerRef dari webhook; bila gagal (mis.
+  // payload tidak memuat transactionId), verifikasi dengan
+  // payment_ref transaksi yang tersimpan.
+  let verified: PaymentStatusResult | null = null;
+  let lastError: unknown = null;
+  const refs = [providerRef, tx.payment_ref].filter(
+    (ref): ref is string => Boolean(ref)
+  );
+  for (const ref of refs) {
+    try {
+      verified = await mayarProvider.fetchStatus(ref);
+      break;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  if (!verified) {
+    console.error("Mayar verification failed:", lastError);
     return NextResponse.json(
       {
         error:
           "Gagal memverifikasi pembayaran ke Mayar. Notifikasi ini tidak mengubah status transaksi.",
-        detail: errorMessage(error),
+        detail: errorMessage(lastError),
       },
       { status: 502 }
-    );
-  }
-
-  const supabase = adminClient();
-  const { data: tx, error: txError } = await supabase
-    .from("transactions")
-    .select("*")
-    .eq("payment_ref", providerRef)
-    .single();
-
-  if (txError || !tx) {
-    console.warn(`[payments/webhook/mayar] Transaksi dengan payment_ref=${providerRef} tidak ditemukan.`);
-    return NextResponse.json(
-      { error: "Transaksi tidak ditemukan." },
-      { status: 404 }
     );
   }
 
@@ -211,7 +256,7 @@ async function handleMayarWebhook(request: NextRequest): Promise<NextResponse> {
       status: "paid",
       payment_method: verified.paymentMethod ?? tx.payment_method,
       payment_provider: "mayar",
-      payment_ref: providerRef,
+      payment_ref: verified.providerRef ?? providerRef,
       paid_at: verified.paidAt?.toISOString() ?? new Date().toISOString(),
     })
     .eq("id", tx.id);

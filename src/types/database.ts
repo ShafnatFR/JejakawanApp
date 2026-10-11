@@ -26,6 +26,7 @@ export interface UserProfile {
   level: number
   badge_count: number
   subscription: SubscriptionPlan
+  subscription_expires_at: string | null
   created_at: string
   updated_at: string
 }
@@ -165,6 +166,7 @@ export interface Mission {
   end_date: string | null
   max_claims: number | null
   current_claims: number
+  category?: string
   created_at: string
   destination?: Destination
 }
@@ -248,7 +250,7 @@ export interface GuideBooking {
   destination?: Destination
 }
 
-export interface UserRole {
+export interface UserRoleRow {
   id: string
   user_id: string
   role: GuideRole

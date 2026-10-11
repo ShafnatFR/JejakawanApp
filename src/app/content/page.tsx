@@ -5,6 +5,7 @@ import { useAuthStore } from "@/stores/auth"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { Camera, Upload, Trash2, Image, CheckCircle, CloudUpload, Info, Star, Heart, Eye, ChevronDown, Shield, X as XIcon, MessageCircle, Bell, Compass, Map, Trophy, User } from "lucide-react"
+import { CONTENT_TAGS } from "@/lib/constants"
 
 export default function ContentPage() {
   const { user } = useAuthStore()

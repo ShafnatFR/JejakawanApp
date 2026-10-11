@@ -26,7 +26,7 @@ export function TripCard({ trip, showActions = true }: TripCardProps) {
         <div className="flex items-start justify-between mb-3">
           <div>
             <h3 className="font-semibold text-base text-slate-900 group-hover:text-brand-600 transition-colors">
-              {(trip as any).destination?.name || trip.destination_name || "Trip"}
+              {(trip as any).destination?.name || "Trip"}
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">{(trip as any).destination?.province || ""}</p>
           </div>

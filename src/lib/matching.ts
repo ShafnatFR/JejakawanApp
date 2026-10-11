@@ -176,20 +176,22 @@ export async function acceptMatch(matchId: string): Promise<boolean> {
     .single()
 
   if (match) {
-    await supabase.rpc('increment_trip_members', { p_trip_id: match.trip_request_id }).catch(() => {
+    try {
+      await supabase.rpc('increment_trip_members', { p_trip_id: match.trip_request_id })
+    } catch {
       // Fallback: manual increment
-      supabase.from('trip_requests')
+      const { data } = await supabase
+        .from('trip_requests')
         .select('current_members')
         .eq('id', match.trip_request_id)
         .single()
-        .then(({ data }) => {
-          if (data) {
-            supabase.from('trip_requests')
-              .update({ current_members: (data.current_members || 0) + 1 })
-              .eq('id', match.trip_request_id)
-          }
-        })
-    })
+      if (data) {
+        await supabase
+          .from('trip_requests')
+          .update({ current_members: (data.current_members || 0) + 1 })
+          .eq('id', match.trip_request_id)
+      }
+    }
   }
 
   return true

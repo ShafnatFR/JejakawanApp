@@ -41,7 +41,7 @@ export default function ChatRoomPage() {
               .select("display_name, avatar_url")
               .eq("id", newMsg.sender_id)
               .single()
-            setMessages((prev) => [...prev, { ...newMsg, sender: sender || undefined }])
+            setMessages((prev) => [...prev, { ...newMsg, sender: sender as ChatMessage["sender"] }])
           }
         )
         .subscribe()
@@ -68,7 +68,7 @@ export default function ChatRoomPage() {
       .order("created_at", { ascending: true })
       .limit(200)
 
-    setMessages(data || [])
+    setMessages((data || []) as ChatMessage[])
     setLoading(false)
   }
 

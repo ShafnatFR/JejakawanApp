@@ -87,7 +87,7 @@ export default function BookingsPage() {
         .order("created_at", { ascending: false })
 
       if (error) throw error
-      const rows = (data || []) as BookingRow[]
+      const rows = (data || []) as unknown as BookingRow[]
       setBookings(rows)
 
       const ids = rows.map((b) => b.id)

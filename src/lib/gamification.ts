@@ -200,7 +200,10 @@ export async function checkBadgeUnlock(userId: string): Promise<string[]> {
       unlockedBadges.push(badge.id)
 
       // Update badge count
-      await supabase.rpc('increment_badge_count', { p_user_id: userId }).catch(async () => {
+      try {
+        await supabase.rpc('increment_badge_count', { p_user_id: userId })
+      } catch {
+        // Fallback: manual increment
         const { data: p } = await supabase
           .from('user_profiles')
           .select('badge_count')
@@ -212,7 +215,7 @@ export async function checkBadgeUnlock(userId: string): Promise<string[]> {
             .update({ badge_count: (p.badge_count || 0) + 1 })
             .eq('id', userId)
         }
-      })
+      }
     }
   }
 
@@ -312,10 +315,13 @@ export async function completeMission(
 
   // Award badge if mission has one
   if (mission?.badge_reward_id) {
-    await supabase.from('user_badges').insert({
-      user_id: claim.user_id,
-      badge_id: mission.badge_reward_id,
-    }).catch(() => {}) // may already exist
+    try {
+      await supabase
+        .from('user_badges')
+        .insert({ user_id: claim.user_id, badge_id: mission.badge_reward_id })
+    } catch {
+      // may already exist
+    }
   }
 
   return { success: true, xpEarned }

@@ -58,7 +58,7 @@ export default function MatchPage() {
   async function fetchData() {
     setLoading(true)
     const { data: d } = await supabase.from("destinations").select("id,name,province").eq("is_active", true).order("name")
-    setDestinations(d || [])
+    setDestinations((d || []) as Destination[])
 
     const { data: t } = await supabase
       .from("trip_requests")

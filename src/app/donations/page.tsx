@@ -44,7 +44,7 @@ export default function DonationsPage() {
           color: tierColors[d.tier || "bronze"] || "slate",
           tier: d.tier ? d.tier.charAt(0).toUpperCase() + d.tier.slice(1) : "Bronze",
           amount: d.amount,
-          time: new Date(d.created_at).toLocaleString("id-ID", { relativeTime: true }),
+          time: new Date(d.created_at).toLocaleString("id-ID"),
           message: "",
         })))
       }

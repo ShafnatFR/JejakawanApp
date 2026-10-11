@@ -133,17 +133,20 @@ export async function getRecommendations(
   // Track usage
   if (userId && dailyRemaining !== Infinity) {
     const today = new Date().toISOString().split('T')[0]
-    await supabase.from('user_recommendation_limits').upsert(
-      { user_id: userId, date: today, count: 1 },
-      { onConflict: 'user_id,date', ignoreDuplicates: false }
-    ).then(async () => {
-      await supabase.rpc('increment_recommendation_count', { p_user_id: userId, p_date: today }).catch(() => {
+    try {
+      await supabase.from('user_recommendation_limits').upsert(
+        { user_id: userId, date: today, count: 1 },
+        { onConflict: 'user_id,date', ignoreDuplicates: false }
+      )
+      try {
+        await supabase.rpc('increment_recommendation_count', { p_user_id: userId, p_date: today })
+      } catch {
         // Fallback: just insert a new row
-        return supabase.from('user_recommendation_limits').insert({ user_id: userId, date: today })
-      })
-    }).catch(() => {
+        await supabase.from('user_recommendation_limits').insert({ user_id: userId, date: today })
+      }
+    } catch {
       // Table may not exist yet, ignore
-    })
+    }
   }
 
   return {

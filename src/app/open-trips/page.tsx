@@ -75,7 +75,7 @@ export default function OpentripsPage() {
         .eq("is_active", true)
         .order("start_date", { ascending: true })
       if (error) throw error
-      setTrips((data || []) as TripRow[])
+      setTrips((data || []) as unknown as TripRow[])
 
       if (user) {
         const { data: bks } = await supabase

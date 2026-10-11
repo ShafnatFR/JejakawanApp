@@ -67,7 +67,7 @@ export default function TripDetailPage() {
         .from("trip_group_members")
         .select("user_id, role, user_profiles(*)")
         .eq("group_id", group.id)
-      setMembers(memberData || [])
+      setMembers((memberData || []) as unknown as TripMember[])
 
       // Fetch chat room for this trip
       // Store group.id for chat navigation

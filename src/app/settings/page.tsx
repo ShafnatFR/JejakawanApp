@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { User, Bell, Shield, CreditCard, Check, ChevronDown, Camera, X, Users, Eye, EyeOff, Ban } from "lucide-react"
 import { INTEREST_OPTIONS, TRANSPORT_MODES, SETTINGS_TABS } from "@/lib/constants"
+import type { UserProfile } from "@/types/database"
 import { Separator } from "@/components/ui/separator"
 
 export default function SettingsPage() {
@@ -43,7 +44,7 @@ export default function SettingsPage() {
 
   async function saveProfile() {
     setSaving(true)
-    await updateProfile(form)
+    await updateProfile(form as Partial<UserProfile>)
     setSaving(false)
   }
 

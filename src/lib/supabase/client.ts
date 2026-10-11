@@ -1,6 +1,15 @@
-import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import {
+  createClient as createSupabaseClient,
+  type SupabaseClient,
+} from '@supabase/supabase-js'
 
-let clientInstance: ReturnType<typeof createSupabaseClient> | null = null
+// NOTE: do NOT annotate this with ReturnType<typeof createSupabaseClient> —
+// instantiating the generic function that way collapses the internal Schema
+// type parameter to `never`, which makes every `.from()`/`.insert()`/`.select()`
+// resolve to `never`. `SupabaseClient<any>` keeps Schema = `any`, so queries
+// stay permissive (any table name, rows as `any`) — the intended behaviour
+// for an untyped client.
+let clientInstance: SupabaseClient<any> | null = null
 
 export function createClient() {
   if (!clientInstance) {

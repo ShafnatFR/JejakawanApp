@@ -69,7 +69,7 @@ export default function FavoritesPage() {
         .eq("user_id", user!.id)
         .order("created_at", { ascending: false })
       if (error) throw error
-      setFavorites((data || []) as FavoriteRow[])
+      setFavorites((data || []) as unknown as FavoriteRow[])
     } catch (e) {
       setError(e instanceof Error ? e.message : "Gagal memuat favorit")
     } finally {

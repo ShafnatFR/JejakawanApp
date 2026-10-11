@@ -3,6 +3,7 @@ import { cookies } from "next/headers"
 import { createClient } from "@/lib/supabase/server"
 import {
   activeProvider,
+  adminClient,
   PaymentProviderError,
   type PaymentLineItem,
 } from "@/lib/payments"
@@ -114,8 +115,9 @@ export async function POST(
       )
     }
 
-    // Update participant count
-    await supabase
+    // Update participant count (service role: kapasitas dikelola sistem,
+    // bukan ditulis user, setelah RLS diaktifkan)
+    await adminClient()
       .from("open_trips")
       .update({ current_participants: trip.current_participants + participants })
       .eq("id", params.id)

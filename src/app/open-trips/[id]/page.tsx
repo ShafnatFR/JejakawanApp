@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { MapPin, Calendar, Users, DollarSign, Star, Shield, Check, X, Backpack } from "lucide-react"
 
 export default function OpenTripDetailPage() {
@@ -18,6 +19,8 @@ export default function OpenTripDetailPage() {
   const [participants, setParticipants] = useState(1)
   const [booking, setBooking] = useState(false)
   const [myBooking, setMyBooking] = useState<any>(null)
+  const [pendingPaymentUrl, setPendingPaymentUrl] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -31,6 +34,20 @@ export default function OpenTripDetailPage() {
     if (user) {
       const { data: booking } = await supabase.from("open_trip_bookings").select("*").eq("trip_id", id).eq("user_id", user.id).maybeSingle()
       setMyBooking(booking)
+      if (booking && booking.payment_status === "pending") {
+        const { data: tx } = await supabase
+          .from("transactions")
+          .select("payment_url")
+          .eq("reference_type", "booking")
+          .eq("reference_id", booking.id)
+          .eq("status", "pending")
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle()
+        setPendingPaymentUrl(tx?.payment_url ?? null)
+      } else {
+        setPendingPaymentUrl(null)
+      }
     }
     setLoading(false)
   }
@@ -38,11 +55,30 @@ export default function OpenTripDetailPage() {
   async function bookTrip() {
     if (!user || !trip) return
     setBooking(true)
-    const supabase = createClient()
-    await supabase.from("open_trip_bookings").insert({ trip_id: trip.id, user_id: user.id, status: "pending", payment_status: "pending" })
-    await supabase.from("open_trips").update({ current_participants: trip.current_participants + participants }).eq("id", trip.id)
-    setBooking(false)
-    fetchTrip(trip.id)
+    setError(null)
+    try {
+      const res = await fetch(`/api/open-trips/${trip.id}/book`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ participants }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || "Gagal membuat booking. Silakan coba lagi.")
+        return
+      }
+      if (!data.payment_url) {
+        // Trip gratis — booking langsung dikonfirmasi
+        fetchTrip(trip.id)
+        return
+      }
+      // Arahkan ke halaman pembayaran Mayar
+      window.location.href = data.payment_url
+    } catch {
+      setError("Gagal menghubungi server. Silakan coba lagi beberapa saat lagi.")
+    } finally {
+      setBooking(false)
+    }
   }
 
   if (loading) return <div className="container mx-auto px-4 py-8"><div className="h-96 bg-muted rounded-lg animate-pulse" /></div>
@@ -117,13 +153,27 @@ export default function OpenTripDetailPage() {
           {myBooking ? (
             <div className="text-center py-4">
               <Badge className="text-lg px-4 py-2 mb-2" variant={myBooking.status === "confirmed" ? "default" : "secondary"}>{myBooking.status}</Badge>
-              <p className="text-muted-foreground">Kamu sudah booking trip ini.</p>
+              {myBooking.payment_status === "pending" ? (
+                pendingPaymentUrl ? (
+                  <div className="mt-3 space-y-2">
+                    <p className="text-sm text-amber-600">Menunggu pembayaran</p>
+                    <Button variant="outline" onClick={() => { window.location.href = pendingPaymentUrl }}>Bayar Sekarang</Button>
+                  </div>
+                ) : (
+                  <p className="text-sm text-amber-600 mt-2">Menunggu pembayaran</p>
+                )
+              ) : (
+                <p className="text-muted-foreground">Kamu sudah booking trip ini.</p>
+              )}
             </div>
           ) : (
             <div className="space-y-4">
+              {error && (
+                <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">{error}</div>
+              )}
               <div>
                 <Label>Jumlah Peserta</Label>
-                <Input type="number" min={1} max={spotsLeft} value={participants} onChange={e => setParticipants(+e.target.value)} />
+                <Input type="number" min={1} max={spotsLeft} value={participants} onChange={e => setParticipants(Math.max(1, Math.min(spotsLeft, +e.target.value || 1)))} />
               </div>
               <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                 <span className="font-medium">Total</span>
@@ -132,7 +182,7 @@ export default function OpenTripDetailPage() {
               <Button className="w-full" size="lg" onClick={bookTrip} disabled={booking || spotsLeft < 1}>
                 {booking ? "Memproses..." : spotsLeft < 1 ? "Penuh" : "Booking Sekarang"}
               </Button>
-              <p className="text-xs text-center text-muted-foreground">Pembayaran via Midtrans (segera tersedia)</p>
+              <p className="text-xs text-center text-muted-foreground">Pembayaran aman via Mayar — Anda akan diarahkan ke halaman pembayaran.</p>
             </div>
           )}
         </CardContent>

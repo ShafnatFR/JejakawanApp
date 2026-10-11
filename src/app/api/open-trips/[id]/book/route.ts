@@ -51,6 +51,21 @@ export async function POST(
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
+    // Jumlah peserta (opsional, default 1)
+    let participants = 1
+    try {
+      const body = await request.json()
+      if (
+        body &&
+        typeof body.participants === "number" &&
+        Number.isFinite(body.participants)
+      ) {
+        participants = Math.max(1, Math.floor(body.participants))
+      }
+    } catch {
+      // Body kosong / bukan JSON — gunakan default
+    }
+
     // Get the trip
     const { data: trip } = await supabase
       .from("open_trips")
@@ -59,8 +74,11 @@ export async function POST(
       .single()
 
     if (!trip) return NextResponse.json({ error: "Trip not found" }, { status: 404 })
-    if (trip.current_participants >= trip.max_participants) {
-      return NextResponse.json({ error: "Trip penuh" }, { status: 400 })
+    if (trip.current_participants + participants > trip.max_participants) {
+      return NextResponse.json(
+        { error: "Slot tersisa tidak mencukupi." },
+        { status: 400 }
+      )
     }
 
     // Check existing booking
@@ -73,7 +91,7 @@ export async function POST(
 
     if (existing) return NextResponse.json({ error: "Sudah booking" }, { status: 400 })
 
-    const amount = Math.round(Number(trip.price) || 0)
+    const amount = Math.round(Number(trip.price) || 0) * participants
 
     // Create booking
     const { data: booking, error: bookingError } = await supabase
@@ -81,8 +99,9 @@ export async function POST(
       .insert({
         trip_id: params.id,
         user_id: user.id,
+        participants,
         status: amount > 0 ? "pending" : "confirmed",
-        payment_status: "pending",
+        payment_status: amount > 0 ? "pending" : "paid",
       })
       .select()
       .single()
@@ -98,7 +117,7 @@ export async function POST(
     // Update participant count
     await supabase
       .from("open_trips")
-      .update({ current_participants: trip.current_participants + 1 })
+      .update({ current_participants: trip.current_participants + participants })
       .eq("id", params.id)
 
     // Trip gratis — tidak perlu pembayaran

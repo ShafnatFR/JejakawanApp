@@ -575,3 +575,66 @@ CREATE POLICY "Users can view own guide bookings" ON public.guide_bookings FOR S
 CREATE POLICY "Users can create guide bookings" ON public.guide_bookings FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 CREATE TRIGGER update_guide_profiles_updated_at BEFORE UPDATE ON public.guide_profiles FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+-- ═══════════════════════════════════════════════════════════════════
+-- MIGRASI 2026-10-11: Payment (Mayar) & RLS Hardening
+-- Sudah diterapkan di production (project ipnpbjxrjplcdfzakakp)
+-- ═══════════════════════════════════════════════════════════════════
+
+-- Open trip bookings: tambah kolom peserta
+ALTER TABLE public.open_trip_bookings ADD COLUMN IF NOT EXISTS participants INT NOT NULL DEFAULT 1;
+
+-- Transactions: kolom referensi pembayaran (Mayar / provider agnostic)
+ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS payment_provider VARCHAR(20);
+ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS payment_ref VARCHAR(200);
+ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS payment_url TEXT;
+ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS reference_type VARCHAR(30);  -- booking|donation|subscription|guide_booking
+ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS reference_id UUID;
+ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS paid_at TIMESTAMPTZ;
+
+-- ── RLS: open_trips ───────────────────────────────────────────────
+ALTER TABLE public.open_trips ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Open trips are viewable by everyone" ON public.open_trips FOR SELECT USING (true);
+CREATE POLICY "Agency owners can create trips" ON public.open_trips FOR INSERT WITH CHECK (agency_id IN (SELECT id FROM public.agency_profiles WHERE user_id = auth.uid()));
+CREATE POLICY "Agency owners can update their trips" ON public.open_trips FOR UPDATE USING (agency_id IN (SELECT id FROM public.agency_profiles WHERE user_id = auth.uid()));
+CREATE POLICY "Agency owners can delete their trips" ON public.open_trips FOR DELETE USING (agency_id IN (SELECT id FROM public.agency_profiles WHERE user_id = auth.uid()));
+
+-- ── RLS: agency_profiles ──────────────────────────────────────────
+ALTER TABLE public.agency_profiles ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Agency profiles are viewable by everyone" ON public.agency_profiles FOR SELECT USING (true);
+CREATE POLICY "Users can create own agency profile" ON public.agency_profiles FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own agency profile" ON public.agency_profiles FOR UPDATE USING (auth.uid() = user_id);
+
+-- ── RLS: open_trip_bookings ───────────────────────────────────────
+ALTER TABLE public.open_trip_bookings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can view own bookings" ON public.open_trip_bookings FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Agency owners can view bookings for their trips" ON public.open_trip_bookings FOR SELECT USING (trip_id IN (SELECT id FROM public.open_trips WHERE agency_id IN (SELECT id FROM public.agency_profiles WHERE user_id = auth.uid())));
+CREATE POLICY "Admins can view all bookings" ON public.open_trip_bookings FOR SELECT USING (auth.uid() IN (SELECT user_id FROM public.user_roles WHERE role = 'admin'));
+CREATE POLICY "Users can create own bookings" ON public.open_trip_bookings FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own bookings" ON public.open_trip_bookings FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "Users can delete own bookings" ON public.open_trip_bookings FOR DELETE USING (auth.uid() = user_id);
+
+-- ── RLS: transactions ───────────────────────────────────────────
+ALTER TABLE public.transactions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can view own transactions" ON public.transactions FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Admins can view all transactions" ON public.transactions FOR SELECT USING (auth.uid() IN (SELECT user_id FROM public.user_roles WHERE role = 'admin'));
+CREATE POLICY "Users can create own transactions" ON public.transactions FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own transactions" ON public.transactions FOR UPDATE USING (auth.uid() = user_id);
+
+-- ── RLS: user_favorites ─────────────────────────────────────────
+ALTER TABLE public.user_favorites ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can view own favorites" ON public.user_favorites FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can create own favorites" ON public.user_favorites FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can delete own favorites" ON public.user_favorites FOR DELETE USING (auth.uid() = user_id);
+
+-- ── RLS: user_subscriptions ─────────────────────────────────────
+ALTER TABLE public.user_subscriptions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can view own subscriptions" ON public.user_subscriptions FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can create own subscriptions" ON public.user_subscriptions FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own subscriptions" ON public.user_subscriptions FOR UPDATE USING (auth.uid() = user_id);
+
+-- ── Storage bucket "ktp" (dibuat via REST API, private, 5 MB) ───
+-- Kebijakan storage.objects:
+--   INSERT/SELECT/UPDATE/DELETE TO authenticated
+--   USING/WITH CHECK (bucket_id = 'ktp' AND (storage.foldername(name))[1] = auth.uid()::text)
+-- Berkas KTP diunggah ke path: {user_id}/{timestamp}-{namafile}

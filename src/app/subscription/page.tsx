@@ -13,22 +13,42 @@ const ICON_MAP: Record<string, any> = { Free: Star, Weekly: Zap, Monthly: Crown,
 const plans = SUBSCRIPTION_PLANS.map(p => ({ ...p, icon: ICON_MAP[p.name] || Star }))
 
 export default function SubscriptionPage() {
-  const { profile, updateProfile } = useAuthStore()
+  const { profile, updateProfile, fetchProfile } = useAuthStore()
   const [purchasing, setPurchasing] = useState<string | null>(null)
+
+  // Muat ulang profil saat halaman dimuat — setelah
+  // redirect dari Mayar, status langganan bisa berubah.
+  useEffect(() => {
+    fetchProfile()
+  }, [fetchProfile])
 
   async function purchasePlan(plan: string) {
     setPurchasing(plan)
-    // Mock payment - real Midtrans integration later
-    setTimeout(async () => {
-      const expiresAt = new Date()
-      if (plan === "weekly") expiresAt.setDate(expiresAt.getDate() + 7)
-      else if (plan === "monthly") expiresAt.setMonth(expiresAt.getMonth() + 1)
-      else if (plan === "exclusive") expiresAt.setFullYear(expiresAt.getFullYear() + 1)
-
-      await updateProfile({ subscription: plan as any, subscription_expires_at: expiresAt.toISOString() })
-      setPurchasing(null)
+    try {
+      const res = await fetch("/api/subscriptions/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || "Gagal membuat pembayaran.")
+        setPurchasing(null)
+        return
+      }
+      if (data.payment_url) {
+        // Arahkan ke halaman pembayaran Mayar
+        window.location.href = data.payment_url
+        return
+      }
+      // Tanpa payment_url (gratis) — perbarui profil langsung
+      await updateProfile({ subscription: plan as any })
       alert("Berhasil upgrade ke " + plan + "!")
-    }, 2000)
+      setPurchasing(null)
+    } catch {
+      alert("Terjadi kesalahan. Silakan coba lagi.")
+      setPurchasing(null)
+    }
   }
 
   return (

@@ -88,12 +88,26 @@ export async function syncReference(
         .update({ payment_status: "paid" })
         .eq("id", tx.reference_id);
       break;
-    case "subscription":
-      await supabase
+    case "subscription": {
+      // Aktifkan langganan dan cerminkan ke user_profiles
+      // (field yang dibaca UI: subscription & subscription_expires_at).
+      const { data: sub } = await supabase
         .from("user_subscriptions")
         .update({ status: "active" })
-        .eq("id", tx.reference_id);
+        .eq("id", tx.reference_id)
+        .select("user_id, plan, expires_at")
+        .single();
+      if (sub?.user_id) {
+        await supabase
+          .from("user_profiles")
+          .update({
+            subscription: sub.plan,
+            subscription_expires_at: sub.expires_at,
+          })
+          .eq("id", sub.user_id);
+      }
       break;
+    }
     case "guide_booking":
       await supabase
         .from("guide_bookings")

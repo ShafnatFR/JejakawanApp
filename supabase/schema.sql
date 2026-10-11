@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS public.user_subscriptions (
   started_at TIMESTAMPTZ DEFAULT NOW(),
   expires_at TIMESTAMPTZ,
   payment_id VARCHAR(200),
-  status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active','expired','cancelled')),
+  status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active','expired','cancelled','pending')),
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

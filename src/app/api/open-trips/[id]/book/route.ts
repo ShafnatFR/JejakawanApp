@@ -167,6 +167,9 @@ export async function POST(
           user.email ||
           "Pelanggan",
         email: user.email ?? "",
+        mobile:
+          (user.user_metadata as Record<string, unknown> | null)?.phone?.toString() ||
+          undefined,
       },
       items,
       redirectUrl: `${origin}/bookings`,

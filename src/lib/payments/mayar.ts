@@ -58,6 +58,16 @@ export function isMayarRestrictPaymentMethod(): boolean {
 }
 
 /**
+ * Nomor HP merchant (fallback). Mayar mewajibkan field `mobile`
+ * saat membuat tagihan; bila pelanggan tidak memberi nomor,
+ * notifikasi tagihan dikirim ke nomor ini supaya invoice
+ * tetap bisa dibuat.
+ */
+export function getMayarMerchantPhone(): string {
+  return (process.env.MAYAR_MERCHANT_PHONE ?? "").trim();
+}
+
+/**
  * Petakan petunjuk metode internal ke channel Mayar.
  *
  * Hanya dipakai bila MAYAR_RESTRICT_PAYMENT_METHOD="true" — Mayar menolak (400)
@@ -306,7 +316,17 @@ async function createPayment(
     },
   };
 
-  if (input.customer.mobile?.trim()) basePayload.mobile = input.customer.mobile.trim();
+  // Mayar mewajibkan `mobile` saat membuat tagihan. Bila pelanggan
+  // tidak memberi nomor, fallback ke nomor merchant agar invoice
+  // tetap bisa dibuat (notifikasi dikirim ke merchant).
+  const mobile = input.customer.mobile?.trim() || getMayarMerchantPhone();
+  if (!mobile) {
+    throw new PaymentProviderError(
+      "Nomor HP pelanggan wajib diisi untuk membuat tagihan Mayar. Isi metadata `phone` user atau env MAYAR_MERCHANT_PHONE.",
+      400
+    );
+  }
+  basePayload.mobile = mobile;
   if (input.expiresAt && !Number.isNaN(input.expiresAt.getTime())) {
     basePayload.expiredAt = input.expiresAt.toISOString();
   }
